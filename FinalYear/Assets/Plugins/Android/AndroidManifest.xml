@@ -1,0 +1,16 @@
+<maifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.DefaultCompany.FinalYear">
+
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-feature android:name="android.hardware.nfc" android:required="true"/>
+
+    <application>
+        <activity android:name="com.unity3d.player.UnityPlayerActivity" android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="test/plain"/>
+            </intent-filter>
+        </activity>
+    </application>
+</maifest>

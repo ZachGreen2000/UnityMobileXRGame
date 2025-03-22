@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8?">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NFCReaderUsageDescription</key>
+    <string>This app requires NFC to read and write tags.</string>
+    <key>com.apple.developer.nfc.reeadersession.formats</key>
+    <array>
+        <string>NDEF</string>
+    </array>
+</dict>
+</plist>
