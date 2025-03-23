@@ -54,7 +54,7 @@ public class NFCPlugin {
         try {
             ndef.connect();
             byte[] jsonData = data.getBytes(StandardCharsets.UTF_8); // convert to bytes
-            NdefRecord record = NdefRecord.createTextRecord(Locale.ENGLISH.getLanguage(), jsonData);
+            NdefRecord record = NdefRecord.createMime("application/json", jsonData);
             NdefMessage message = new NdefMessage(new NdefRecord[]{record});
             ndef.writeNdefMessage(message);
             ndef.close();

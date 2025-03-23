@@ -18,7 +18,8 @@ public class NFCManager : MonoBehaviour
     private static AndroidJavaObject NFCAndroidPlugin;
 #endif
     public static NFCManager Instance { get; private set; }
-    public characterData currentCharacter;
+    public characterData characterDatabase;
+    public characterSingleton currentCharacter;
     private void Awake()
     {
         if (Instance == null)
@@ -40,7 +41,7 @@ public class NFCManager : MonoBehaviour
     {
         using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.unityPlayer))
         {
-            return unityPlayer.GetStatuc<AndroidJavaObject>("currentActivity");
+            return unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
         }
     }
 #endif
@@ -63,7 +64,7 @@ public class NFCManager : MonoBehaviour
     {
         Debug.Log("Writting session has begun");
 
-        string jsonData = currentCharacter.ToJson();
+        string jsonData = characterDatabase.ToJson();
 #if UNITY_IOS && !UNITY_EDITOR
         startWriting(jsonData);
 #elif UNITY_ANDROID
@@ -76,9 +77,9 @@ public class NFCManager : MonoBehaviour
     //this function is called once NFC tag has been read and data retrived
     public void OnNFCRead(string jsonData)
     {
-        currentCharacter = characterData.FromJson(jsonData);
-        currentCharacter.SaveToFile();
-        Debug.Log($"Character data: ID={currentCharacter.characterID}, Name={currentCharacter.characterName}, Level={currentCharacter.characterLevel}, Unlocked={currentCharacter.characterBool}");
+        characterSingleton character = JsonUtility.FromJson<characterSingleton>(jsonData);
+        characterData database = characterData.LoadFromFile();
+        database.UnlockCharacter(character);
     }
 
     private void OnNFCError(string message)

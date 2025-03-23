@@ -5,24 +5,13 @@ using System.IO;
 using System;
 
 [Serializable]
-public class characterData : MonoBehaviour
+public class characterData
 {
-    public string characterID;
-    public string characterName;
-    public string characterLevel;
-    public string characterBool;
-    // data for the current character in use
-    public characterData(string id, string name, string level, string unlocked)
-    {
-        this.characterID = id;
-        this.characterName = name;
-        this.characterLevel = level;
-        this.characterBool = unlocked;
-    }
+    public List<characterSingleton> characters = new List<characterSingleton> (); // creates list to handle multiple characters
     // convert the character data to json
     public string ToJson()
     {
-        return JsonUtility.ToJson(this);
+        return JsonUtility.ToJson(this, true);
     }
     // loads character data from json
     public static characterData FromJson(string json)
@@ -47,8 +36,21 @@ public class characterData : MonoBehaviour
         }else
         {
             Debug.Log("No character data found");
-            return null;
+            return new characterData();
         }
+    }
 
+    // this function allows the adding of a new character but checks if character exists first
+    public void UnlockCharacter(characterSingleton newCharacter)
+    {
+        if (!characters.Exists(c => c.characterID == newCharacter.characterID)) // c is lambda expression that is used to loop through json objects to find ID
+        {
+            characters.Add(newCharacter);
+            SaveToFile();
+            Debug.Log("New character unlocked");
+        } else
+        {
+            Debug.Log("Character already unlocked");
+        }
     }
 }
