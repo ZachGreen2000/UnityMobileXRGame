@@ -64,7 +64,7 @@
             [tag queryNDEFStatusWithCompletionHandler:^(NFCNDEFStatus status, NSUInteger capacity, NSError *error) {
                 if (status == NFCNDEFStatusReadWrite) {
                     NSData *payloadData = [self->writeData dataUsingEncoding:NSUTF8StringEncoding];
-                    NCFNDEFPayload *payload = [NCFNDEFPayload ndefPayloadWithFormat:NFCTypeNameFormatNFCWellKnown type:[@"T" dataUsingEncoding:NSUTF8StringEncoding] identifier:[NSData data] payload:payloadData];
+                    NCFNDEFPayload *payload = [NCFNDEFPayload ndefPayloadWithFormat:NFCTypeNameFormatMedia type:[@"application/json" dataUsingEncoding:NSUTF8StringEncoding] identifier:[NSData data] payload:payloadData];
                     NFCNDEFMessage *message = [[NFCNDEFMessage alloc] initWithRecords:@[payload]];
                     [tag writeNDEF:message completionHandler:^(NSError *writeError) {
                         if (writeError) {

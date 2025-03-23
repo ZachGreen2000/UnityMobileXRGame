@@ -19,6 +19,12 @@ public class NFCPlugin {
     private Activity activity;
     private NfcAdapter nfcAdapter;
     private Tag currentTag;
+    //calls from unity to start reading process
+    public static startReading() {
+        Activity activity = UnityPlayer.currentActivity;
+        Intent intent = activity.getIntent();
+        processNFCIntent(intent);
+    }
     // ensures only one instance of NFCPlugin exsists
     public static NFCPlugin getInstance(Activity act) {
         if (instance == null) {
@@ -47,7 +53,8 @@ public class NFCPlugin {
         // open connection and write data to NFC tag using an NDEF record containing text data
         try {
             ndef.connect();
-            NdefRecord record = NdefRecord.createTextRecord(Locale.ENGLISH.getLanguage(), data);
+            byte[] jsonData = data.getBytes(StandardCharsets.UTF_8); // convert to bytes
+            NdefRecord record = NdefRecord.createTextRecord(Locale.ENGLISH.getLanguage(), jsonData);
             NdefMessage message = new NdefMessage(new NdefRecord[]{record});
             ndef.writeNdefMessage(message);
             ndef.close();
