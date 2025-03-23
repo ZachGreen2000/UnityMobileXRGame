@@ -36,8 +36,16 @@ public class characterData
         }else
         {
             Debug.Log("No character data found");
-            return new characterData();
+            return CreateDefaultFile();
         }
+    }
+
+    //creates a default json file when game first loaded
+    public static characterData CreateDefaultFile()
+    {
+        characterData newData = new characterData();
+        newData.SaveToFile();
+        return newData;
     }
 
     // this function allows the adding of a new character but checks if character exists first
