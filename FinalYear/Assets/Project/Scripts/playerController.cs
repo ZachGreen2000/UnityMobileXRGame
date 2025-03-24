@@ -226,10 +226,10 @@ public class playerController : MonoBehaviour
 
         if (Input.GetKey(keyForSprint.ToLower()) && !isMovingBack) // checks player is not moving backwards
         {
-            playerRigidbody.velocity = (moveDirection * playerSprintSpeed * Time.deltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
+            playerRigidbody.velocity = (moveDirection * playerSprintSpeed * Time.fixedDeltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
         } else
         {
-            playerRigidbody.velocity = (moveDirection * playerCurrentSpeed * Time.deltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
+            playerRigidbody.velocity = (moveDirection * playerCurrentSpeed * Time.fixedDeltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
         }
 
         if (playerRigidbody.velocity == new Vector3(0,0,0)) // checks wether the player is moving and changes a bool to be used as a flag for other methods
@@ -377,11 +377,11 @@ public class playerController : MonoBehaviour
 
         if (Input.GetKey(keyForSprint.ToLower()) && !isMovingBack) // checks player is not moving backwards
         {
-            playerRigidbody.velocity = (moveDirection * playerSprintSpeed * Time.deltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
+            playerRigidbody.velocity = (moveDirection * playerSprintSpeed * Time.fixedDeltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
         }
         else
         {
-            playerRigidbody.velocity = (moveDirection * playerCurrentSpeed * Time.deltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
+            playerRigidbody.velocity = (moveDirection * playerCurrentSpeed * Time.fixedDeltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
         }
 
         if (playerRigidbody.velocity == new Vector3(0, 0, 0)) // checks wether the player is moving and changes a bool to be used as a flag for other methods
@@ -404,7 +404,7 @@ public class playerController : MonoBehaviour
         } else
         {
             Vector3 desiredCamPos = playerPosition - cameraOffset; // calculates camera position for when following
-            topDownCamera.transform.position = Vector3.Lerp(currentCamPos, desiredCamPos, cameraCorrectionSpeed * Time.deltaTime);
+            topDownCamera.transform.position = desiredCamPos;
         }
     }
 }

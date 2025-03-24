@@ -511,12 +511,12 @@ PrefabInstance:
     - target: {fileID: 1811077854186159413, guid: ea13dd12c19327642a47acbd82295104,
         type: 3}
       propertyPath: topDownPerspective
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1811077854186159413, guid: ea13dd12c19327642a47acbd82295104,
         type: 3}
       propertyPath: firstNThirdPerspective
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2984080403730888538, guid: ea13dd12c19327642a47acbd82295104,
         type: 3}
