@@ -11,13 +11,14 @@ public class enemyManager : MonoBehaviour
     public GameObject spawnLocation;
     
     [Header("Enemy Pool")] // variables for the object pooling of enemies. Pooling is a technique used for performance to help lower CPU usage.
-    [SerializeField] private IObjectPool<enemy> enemyPool;
+    public IObjectPool<enemy> enemyPool;
     public bool collectionChecks;
     public int maxPoolSize;
     public List<enemy> enemyList;
 
     [Header("Other")]
     public GameObject noSpawn;
+    public GameObject tower;
     // setting up the object pool for the enemies
     public IObjectPool<enemy> Pool
     {
@@ -33,7 +34,7 @@ public class enemyManager : MonoBehaviour
 
     private enemy CreatePooledItem() // creates the item to be pooled, in this case it is our enemy.
     {
-        enemy newEnemy = Instantiate (enemyPrefab.enemyPrefab, spawnLocation.transform.position, Quaternion.identity);
+        enemy newEnemy = Instantiate (enemyPrefab.enemyPrefab, spawnLocation.transform.position, Quaternion.LookRotation(Vector3.up));
         newEnemy.gameObject.SetActive(false);
         return newEnemy;
     }
@@ -55,9 +56,9 @@ public class enemyManager : MonoBehaviour
         Destroy(pooledEnemy.gameObject);
     } 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+       _ = Pool;
     }
 
     // Update is called once per frame
@@ -69,27 +70,51 @@ public class enemyManager : MonoBehaviour
     public void Spawn()
     {
         Vector3 spawnPosition;
-        bool canSpawn;
+        bool canSpawn = false;
+        int maxAttempts = 10;
+        int attempts = 0;
+        float noSpawnRadius = noSpawn.transform.localScale.x / 2;
         if (spawnLocation.CompareTag("Spawnable"))
         {
             do
             {
-                float randx = Random.Range(spawnLocation.transform.position.x - noSpawn.transform.position.x, spawnLocation.transform.position.x + noSpawn.transform.position.x); // calculates a random range for the ememies to spawn in
-                float randy = Random.Range(spawnLocation.transform.position.y - noSpawn.transform.position.y, spawnLocation.transform.position.y + noSpawn.transform.position.y); // takes into account the no spawn zone around tower
-                spawnPosition = new Vector3(randx, randy, 0);
-                canSpawn = true;
-                foreach (enemy e in enemyList) // iterates through list of spawned enemies to check spawnable posiitons to ensure no overlap
+                float randx = Random.Range(spawnLocation.transform.position.x - 20, spawnLocation.transform.position.x + 20); // calculates a random range for the ememies to spawn in
+                float randz = Random.Range(spawnLocation.transform.position.z - 20, spawnLocation.transform.position.z + 20); 
+                spawnPosition = new Vector3(randx, 2, randz);
+                float distanceCentre = Vector3.Distance(tower.transform.position, spawnPosition); // calculates no spawn zone
+                Debug.Log("Distance to centre: " +  distanceCentre);
+                Debug.Log("No Spawn radius: " + noSpawnRadius);
+                if (distanceCentre >= noSpawnRadius)
                 {
-                    if (Vector3.Distance(e.transform.position, spawnPosition) < 2.0f)
+                    Debug.Log("Can Spawn at position");
+                    canSpawn = true;
+                    foreach (enemy e in enemyList) // iterates through list of spawned enemies to check spawnable posiitons to ensure no overlap
                     {
-                        canSpawn = false; 
-                        break;
+                        if (Vector3.Distance(e.transform.position, spawnPosition) < 2.0f)
+                        {
+                            Debug.Log("Enemy overlapping");
+                            canSpawn = false;
+                            break;
+                        }
                     }
                 }
-            } while (!canSpawn); 
+                attempts++;
+            } while (!canSpawn && attempts < maxAttempts); 
 
-            var poolItem = enemyPool.Get(); // retrives the pool to set the transform position
-            poolItem.transform.position = spawnPosition;
+            if (canSpawn)
+            {
+                if (enemyPool == null)
+                {
+                    Debug.Log("enemyPool is null");
+                }
+                var poolItem = enemyPool.Get(); // retrives the pool to set the transform position
+                poolItem.transform.position = spawnPosition;
+                Debug.Log("Enemy spawned at: " + spawnPosition);
+            } else
+            {
+                Debug.Log("Failed to find spawn position after " + maxAttempts);
+                Debug.Log("Items in pool: " + enemyList.Count);
+            }
         }
     }
 }

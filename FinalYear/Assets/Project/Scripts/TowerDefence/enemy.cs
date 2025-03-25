@@ -15,17 +15,16 @@ namespace Enemies
         [Header("Other")]
         public towerHealth towerHealth;
         public enemyManager enemyManager;
-        private Vector3 pos;
         // Start is called before the first frame update
         void Start()
         {
-            Vector3 pos = transform.position;
+            
         }
 
         // Update is called once per frame
         void Update()
         {
-            pos = Vector3.Lerp(pos, target.transform.position, speed * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
         }
 
         public void OnTriggerEnter(Collider obj)
