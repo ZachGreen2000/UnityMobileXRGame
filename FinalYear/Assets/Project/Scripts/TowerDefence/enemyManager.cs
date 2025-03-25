@@ -8,14 +8,16 @@ public class enemyManager : MonoBehaviour
 {
     [Header("Enemy Variables")] // variables for enemys for the spawning and target destination for enemies
     public enemy enemyPrefab;
-    public int maxEnemy;
-    public int enemySpawnSpeed;
     public GameObject spawnLocation;
     
     [Header("Enemy Pool")] // variables for the object pooling of enemies. Pooling is a technique used for performance to help lower CPU usage.
     [SerializeField] private IObjectPool<enemy> enemyPool;
     public bool collectionChecks;
     public int maxPoolSize;
+    public List<enemy> enemyList;
+
+    [Header("Other")]
+    public GameObject noSpawn;
     // setting up the object pool for the enemies
     public IObjectPool<enemy> Pool
     {
@@ -23,30 +25,32 @@ public class enemyManager : MonoBehaviour
         {
             if (enemyPool == null)
             {
-                enemyPool = new ObjectPool<enemy>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, collectionChecks, 10, maxPoolSize);
+                enemyPool = new ObjectPool<enemy>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, collectionChecks, 10, maxPoolSize); // keeps pool size under certain size for memory
             }
             return enemyPool;
         }
     }
 
-    private enemy CreatePooledItem()
+    private enemy CreatePooledItem() // creates the item to be pooled, in this case it is our enemy.
     {
-        enemy newEnemy = Instantiate (enemyPrefab, spawnLocation.transform.position, Quaternion.identity);
+        enemy newEnemy = Instantiate (enemyPrefab.enemyPrefab, spawnLocation.transform.position, Quaternion.identity);
         newEnemy.gameObject.SetActive(false);
         return newEnemy;
     }
 
-    private void OnTakeFromPool(enemy pooledEnemy)
+    private void OnTakeFromPool(enemy pooledEnemy)//sets enemy to be true as a spawn when called, also adds to list for iteration
     {
         pooledEnemy.gameObject.SetActive(true);
+        enemyList.Add(pooledEnemy);
     }
 
-    private void OnReturnedToPool(enemy pooledEnemy)
+    public void OnReturnedToPool(enemy pooledEnemy)// called when enemy is returned to pool and sets to false, also removes from list 
     {
         pooledEnemy.gameObject.SetActive(false);
+        enemyList.Remove(pooledEnemy);
     }
 
-    private void OnDestroyPoolObject(enemy pooledEnemy)
+    private void OnDestroyPoolObject(enemy pooledEnemy) // destroys pooled enemy
     {
         Destroy(pooledEnemy.gameObject);
     } 
@@ -70,21 +74,21 @@ public class enemyManager : MonoBehaviour
         {
             do
             {
-                float randx = Random.Range(spawnLocation.transform.position.x - 2, spawnLocation.transform.position.x + 2); // calculates a random range for the ememies to spawn in
-                float randy = Random.Range(spawnLocation.transform.position.y - 2, spawnLocation.transform.position.y + 2);
+                float randx = Random.Range(spawnLocation.transform.position.x - noSpawn.transform.position.x, spawnLocation.transform.position.x + noSpawn.transform.position.x); // calculates a random range for the ememies to spawn in
+                float randy = Random.Range(spawnLocation.transform.position.y - noSpawn.transform.position.y, spawnLocation.transform.position.y + noSpawn.transform.position.y); // takes into account the no spawn zone around tower
                 spawnPosition = new Vector3(randx, randy, 0);
                 canSpawn = true;
-                /*foreach (enemy e in enemyPool.GetCollection())
+                foreach (enemy e in enemyList) // iterates through list of spawned enemies to check spawnable posiitons to ensure no overlap
                 {
                     if (Vector3.Distance(e.transform.position, spawnPosition) < 2.0f)
                     {
                         canSpawn = false; 
                         break;
                     }
-                }*/
+                }
             } while (!canSpawn); 
 
-            var poolItem = enemyPool.Get();
+            var poolItem = enemyPool.Get(); // retrives the pool to set the transform position
             poolItem.transform.position = spawnPosition;
         }
     }
