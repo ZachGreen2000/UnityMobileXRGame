@@ -55,7 +55,7 @@ public class enemyManager : MonoBehaviour
     {
         Destroy(pooledEnemy.gameObject);
     } 
-    // Start is called before the first frame update
+    // Awake is called before the first frame update
     void Awake()
     {
        _ = Pool;

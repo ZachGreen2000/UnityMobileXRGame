@@ -25,14 +25,17 @@ namespace Enemies
         void Update()
         {
             this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+            destroyEnemy();
         }
 
         public void OnTriggerEnter(Collider obj)
         {
+            Debug.Log("Tower Hit");
             if (obj.CompareTag("Tower"))
             {
                 towerHealth.damage();
                 health = 0;
+                Debug.Log("Enemy is dead");
             }
         }
 
@@ -49,9 +52,10 @@ namespace Enemies
 
         public void destroyEnemy()
         {
-            if (health > 0)
+            if (health == 0)
             {
                 enemyManager.OnReturnedToPool(this);
+                Debug.Log("Enemy destroyed");
             }
         }
     }

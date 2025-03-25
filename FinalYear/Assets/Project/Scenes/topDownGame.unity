@@ -1075,6 +1075,7 @@ MonoBehaviour:
   round: 0
   killCount: 0
   neededKills: 0
+  maxEnemies: 0
   enemyManager: {fileID: 2108552618}
   towerHealth: {fileID: 3535456848524957752}
 --- !u!1 &2111555780
@@ -1163,6 +1164,11 @@ PrefabInstance:
       propertyPath: noSpawn
       value: 
       objectReference: {fileID: 1011849021}
+    - target: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: maxPoolSize
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1690730702585012199, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
       propertyPath: m_Name
@@ -1293,7 +1299,7 @@ PrefabInstance:
     - target: {fileID: 7218107446565410043, guid: acd35b1d3a20c574aa19140ac56382fe,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8761191311831547892, guid: acd35b1d3a20c574aa19140ac56382fe,
         type: 3}
@@ -1330,11 +1336,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
-        type: 3}
-      propertyPath: speed
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
         type: 3}
       propertyPath: target
@@ -1404,11 +1405,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: changeableEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7870661490233784582, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
