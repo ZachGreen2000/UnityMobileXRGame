@@ -22,31 +22,15 @@ namespace Enemies
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
-            destroyEnemy();
+            //this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
         }
 
-        public void takeDamage(int damage)
-        {
-            health = health - damage;
-        }
-
-        public void setStats(int h, int s)
+        public void setStats(int h, int s) // this function will set the stats based on the round
         {
             health = health + h;
             speed = speed + s;
-        }
-
-        public void destroyEnemy()
-        {
-           // Debug.Log("Destroy function called, health = " + health);
-            if (health <= 0)
-            {
-                enemyManager.OnReturnedToPool(this);
-                Debug.Log("Enemy destroyed");   
-            }
         }
     }
 }

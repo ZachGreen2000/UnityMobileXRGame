@@ -47,9 +47,10 @@ public class enemyManager : MonoBehaviour
 
     public void OnReturnedToPool(enemy pooledEnemy)// called when enemy is returned to pool and sets to false, also removes from list 
     {
-        Debug.Log("Enemy retrurned to pool: " + pooledEnemy);
+        //Debug.Log("Enemy retrurned to pool: " + pooledEnemy);
         pooledEnemy.gameObject.SetActive(false);
-        //enemyList.Remove(pooledEnemy);
+        //Debug.Log("Enemy is: " + pooledEnemy.gameObject.activeSelf);
+        enemyList.Remove(pooledEnemy);
     }
 
     private void OnDestroyPoolObject(enemy pooledEnemy) // destroys pooled enemy
@@ -83,17 +84,17 @@ public class enemyManager : MonoBehaviour
                 float randz = Random.Range(spawnLocation.transform.position.z - 20, spawnLocation.transform.position.z + 20); 
                 spawnPosition = new Vector3(randx, 2, randz);
                 float distanceCentre = Vector3.Distance(tower.transform.position, spawnPosition); // calculates no spawn zone
-                Debug.Log("Distance to centre: " +  distanceCentre);
-                Debug.Log("No Spawn radius: " + noSpawnRadius);
+               // Debug.Log("Distance to centre: " +  distanceCentre);
+                //Debug.Log("No Spawn radius: " + noSpawnRadius);
                 if (distanceCentre >= noSpawnRadius)
                 {
-                    Debug.Log("Can Spawn at position");
+                   // Debug.Log("Can Spawn at position");
                     canSpawn = true;
                     foreach (enemy e in enemyList) // iterates through list of spawned enemies to check spawnable posiitons to ensure no overlap
                     {
                         if (Vector3.Distance(e.transform.position, spawnPosition) < 2.0f)
                         {
-                            Debug.Log("Enemy overlapping");
+                           // Debug.Log("Enemy overlapping");
                             canSpawn = false;
                             break;
                         }
@@ -106,11 +107,11 @@ public class enemyManager : MonoBehaviour
             {
                 if (enemyPool == null)
                 {
-                    Debug.Log("enemyPool is null");
+                    //Debug.Log("enemyPool is null");
                 }
                 var poolItem = enemyPool.Get(); // retrives the pool to set the transform position
                 poolItem.transform.position = spawnPosition;
-                Debug.Log("Enemy spawned at: " + spawnPosition);
+                //Debug.Log("Enemy spawned at: " + spawnPosition);
             } else
             {
                 Debug.Log("Failed to find spawn position after " + maxAttempts);

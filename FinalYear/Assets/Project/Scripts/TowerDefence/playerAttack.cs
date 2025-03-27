@@ -11,9 +11,12 @@ public class playerAttack : MonoBehaviour
     public int damage;
     public int type;
     public float bulletSpeed;
+    public LayerMask enemyLayer;
 
     [Header("Scripts")]
     public enemy enemy;
+    public enemyManager enemyManager;
+    public defenceManager defenceManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,25 +24,38 @@ public class playerAttack : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0)) // detects input
         {
             Debug.Log("Shoot");
             attack();
         }
     }
 
-    public void attack()
+    public void attack() // this function is called on input to use raycast to damage enemies
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(shootPosition.position, shootPosition.forward, out hit, range))
+        if(Physics.SphereCast(shootPosition.position, 5, shootPosition.forward, out hit, range, enemyLayer))
         {
+            Debug.Log("RayCast hit: " + hit.collider);
             Debug.DrawRay(shootPosition.position, shootPosition.forward * hit.distance, Color.red, 1f);
             if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
-                enemy.takeDamage(damage);
+                Debug.Log("Hit is tagged enemy");
+                enemy hitEnemy = hit.collider.GetComponent<enemy>();
+                if (hitEnemy != null)
+                {
+                    Debug.Log("Hit enemy is not null");
+                    hitEnemy.health -= damage;
+                    if (hitEnemy.health <= 0)
+                    {
+                        Debug.Log("Hit enemy has no health");
+                        enemyManager.enemyPool.Release(hitEnemy);
+                        defenceManager.updateKillCount();
+                    }
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7870661490233784582}
   - component: {fileID: 919177559890366703}
   - component: {fileID: 836098632234586221}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: changeableEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12.299999, y: 16.379997, z: 3.78}
+  m_Size: {x: 12.299999, y: 16.379997, z: 13.1}
   m_Center: {x: 0, y: 0, z: -1.24}
 --- !u!114 &919177559890366703
 MonoBehaviour:
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 919177559890366703}
-  health: 1
+  health: 16
   target: {fileID: 8761191311831547892, guid: acd35b1d3a20c574aa19140ac56382fe, type: 3}
   speed: 1
   towerHealth: {fileID: 6785173350295192380, guid: acd35b1d3a20c574aa19140ac56382fe,

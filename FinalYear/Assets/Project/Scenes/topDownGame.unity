@@ -441,7 +441,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011849021}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -493,7 +493,7 @@ Transform:
   m_GameObject: {fileID: 1011849021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.084368, y: -0.52, z: -0.21}
+  m_LocalPosition: {x: 0.084368, y: -3.72, z: -0.21}
   m_LocalScale: {x: 15.083714, y: 1.0210232, z: 15.083714}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -781,11 +781,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPosition: {fileID: 1546638918}
-  range: 5
+  range: 100
   damage: 5
   type: 0
   bulletSpeed: 5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
   enemy: {fileID: 107622671}
+  enemyManager: {fileID: 2108552618}
+  defenceManager: {fileID: 2108552619}
 --- !u!1 &1610212484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,8 +1254,18 @@ PrefabInstance:
       objectReference: {fileID: 1011849021}
     - target: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 107622671}
+    - target: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
       propertyPath: maxPoolSize
-      value: 20
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: collectionChecks
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1690730702585012199, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
@@ -1384,6 +1399,11 @@ PrefabInstance:
       propertyPath: health
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6785173350295192380, guid: acd35b1d3a20c574aa19140ac56382fe,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 2108552618}
     - target: {fileID: 7218107446565410043, guid: acd35b1d3a20c574aa19140ac56382fe,
         type: 3}
       propertyPath: m_IsTrigger
@@ -1424,6 +1444,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
+        type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
         type: 3}
       propertyPath: health
@@ -1502,7 +1527,12 @@ PrefabInstance:
     - target: {fileID: 5806891785716891946, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870661490233784582, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 13.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

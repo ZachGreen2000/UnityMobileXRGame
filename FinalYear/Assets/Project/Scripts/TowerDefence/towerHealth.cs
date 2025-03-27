@@ -56,7 +56,7 @@ public class towerHealth : MonoBehaviour
         if (obj.CompareTag("Enemy"))
         {
             damage();
-            enemyManager.OnReturnedToPool(obj.GetComponent<enemy>());
+            enemyManager.enemyPool.Release(obj.GetComponent<enemy>());
         }
     }
 }

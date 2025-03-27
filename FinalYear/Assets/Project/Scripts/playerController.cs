@@ -80,7 +80,7 @@ public class playerController : MonoBehaviour
             // locks the rotation of player so they do not 'fall over'
             if (contraintAxis)
             {
-                playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX;
+                playerRigidbody.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
             }
         }
         if ((firstNThirdPerspective && topDownPerspective) || (pcInputSystem && mobileInputSystem)) // checks if more than once perspective or input system is selected for debugging

@@ -44,11 +44,11 @@ public class defenceManager : MonoBehaviour
         }
         if(roundFlag && enemyManager.enemyList.Count <= maxEnemies)
         {
-            StartCoroutine(spawnDelay()); // calls spawn function in enemyManager to start enemy spawning
+            enemyManager.Spawn(); // calls spawn function in enemyManager to start enemy spawning
         }
     }
 
-    public void setNeededKills()
+    public void setNeededKills() // this is called for needed kills to complete round
     {
         neededKills = neededKills * (round / 2); // calculates needed kills for each round using the round counter for infinite increasing
         maxEnemies = maxEnemies + neededKills + 50;
@@ -68,10 +68,4 @@ public class defenceManager : MonoBehaviour
     {
         roundFlag = true;
     } 
-
-    public IEnumerator spawnDelay() // controls delay for spawn between enemies
-    {
-        enemyManager.Spawn();
-        yield return new WaitForSeconds(spawnTime);
-    }
 }
