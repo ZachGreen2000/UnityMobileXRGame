@@ -61,4 +61,6 @@ public class characterData
             Debug.Log("Character already unlocked");
         }
     }
+
+    //this function will retrieve correct character for use in game
 }

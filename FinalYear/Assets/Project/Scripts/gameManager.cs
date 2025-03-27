@@ -6,6 +6,9 @@ public class gameManager : MonoBehaviour
 {
     [Header("GameObjects")]
     public Camera Main;
+
+    [Header("Characters")]
+    public int character;
     
     // Start is called before the first frame update
     void Start()
@@ -14,6 +17,10 @@ public class gameManager : MonoBehaviour
         
     }
 
+    void Awake()
+    {
+
+    }
     // Update is called once per frame
     void Update()
     {
