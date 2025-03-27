@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemies;
 
 public class defenceManager : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class defenceManager : MonoBehaviour
     public float neededKills;
     private bool roundFlag = false;
     public float maxEnemies;
+    public float spawnTime;
 
     [Header("Scripts")]
     public enemyManager enemyManager;
     public towerHealth towerHealth;
+    public enemy enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +40,11 @@ public class defenceManager : MonoBehaviour
             killCount = 0;
             enemyManager.enemyList.Clear();
             setNeededKills();
+            enemy.setStats(5, 1);
         }
         if(roundFlag && enemyManager.enemyList.Count <= maxEnemies)
         {
-            enemyManager.Spawn(); // calls spawn function in enemyManager to start enemy spawning
+            StartCoroutine(spawnDelay()); // calls spawn function in enemyManager to start enemy spawning
         }
     }
 
@@ -64,4 +68,10 @@ public class defenceManager : MonoBehaviour
     {
         roundFlag = true;
     } 
+
+    public IEnumerator spawnDelay() // controls delay for spawn between enemies
+    {
+        enemyManager.Spawn();
+        yield return new WaitForSeconds(spawnTime);
+    }
 }

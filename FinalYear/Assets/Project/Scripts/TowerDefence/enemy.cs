@@ -28,34 +28,24 @@ namespace Enemies
             destroyEnemy();
         }
 
-        public void OnTriggerEnter(Collider obj)
-        {
-            Debug.Log("Tower Hit");
-            if (obj.CompareTag("Tower"))
-            {
-                towerHealth.damage();
-                health = 0;
-                Debug.Log("Enemy is dead");
-            }
-        }
-
-        public void takedamage(int damage)
+        public void takeDamage(int damage)
         {
             health = health - damage;
         }
 
         public void setStats(int h, int s)
         {
-            health = h;
-            speed = s;
+            health = health + h;
+            speed = speed + s;
         }
 
         public void destroyEnemy()
         {
-            if (health == 0)
+           // Debug.Log("Destroy function called, health = " + health);
+            if (health <= 0)
             {
                 enemyManager.OnReturnedToPool(this);
-                Debug.Log("Enemy destroyed");
+                Debug.Log("Enemy destroyed");   
             }
         }
     }

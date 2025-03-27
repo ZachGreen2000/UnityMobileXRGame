@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enemies;
 
 public class towerHealth : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class towerHealth : MonoBehaviour
     public float health;
     public int type;
     public float round;
+
+    [Header("Scripts")]
+    public enemy enemy;
+    public enemyManager enemyManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,5 +48,15 @@ public class towerHealth : MonoBehaviour
     public void setRound(float rnd)
     {
         round = rnd;
+    }
+
+    public void OnTriggerEnter(Collider obj) // detects collision from enemy and returns enemy to pool
+    {
+        Debug.Log("Tower Hit");
+        if (obj.CompareTag("Enemy"))
+        {
+            damage();
+            enemyManager.OnReturnedToPool(obj.GetComponent<enemy>());
+        }
     }
 }

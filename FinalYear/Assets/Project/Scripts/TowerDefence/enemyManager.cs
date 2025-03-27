@@ -47,8 +47,9 @@ public class enemyManager : MonoBehaviour
 
     public void OnReturnedToPool(enemy pooledEnemy)// called when enemy is returned to pool and sets to false, also removes from list 
     {
+        Debug.Log("Enemy retrurned to pool: " + pooledEnemy);
         pooledEnemy.gameObject.SetActive(false);
-        enemyList.Remove(pooledEnemy);
+        //enemyList.Remove(pooledEnemy);
     }
 
     private void OnDestroyPoolObject(enemy pooledEnemy) // destroys pooled enemy
