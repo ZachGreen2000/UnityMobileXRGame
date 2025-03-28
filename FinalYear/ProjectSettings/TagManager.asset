@@ -8,6 +8,7 @@ TagManager:
   - Spawnable
   - Tower
   - Enemy
+  - Waypoint
   layers:
   - Default
   - TransparentFX

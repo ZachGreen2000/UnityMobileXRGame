@@ -26,7 +26,7 @@ public class enemyManager : MonoBehaviour
         {
             if (enemyPool == null)
             {
-                enemyPool = new ObjectPool<enemy>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, collectionChecks, 10, maxPoolSize); // keeps pool size under certain size for memory
+                enemyPool = new ObjectPool<enemy>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, collectionChecks, 1000, maxPoolSize); // keeps pool size under certain size for memory
             }
             return enemyPool;
         }
@@ -34,7 +34,7 @@ public class enemyManager : MonoBehaviour
 
     private enemy CreatePooledItem() // creates the item to be pooled, in this case it is our enemy.
     {
-        enemy newEnemy = Instantiate (enemyPrefab.enemyPrefab, spawnLocation.transform.position, Quaternion.LookRotation(Vector3.up));
+        enemy newEnemy = Instantiate (enemyPrefab.enemyPrefab, spawnLocation.transform.position, Quaternion.LookRotation(Vector3.down));
         newEnemy.gameObject.SetActive(false);
         return newEnemy;
     }
@@ -50,7 +50,7 @@ public class enemyManager : MonoBehaviour
         //Debug.Log("Enemy retrurned to pool: " + pooledEnemy);
         pooledEnemy.gameObject.SetActive(false);
         //Debug.Log("Enemy is: " + pooledEnemy.gameObject.activeSelf);
-        enemyList.Remove(pooledEnemy);
+        //enemyList.Remove(pooledEnemy);
     }
 
     private void OnDestroyPoolObject(enemy pooledEnemy) // destroys pooled enemy

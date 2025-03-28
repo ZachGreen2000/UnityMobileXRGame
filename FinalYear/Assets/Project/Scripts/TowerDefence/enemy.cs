@@ -24,7 +24,9 @@ namespace Enemies
         // Update is called once per frame
         void FixedUpdate()
         {
-            //this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+            
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+            
         }
 
         public void setStats(int h, int s) // this function will set the stats based on the round

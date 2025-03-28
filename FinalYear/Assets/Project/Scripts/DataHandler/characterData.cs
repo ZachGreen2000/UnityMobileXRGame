@@ -8,6 +8,7 @@ using System;
 public class characterData
 {
     public List<characterSingleton> characters = new List<characterSingleton> (); // creates list to handle multiple characters
+    public string currentCharacterID;
     // convert the character data to json
     public string ToJson()
     {
@@ -63,4 +64,30 @@ public class characterData
     }
 
     //this function will retrieve correct character for use in game
+    public void SetCurrentCharacter(string characterID)
+    {
+        if (characters.Exists(c => c.characterID == characterID))
+        {
+            currentCharacterID = characterID;
+            SaveToFile();
+            Debug.Log("Current character set to: " + characterID);
+        }
+        else
+        {
+            Debug.Log("Character ID not found.");
+        }
+    }
+
+    public void SwapCharacter(string newCharacterID)
+    {
+        if (characters.Exists(c => c.characterID == newCharacterID))
+        {
+            SetCurrentCharacter(newCharacterID);
+            Debug.Log("Swapped to: " + newCharacterID);
+        }
+        else
+        {
+            Debug.Log("Character ID not found!");
+        }
+    }
 }
