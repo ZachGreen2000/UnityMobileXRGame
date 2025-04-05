@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1381 1257">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: BaskOldFace, 'Baskerville Old Face';
+        font-size: 72px;
+      }
+
+      .cls-2 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #1a1a1a;
+      }
+
+      .cls-4 {
+        fill: #999;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-4" x="24.5" y="23.5" width="1336" height="1216" rx="11.5" ry="11.5"/>
+    <path d="M1349,24c6.07,0,11,4.93,11,11v1193c0,6.07-4.93,11-11,11H36c-6.07,0-11-4.93-11-11V35c0-6.07,4.93-11,11-11h1313M1349,23H36c-6.6,0-12,5.4-12,12v1193c0,6.6,5.4,12,12,12h1313c6.6,0,12-5.4,12-12V35c0-6.6-5.4-12-12-12h0Z"/>
+  </g>
+  <g>
+    <path class="cls-3" d="M692.5,883.5c-57.35,0-104-46.43-104-103.5s46.65-103.5,104-103.5,104,46.43,104,103.5-46.65,103.5-104,103.5Z"/>
+    <path d="M692.5,677c57.07,0,103.5,46.21,103.5,103s-46.43,103-103.5,103-103.5-46.21-103.5-103,46.43-103,103.5-103M692.5,676c-57.71,0-104.5,46.56-104.5,104s46.79,104,104.5,104,104.5-46.56,104.5-104-46.79-104-104.5-104h0Z"/>
+  </g>
+  <rect class="cls-2" x="686.5" y="884.5" width="13" height="184"/>
+  <rect class="cls-2" x="741.25" y="1049.25" width="11.66" height="201.86" transform="translate(1969.17 1772.72) rotate(150)"/>
+  <rect class="cls-2" x="630.95" y="1049.13" width="11.66" height="201.86" transform="translate(660.34 -164.31) rotate(30)"/>
+  <rect class="cls-2" x="746.16" y="838.24" width="13.23" height="119.62" transform="translate(-56.11 1745.92) rotate(-96.38)"/>
+  <rect class="cls-2" x="630.51" y="838.18" width="13.23" height="119.62" transform="translate(-363.4 1357.63) rotate(-79.32)"/>
+  <rect class="cls-2" x="820.64" y="688.65" width="19.54" height="211.01" transform="translate(1462.41 1753.76) rotate(-167.09)"/>
+  <rect class="cls-2" x="545.36" y="688.49" width="19.54" height="211.01" transform="translate(-163.35 144.08) rotate(-12.91)"/>
+  <path class="cls-2" d="M504.5,534.5h389.31s-206.31,314-389.31,0Z"/>
+  <ellipse class="cls-2" cx="220.5" cy="138" rx="40" ry="60.5"/>
+  <ellipse class="cls-2" cx="1227" cy="169.5" rx="39.5" ry="64"/>
+  <ellipse class="cls-2" cx="1107.5" cy="458.5" rx="40" ry="68"/>
+  <ellipse class="cls-2" cx="431.5" cy="303" rx="42" ry="69.5"/>
+  <ellipse class="cls-2" cx="807.5" cy="347" rx="36" ry="79.5"/>
+  <ellipse class="cls-2" cx="1259.5" cy="743" rx="41" ry="76.5"/>
+  <ellipse class="cls-2" cx="220.5" cy="489.5" rx="40" ry="73"/>
+  <text class="cls-1" transform="translate(486.59 112.23)"><tspan x="0" y="0">CATCH THE </tspan><tspan x="106.8" y="86.4">FOOD</tspan></text>
+</svg>
