@@ -26,6 +26,7 @@ public class gameManager : MonoBehaviour
         input.gameObject.SetActive(true);
         button.gameObject.SetActive(true);
 #endif
+        playerBase.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
     }
 
     void Awake()

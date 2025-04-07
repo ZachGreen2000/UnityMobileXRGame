@@ -9,6 +9,7 @@ TagManager:
   - Tower
   - Enemy
   - Waypoint
+  - Pet
   layers:
   - Default
   - TransparentFX

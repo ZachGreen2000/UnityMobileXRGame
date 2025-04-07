@@ -1630,7 +1630,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1697,9 +1697,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 285971692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1 &297599683
 GameObject:
   m_ObjectHideFlags: 0
@@ -3454,7 +3456,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3521,9 +3523,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 584073193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1001 &592415029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3706,7 +3710,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3773,9 +3777,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 624049694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1 &641390507
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,7 +4920,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4981,9 +4987,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 829369114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1001 &859377214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5617,7 +5625,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5684,9 +5692,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 984976499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1 &1029519842
 GameObject:
   m_ObjectHideFlags: 0
@@ -5965,7 +5975,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -6032,9 +6042,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1062030695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1001 &1071973573
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6951,7 +6963,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -7018,9 +7030,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245879583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1 &1252080346
 GameObject:
   m_ObjectHideFlags: 0
@@ -7150,13 +7164,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1252080346}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 100.17, y: 2.04, z: 5.37}
   m_LocalScale: {x: 0.54955, y: 0.54955, z: 0.54955}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1252080352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7169,8 +7183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09c97aa32066b04190c52a73798c869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.01
+  speed: 0.5
+  walkSpeed: 2
   target: {fileID: 2002043709}
+  mainCam: {fileID: 2119517642}
 --- !u!1 &1258142246
 GameObject:
   m_ObjectHideFlags: 0
@@ -7221,7 +7237,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -7288,9 +7304,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1258142246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1001 &1265317409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7529,7 +7547,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -7596,9 +7614,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1323735130}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1 &1345479829
 GameObject:
   m_ObjectHideFlags: 0
@@ -8205,7 +8225,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -8272,9 +8292,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1484496007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1001 &1505746341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8385,7 +8407,7 @@ GameObject:
   - component: {fileID: 1512695335}
   m_Layer: 0
   m_Name: tempPet
-  m_TagString: Untagged
+  m_TagString: Pet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8472,7 +8494,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -10991,7 +11013,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -11058,9 +11080,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1864346463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e45170d7f6fee34fafa2b0a0d0d0538, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1 &1952888355
 GameObject:
   m_ObjectHideFlags: 0
@@ -11301,6 +11325,7 @@ GameObject:
   - component: {fileID: 2002043713}
   - component: {fileID: 2002043712}
   - component: {fileID: 2002043711}
+  - component: {fileID: 2002043714}
   m_Layer: 0
   m_Name: mainPetPos
   m_TagString: Untagged
@@ -11338,7 +11363,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -11396,6 +11421,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002043709}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2002043714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002043709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ad13e9efd79b446ac898df8f2b70c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petMovement: {fileID: 1512695335}
+  homePlayer: {fileID: 1252080352}
 --- !u!1 &2015889780
 GameObject:
   m_ObjectHideFlags: 0

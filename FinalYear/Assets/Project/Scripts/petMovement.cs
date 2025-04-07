@@ -20,12 +20,9 @@ public class petMovement : MonoBehaviour
         this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
     }
 
-    public void OnTriggerEnter(Collider obj)
+    public void changeDestination()
     {
-        if (obj.gameObject.CompareTag("Waypoint"))
-        {
-            int rand = Random.Range(0, wayPoints.Length);
-            target = wayPoints[rand];
-        }
+        int rand = Random.Range(0, wayPoints.Length);
+        target = wayPoints[rand];  
     }
 }
