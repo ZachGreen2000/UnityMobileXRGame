@@ -21,6 +21,9 @@ public class mainScreen : MonoBehaviour
     [Header("CameraVariables")]
     public float correctionSpeed;
 
+    [Header("Scripts")]
+    public homePlayer homePlayer;
+
     // Flags
     private bool isMoving = false;
 
@@ -54,6 +57,7 @@ public class mainScreen : MonoBehaviour
     {
         if (!isMoving) // checks camera still before activating and stating coroutine
         {
+            homePlayer.moveToWayPoint();
             homeScreen.SetActive(false);
             StartCoroutine(moveCamera());
         }
