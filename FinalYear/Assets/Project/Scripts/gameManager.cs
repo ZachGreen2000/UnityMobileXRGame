@@ -22,6 +22,7 @@ public class gameManager : MonoBehaviour
     public GameObject lockedGirlyImg;
     public GameObject lockedWaterImg;
     public GameObject starsScreen;
+    public AudioSource click;
 
     [Header("Characters")]
     public string character;
@@ -120,26 +121,31 @@ public class gameManager : MonoBehaviour
     public void backToHomeButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        click.Play();
     }
     // sets temp selection to knight
     public void knightSelect()
     {
         characterSelected = "Knight";
         Debug.Log("Knight selected");
+        click.Play();
     }
     //sets temp selection to girly
     public void girlySelect()
     {
         characterSelected = "Girly";
+        click.Play();
     }
     //sets temp selection to water
     public void waterSelect()
     {
         characterSelected = "Water";
+        click.Play();
     }
     //triggers once button pressed to confirm switch character by taking into account temp selection
     public void confirmSwitch()
     {
+        click.Play();
         if (characterSelected == "Knight")
         {
             switchCharacter(knight);
@@ -164,38 +170,45 @@ public class gameManager : MonoBehaviour
     public void menuOn()
     {
         menuScreen.gameObject.SetActive(true);
+        click.Play();
     }
     // this function called on button clicked closes menu window
     public void menuBack()
     {
         menuScreen.gameObject.SetActive(false);
+        click.Play();
     }
     // this button call will enable the nfc screen and also start the nfc reader session
     public void unlockCharacterBtn()
     {
         nfcScreen.gameObject.SetActive(true);
         selectScreen.gameObject.SetActive(false);
+        click.Play();
     }
     // this button call will enable the nfc screen and also start the nfc writer session
     public void updateCharacterBtn()
     {
         nfcScreen.gameObject.SetActive(true);
         selectScreen.gameObject.SetActive(false);
+        click.Play();
     }
     // this button call will enable the select screen
     public void selectCharacterBtn()
     {
         selectScreen.gameObject.SetActive(true);
         nfcScreen.gameObject.SetActive(false);
+        click.Play();
     }
-
+    // this button call enables stars menu
     public void starBtn()
     {
         starsScreen.gameObject.SetActive(true);
+        click.Play();
     }
-
+    // this button call sets star menu inactive
     public void starBackBtn()
     {
         starsScreen.gameObject.SetActive(false);
+        click.Play();
     }
 }

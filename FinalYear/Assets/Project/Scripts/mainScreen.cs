@@ -9,6 +9,7 @@ public class mainScreen : MonoBehaviour
     [Header("GameObjects")]
     public Camera Main;
     public GameObject waypoints;
+    public AudioSource click;
 
     [Header("UI")]
     public GameObject homeScreen;
@@ -56,6 +57,7 @@ public class mainScreen : MonoBehaviour
     // UI
     void playClicked() // activates on play button clicked
     {
+        click.Play();
         if (!isMoving) // checks camera still before activating and stating coroutine
         {
             homePlayer.moveToWayPoint();
@@ -78,23 +80,5 @@ public class mainScreen : MonoBehaviour
         isMoving = false; // sets to false for camera movement again
     }
 
-    void starsClicked() // activates on stars button clicked
-    {
-
-    }
-
-    void shopClicked() // activates on shop button clicked
-    {
-
-    }
-
-    void menuClicked() // activates on menu button clicked
-    {
-
-    }
-     // Pet movement
-    void petAiMovement()
-    {
-
-    }
+    
 }

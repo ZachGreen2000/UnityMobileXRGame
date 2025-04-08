@@ -5792,7 +5792,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9b1869846b1a03e49bc60e54106069e0, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12968,6 +12968,7 @@ MonoBehaviour:
   lockedGirlyImg: {fileID: 1430859944}
   lockedWaterImg: {fileID: 1408778963}
   starsScreen: {fileID: 1413807176}
+  click: {fileID: 784321856}
   character: 
   knight: {fileID: 6065549743317853578, guid: 316a1db282fd7f04e9d0668f37cb6df4, type: 3}
   water: {fileID: 6392343882927361884, guid: 495bff6be4136974fbdef6afb3dfa305, type: 3}
@@ -14279,6 +14280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Main: {fileID: 2119517642}
   waypoints: {fileID: 0}
+  click: {fileID: 784321856}
   homeScreen: {fileID: 1855430356}
   playButton: {fileID: 271151023}
   backToHome: {fileID: 760254058}
