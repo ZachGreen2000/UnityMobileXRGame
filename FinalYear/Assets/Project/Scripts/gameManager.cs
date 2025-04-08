@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -11,12 +12,25 @@ public class gameManager : MonoBehaviour
     public TMP_InputField input;
     public Button button;
     public GameObject playerBase;
+    public Image knightImg;
+    public Image girlyImg;
+    public Image waterImg;
+    public GameObject menuScreen;
+    public GameObject nfcScreen;
+    public GameObject selectScreen;
+    public GameObject lockedKnightImg;
+    public GameObject lockedGirlyImg;
+    public GameObject lockedWaterImg;
+    public GameObject starsScreen;
 
     [Header("Characters")]
     public string character;
     public GameObject knight;
     public GameObject water;
     public GameObject girly;
+
+    //variables
+    private string characterSelected;
     
     // Start is called before the first frame update
     void Start()
@@ -45,12 +59,15 @@ public class gameManager : MonoBehaviour
         if (text == "1")
         {
             switchCharacter(knight);
+            lockedKnightImg.SetActive(false);
         }else if (text == "2")
         {
             switchCharacter(water);
+            lockedWaterImg.SetActive(false);
         }else if (text == "3")
         {
             switchCharacter(girly);
+            lockedGirlyImg.SetActive(false);
         }else
         {
             Debug.Log("No character found");
@@ -98,5 +115,87 @@ public class gameManager : MonoBehaviour
                 newChar.transform.localPosition = new Vector3(0f, 4f, 0f);
             }
         }
+    }
+    // this function triggers when home button is pressed to reload the scene 
+    public void backToHomeButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    // sets temp selection to knight
+    public void knightSelect()
+    {
+        characterSelected = "Knight";
+        Debug.Log("Knight selected");
+    }
+    //sets temp selection to girly
+    public void girlySelect()
+    {
+        characterSelected = "Girly";
+    }
+    //sets temp selection to water
+    public void waterSelect()
+    {
+        characterSelected = "Water";
+    }
+    //triggers once button pressed to confirm switch character by taking into account temp selection
+    public void confirmSwitch()
+    {
+        if (characterSelected == "Knight")
+        {
+            switchCharacter(knight);
+            menuScreen.gameObject.SetActive(false);
+        }
+        else if (characterSelected == "Girly")
+        {
+            switchCharacter(girly);
+            menuScreen.gameObject.SetActive(false);
+        }
+        else if (characterSelected == "Water")
+        {
+            switchCharacter(water);
+            menuScreen.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("No character selected");
+        }
+    }
+    //this function will enable menu ui
+    public void menuOn()
+    {
+        menuScreen.gameObject.SetActive(true);
+    }
+    // this function called on button clicked closes menu window
+    public void menuBack()
+    {
+        menuScreen.gameObject.SetActive(false);
+    }
+    // this button call will enable the nfc screen and also start the nfc reader session
+    public void unlockCharacterBtn()
+    {
+        nfcScreen.gameObject.SetActive(true);
+        selectScreen.gameObject.SetActive(false);
+    }
+    // this button call will enable the nfc screen and also start the nfc writer session
+    public void updateCharacterBtn()
+    {
+        nfcScreen.gameObject.SetActive(true);
+        selectScreen.gameObject.SetActive(false);
+    }
+    // this button call will enable the select screen
+    public void selectCharacterBtn()
+    {
+        selectScreen.gameObject.SetActive(true);
+        nfcScreen.gameObject.SetActive(false);
+    }
+
+    public void starBtn()
+    {
+        starsScreen.gameObject.SetActive(true);
+    }
+
+    public void starBackBtn()
+    {
+        starsScreen.gameObject.SetActive(false);
     }
 }

@@ -13,6 +13,7 @@ public class mainScreen : MonoBehaviour
     [Header("UI")]
     public GameObject homeScreen;
     public Button playButton;
+    public Button backToHome;
 
     [Header("CameraLocations")]
     [SerializeField] private Vector3 startLocation;
@@ -60,6 +61,7 @@ public class mainScreen : MonoBehaviour
             homePlayer.moveToWayPoint();
             homeScreen.SetActive(false);
             StartCoroutine(moveCamera());
+            backToHome.gameObject.SetActive(true);
         }
     }
 

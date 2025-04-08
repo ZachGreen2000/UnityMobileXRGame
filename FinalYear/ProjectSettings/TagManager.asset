@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Waypoint
   - Pet
+  - tower
+  - foodCatch
   layers:
   - Default
   - TransparentFX

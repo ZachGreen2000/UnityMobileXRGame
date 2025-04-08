@@ -4,7 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Project/Scenes/Main.unity
+    guid: c850ee8c3b14cc8459e7e186857cf567
+  - enabled: 1
+    path: Assets/Project/Scenes/topDownGame.unity
+    guid: e5f712384cfc9594db27c391d43feccf
+  - enabled: 1
+    path: Assets/Project/Scenes/foodCatcher.unity
+    guid: a8a92e27f1ad30b43a628f8eeeb932e4
+  - enabled: 1
+    path: Assets/Project/Scenes/Parkour.unity
+    guid: d0b5b840930f5db40be7d53b1dd31508
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: c7bf011d85724094389fce995ebaf520,
       type: 2}
