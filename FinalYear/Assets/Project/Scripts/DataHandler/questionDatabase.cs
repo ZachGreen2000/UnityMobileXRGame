@@ -18,7 +18,13 @@ public class questionDatabase : MonoBehaviour
     {
         // the following code creates a connection to the SQLite database that stores the questions
         string dbPath = System.IO.Path.Combine(Application.streamingAssetsPath, "questions.db");
-        var db = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadOnly);
+        db = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadOnly);
+
+        var allQuestions = db.Table<Questions>().ToList();
+        foreach (var q in allQuestions)
+        {
+            Debug.Log($"Subject: {q.subject} | Question: {q.question}");
+        }
     }
 
     // Update is called once per frame
@@ -30,31 +36,46 @@ public class questionDatabase : MonoBehaviour
     public void getEnglishQuestion()
     {
         Questions randomEnglishQuestion = getRandomQuestion("English");
+        if (randomEnglishQuestion == null)
+        {
+            Debug.Log("No english question found");
+            return;
+        }
         currentQ = randomEnglishQuestion.question;
-        correctAnswer = randomEnglishQuestion.correct_answer;
-        answer2 = randomEnglishQuestion.answer2;
-        answer3 = randomEnglishQuestion.answer3;
-        answer4 = randomEnglishQuestion.answer4;
+        correctAnswer = randomEnglishQuestion.correct;
+        answer2 = randomEnglishQuestion.incorrect_1;
+        answer3 = randomEnglishQuestion.incorrect_2;
+        answer4 = randomEnglishQuestion.incorrect_3;
     }
     // when the following function is called it will get a random maths question from the database and store it for use
     public void getMathsQuestion()
     {
         Questions randomMathsQuestion = getRandomQuestion("Maths");
+        if (randomMathsQuestion == null)
+        {
+            Debug.Log("No maths question found");
+            return;
+        }
         currentQ = randomMathsQuestion.question;
-        correctAnswer = randomMathsQuestion.correct_answer;
-        answer2 = randomMathsQuestion.answer2;
-        answer3 = randomMathsQuestion.answer3;
-        answer4 = randomMathsQuestion.answer4;
+        correctAnswer = randomMathsQuestion.correct;
+        answer2 = randomMathsQuestion.incorrect_1;
+        answer3 = randomMathsQuestion.incorrect_2;
+        answer4 = randomMathsQuestion.incorrect_3;
     }
     // when the following function is called it will get a random biology question from the database and store it for use
     public void getBiologyQuestion()
     {
         Questions randomBiologyQuestion = getRandomQuestion("Biology");
+        if (randomBiologyQuestion == null)
+        {
+            Debug.Log("No biology question found");
+            return;
+        }
         currentQ = randomBiologyQuestion.question;
-        correctAnswer = randomBiologyQuestion.correct_answer;
-        answer2 = randomBiologyQuestion.answer2;
-        answer3 = randomBiologyQuestion.answer3;
-        answer4 = randomBiologyQuestion.answer4;
+        correctAnswer = randomBiologyQuestion.correct;
+        answer2 = randomBiologyQuestion.incorrect_1;
+        answer3 = randomBiologyQuestion.incorrect_2;
+        answer4 = randomBiologyQuestion.incorrect_3;
     }
     // this function works by making a query to the database in reference to the subject passed into it
     // if the database subject collumn has a matching subject title and it hasnt been asked then information is taken and stored in a list
@@ -69,10 +90,16 @@ public class questionDatabase : MonoBehaviour
         }
         int randomIndex = Random.Range(0, questions.Count);
         var selectedQuestion = questions[randomIndex];
+        if (selectedQuestion == null)
+        {
+            Debug.Log("Selected question is null");
+            return null;
+        }
+        Debug.Log("Selected question is: " + selectedQuestion.question);
         askedQuestionIds.Add(selectedQuestion.id);
         return selectedQuestion;
     }
-
+    // clears questions that have been asked 
     public void resetAskedQuestions()
     {
         askedQuestionIds.Clear();
@@ -83,9 +110,9 @@ public class questionDatabase : MonoBehaviour
         public int id { get; set; }
         public string subject { get; set; }
         public string question { get; set; }
-        public string correct_answer { get; set; }
-        public string answer2 { get; set; }
-        public string answer3 { get; set; }
-        public string answer4 { get; set; }
+        public string correct { get; set; }
+        public string incorrect_1 { get; set; }
+        public string incorrect_2 { get; set; }
+        public string incorrect_3 { get; set; }
     }
 }

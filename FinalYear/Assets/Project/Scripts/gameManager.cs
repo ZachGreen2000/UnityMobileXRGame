@@ -23,6 +23,7 @@ public class gameManager : MonoBehaviour
     public GameObject lockedWaterImg;
     public GameObject starsScreen;
     public AudioSource click;
+    public TMP_Text currentStars;
 
     [Header("Characters")]
     public string character;
@@ -30,8 +31,12 @@ public class gameManager : MonoBehaviour
     public GameObject water;
     public GameObject girly;
 
+    [Header("Scripts")]
+    public NFCManager NFCManager;
+
     //variables
     private string characterSelected;
+    private accountData accountData;
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +47,8 @@ public class gameManager : MonoBehaviour
         button.gameObject.SetActive(true);
 #endif
         playerBase.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+        accountData = new accountData(0); // this needs later changes to a function that gets from json
+        setStar();
     }
 
     void Awake()
@@ -184,6 +191,7 @@ public class gameManager : MonoBehaviour
         nfcScreen.gameObject.SetActive(true);
         selectScreen.gameObject.SetActive(false);
         click.Play();
+        NFCManager.StartNFCReading();
     }
     // this button call will enable the nfc screen and also start the nfc writer session
     public void updateCharacterBtn()
@@ -191,6 +199,7 @@ public class gameManager : MonoBehaviour
         nfcScreen.gameObject.SetActive(true);
         selectScreen.gameObject.SetActive(false);
         click.Play();
+        NFCManager.StartNFCWriting();
     }
     // this button call will enable the select screen
     public void selectCharacterBtn()
@@ -210,5 +219,11 @@ public class gameManager : MonoBehaviour
     {
         starsScreen.gameObject.SetActive(false);
         click.Play();
+    }
+
+    //this button call checks and sets the current star amounts
+    public void setStar()
+    {
+        currentStars.text = accountData.starCount.ToString();
     }
 }
