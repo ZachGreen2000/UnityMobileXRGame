@@ -34,6 +34,9 @@ public class gameManager : MonoBehaviour
     [Header("Scripts")]
     public NFCManager NFCManager;
 
+    [Header("Variables")]
+    public int currentStarStore;
+
     //variables
     private string characterSelected;
     private accountData accountData;
@@ -48,7 +51,7 @@ public class gameManager : MonoBehaviour
 #endif
         playerBase.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
         accountData = new accountData(0); // this needs later changes to a function that gets from json
-        setStar();
+        currentStarStore = accountData.starCount;
     }
 
     void Awake()
@@ -224,6 +227,7 @@ public class gameManager : MonoBehaviour
     //this button call checks and sets the current star amounts
     public void setStar()
     {
-        currentStars.text = accountData.starCount.ToString();
+        currentStars.text = currentStarStore.ToString();
+        accountData.starCount = currentStarStore;
     }
 }

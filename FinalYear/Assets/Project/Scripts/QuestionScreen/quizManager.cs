@@ -29,11 +29,11 @@ public class quizManager : MonoBehaviour
     private List<string> answers = new List<string>();
     private List<string> randomAnswers = new List<string>();
     private string subject;
-    private accountData accountData;
+    
     // Start is called before the first frame update
     void Start()
     {
-        accountData = new accountData(0);
+       
     }
 
     // Update is called once per frame
@@ -253,7 +253,7 @@ public class quizManager : MonoBehaviour
     public void quit()
     {
         questionScreen.SetActive(false);
-        accountData.starCount += 5;
+        gameManager.currentStarStore += 5;
         gameManager.setStar();
     }
 }
