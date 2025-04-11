@@ -39,7 +39,8 @@ public class gameManager : MonoBehaviour
 
     //variables
     private string characterSelected;
-    private accountData accountData;
+    private accountData account;
+    private characterData charData;
     
     // Start is called before the first frame update
     void Start()
@@ -50,8 +51,12 @@ public class gameManager : MonoBehaviour
         button.gameObject.SetActive(true);
 #endif
         playerBase.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
-        accountData = new accountData(0); // this needs later changes to a function that gets from json
-        currentStarStore = accountData.starCount;
+
+        // this loads the data from the account json file for the star count for the user
+        accountData account = accountData.LoadFromFile(); 
+        currentStarStore = account.starCount;
+        // this loads the data from the character data file for which characters are unlocked and their stats
+        characterData charData = characterData.LoadFromFile();
     }
 
     void Awake()
@@ -228,6 +233,7 @@ public class gameManager : MonoBehaviour
     public void setStar()
     {
         currentStars.text = currentStarStore.ToString();
-        accountData.starCount = currentStarStore;
+        account.starCount = currentStarStore;
+        account.SaveToFile(); // saves star count to file each time it changes
     }
 }

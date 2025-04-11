@@ -13,4 +13,45 @@ public class accountData
     {
         this.starCount = starCount;
     }
+    // the following code is to save and pull to and from json respectively
+    // it works by converting the data from json to account data or the opposite
+    // the functions can read or write to json and has the option to create a new json file if one doesnt exist
+    public string ToJson()
+    {
+        return JsonUtility.ToJson(this, true);
+    }
+
+    public static accountData FromJson(string json)
+    {
+        return JsonUtility.FromJson<accountData>(json);
+    }
+
+    public void SaveToFile()
+    {
+        string path = Application.persistentDataPath + "/accountData.json";
+        File.WriteAllText(path, ToJson());
+        Debug.Log("Account data saved to: " + path);
+    }
+
+    public static accountData LoadFromFile()
+    {
+        string path = Application.persistentDataPath + "/accountData.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            return FromJson(json);
+        }
+        else
+        {
+            Debug.Log("No file, creating new file");
+            return CreateDefaultFile();
+        }
+    }
+
+    public static accountData CreateDefaultFile()
+    {
+        accountData defaultData = new accountData(0);
+        defaultData.SaveToFile();
+        return defaultData;
+    }
 }
