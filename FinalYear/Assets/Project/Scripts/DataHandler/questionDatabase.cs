@@ -21,10 +21,10 @@ public class questionDatabase : MonoBehaviour
         db = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadOnly);
 
         var allQuestions = db.Table<Questions>().ToList();
-        foreach (var q in allQuestions)
+        /*foreach (var q in allQuestions)
         {
             Debug.Log($"Subject: {q.subject} | Question: {q.question}");
-        }
+        }*/
     }
 
     // Update is called once per frame

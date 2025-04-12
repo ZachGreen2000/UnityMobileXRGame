@@ -25,4 +25,14 @@ public class characterSingleton
         this.biologyScore = biology;
         this.mathsScore = maths;
     }
+    // the below functions are used when saving and retrieving data from NFC tags
+    public string ToJson()
+    {
+        return JsonUtility.ToJson(this, true);
+    }
+
+    public static characterSingleton FromJson(string json)
+    {
+        return JsonUtility.FromJson<characterSingleton>(json);
+    }
 }

@@ -41,6 +41,8 @@ public class gameManager : MonoBehaviour
     private string characterSelected;
     private accountData account;
     private characterData charData;
+    private string currentCharacterID;
+    private List<string> unlockedCharacterIDs = new List<string>();
     
     // Start is called before the first frame update
     void Start()
@@ -53,10 +55,77 @@ public class gameManager : MonoBehaviour
         playerBase.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
 
         // this loads the data from the account json file for the star count for the user
-        accountData account = accountData.LoadFromFile(); 
+        account = accountData.LoadFromFile(); 
         currentStarStore = account.starCount;
         // this loads the data from the character data file for which characters are unlocked and their stats
-        characterData charData = characterData.LoadFromFile();
+        charData = characterData.LoadFromFile();
+        currentCharacterID = charData.currentCharacterID;
+        // the below called both get the current character or character last used and load which characters are unlocked
+        detectCurrentChatacter();
+        checkForUnlockedCharacters();
+    }
+    // called for instantiating correct character based on current Id retrieved from saved data
+    public void detectCurrentChatacter()
+    {
+        if (currentCharacterID == "1")
+        {
+            switchCharacter(knight);
+            charData.SetCurrentCharacter("1");
+        }
+        else if (currentCharacterID == "2")
+        {
+            switchCharacter(water);
+            charData.SetCurrentCharacter("2");
+        }
+        else if (currentCharacterID == "3")
+        {
+            switchCharacter(girly);
+            charData.SetCurrentCharacter("3");
+        }
+        else
+        {
+            Debug.Log("No character found");
+        }
+    }
+    // this will be called to change current character ID when user is switched characters
+    public void setCurrentCharacterID(string ID)
+    {
+        currentCharacterID = ID;
+        detectCurrentChatacter();
+    }
+    // this function will check which characters are unlocked already at the start of the game for display in swap char screen
+    public void checkForUnlockedCharacters()
+    {
+        Debug.Log("Checking");
+        unlockedCharacterIDs.Clear();
+        // dictionary for storage allows for easy scale for future characters
+        Dictionary<string, GameObject> lockedImages = new Dictionary<string, GameObject>
+        {
+            {"1", lockedKnightImg},
+            {"2", lockedWaterImg},
+            {"3", lockedGirlyImg}
+        };
+        bool anyUnlocked = false;
+        //iterates through to deactive locked wall
+        foreach(var character in charData.characters)
+        {
+            Debug.Log("Iterating through data");
+            string id = character.characterID;
+            unlockedCharacterIDs.Add(id);
+            if (lockedImages.ContainsKey(id))
+            {
+                Debug.Log("Character unlocked: " + id);
+                lockedImages[id].SetActive(false);
+                anyUnlocked = true;
+            }else
+            {
+                Debug.Log("Character id isnt in dictionairy");
+            }
+        }
+        if (!anyUnlocked)
+        {
+            Debug.Log("No characters unlocked yet");
+        }
     }
 
     void Awake()
@@ -163,17 +232,17 @@ public class gameManager : MonoBehaviour
         click.Play();
         if (characterSelected == "Knight")
         {
-            switchCharacter(knight);
+            setCurrentCharacterID("1");
             menuScreen.gameObject.SetActive(false);
         }
         else if (characterSelected == "Girly")
         {
-            switchCharacter(girly);
+            setCurrentCharacterID("3");
             menuScreen.gameObject.SetActive(false);
         }
         else if (characterSelected == "Water")
         {
-            switchCharacter(water);
+            setCurrentCharacterID("2");
             menuScreen.gameObject.SetActive(false);
         }
         else

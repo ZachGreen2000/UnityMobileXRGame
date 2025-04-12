@@ -64,7 +64,7 @@ public class NFCManager : MonoBehaviour
     {
         Debug.Log("Writting session has begun");
 
-        string jsonData = characterDatabase.ToJson();
+        string jsonData = currentCharacter.ToJson();
 #if UNITY_IOS && !UNITY_EDITOR
         startWriting(jsonData);
 #elif UNITY_ANDROID
