@@ -20,7 +20,7 @@ public class NFCPlugin {
     private NfcAdapter nfcAdapter;
     private Tag currentTag;
     //calls from unity to start reading process
-    public static startReading() {
+    public void startReading() {
         Activity activity = UnityPlayer.currentActivity;
         Intent intent = activity.getIntent();
         processNFCIntent(intent);
@@ -64,9 +64,10 @@ public class NFCPlugin {
         }
     }
     // this method handles the logic to proccess the NFC tag data 
-    public void processNFCIntent(Intent intent) {
+    public static void processNFCIntent(Intent intent) {
         // check that intent is the correct for data reading
         if (intent == null || !NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+            Log.d("NFCPlugin", "cannot read or process data");
             return;
         }
         // retrieve messages in NDEF format from NFC intent, extracting the record and convert into a string uising UTF_8
@@ -77,6 +78,8 @@ public class NFCPlugin {
             String data = new String(record.getPayload(), StandardCharsets.UTF_8);
             Log.d("NFCPlugin", "Data from NFC" + data);
             UnityPlayer.UnitySendMessage("NFCManager", "OnNFCRead", data); // send the data to Unity
+        }else {
+            Log.d("NFCPlugin", "cannot read or process data"); 
         }
     }
 }

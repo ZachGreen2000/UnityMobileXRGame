@@ -1,0 +1,5 @@
+C:/Unity projects/finalYearProject/UnityMobileXRGame/FinalYear/.utmp/Debug/5j555yh6/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Unity projects/finalYearProject/UnityMobileXRGame/FinalYear/.utmp/Debug/5j555yh6/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+C:/Unity projects/finalYearProject/UnityMobileXRGame/FinalYear/.utmp/Debug/5j555yh6/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/Unity projects/finalYearProject/UnityMobileXRGame/FinalYear/.utmp/Debug/5j555yh6/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+C:/Unity projects/finalYearProject/UnityMobileXRGame/FinalYear/.utmp/Debug/5j555yh6/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir

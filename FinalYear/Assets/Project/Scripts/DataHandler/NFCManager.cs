@@ -31,15 +31,15 @@ public class NFCManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
         NFCAndroidPlugin = new AndroidJavaClass("com.DefaultCompany.FinalYear.NFCPlugin").CallStatic<AndroidJavaObject>("getInstance", GetUnityActivity());
 #endif
     }
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
     private static AndroidJavaObject GetUnityActivity()
     {
-        using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.unityPlayer))
+        using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
         {
             return unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
         }

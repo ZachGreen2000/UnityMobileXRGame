@@ -7843,6 +7843,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927980837}
   m_CullTransparentMesh: 1
+--- !u!1 &946787039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946787041}
+  - component: {fileID: 946787040}
+  m_Layer: 0
+  m_Name: NFCManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &946787040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946787039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec37599d8b2dbde46b58f7b91df1e833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterDatabase:
+    characters: []
+    currentCharacterID: 
+  currentCharacter:
+    characterID: 
+    characterName: 
+    characterLevel: 
+    characterBool: 
+    englishScore: 
+    biologyScore: 
+    mathsScore: 
+--- !u!4 &946787041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946787039}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 101.15334, y: 7.6601467, z: 11.123098}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &955385048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12796,7 +12851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3}
+  m_AnchoredPosition: {x: 0, y: 1.1}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1559070922
@@ -12821,8 +12876,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Play '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12882,7 +12937,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -1.68396}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -15287,7 +15342,6 @@ GameObject:
   - component: {fileID: 1807594267}
   - component: {fileID: 1807594268}
   - component: {fileID: 1807594269}
-  - component: {fileID: 1807594270}
   - component: {fileID: 1807594271}
   - component: {fileID: 1807594272}
   m_Layer: 0
@@ -15344,7 +15398,8 @@ MonoBehaviour:
   knight: {fileID: 6065549743317853578, guid: 316a1db282fd7f04e9d0668f37cb6df4, type: 3}
   water: {fileID: 6392343882927361884, guid: 495bff6be4136974fbdef6afb3dfa305, type: 3}
   girly: {fileID: 7497643651781563430, guid: 6866ce0df82216146bb324bfb566e647, type: 3}
-  NFCManager: {fileID: 1807594270}
+  NFCManager: {fileID: 946787040}
+  currentStarStore: 0
 --- !u!82 &1807594269
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15441,29 +15496,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1807594270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807594266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec37599d8b2dbde46b58f7b91df1e833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterDatabase:
-    characters: []
-    currentCharacterID: 
-  currentCharacter:
-    characterID: 
-    characterName: 
-    characterLevel: 
-    characterBool: 
-    englishScore: 
-    biologyScore: 
-    mathsScore: 
 --- !u!114 &1807594271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17062,3 +17094,4 @@ SceneRoots:
   - {fileID: 4049387677144269714}
   - {fileID: 1124257461389262934}
   - {fileID: 1252080351}
+  - {fileID: 946787041}
