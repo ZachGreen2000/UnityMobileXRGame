@@ -281,6 +281,7 @@ public class gameManager : MonoBehaviour
     // this button call will enable the select screen
     public void selectCharacterBtn()
     {
+        checkForUnlockedCharacters();
         selectScreen.gameObject.SetActive(true);
         nfcScreen.gameObject.SetActive(false);
         click.Play();

@@ -1,6 +1,8 @@
 package com.DefaultCompany.FinalYear;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -22,8 +24,26 @@ public class NFCPlugin {
     //calls from unity to start reading process
     public void startReading() {
         Activity activity = UnityPlayer.currentActivity;
-        Intent intent = activity.getIntent();
-        processNFCIntent(intent);
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(activity);
+
+        if (adapter != null) {
+            Intent intent = new Intent(activity, activity.getClass());
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(
+                activity, 0, intent, PendingIntent.FLAG_MUTABLE // use FLAG_UPDATE_CURRENT for older API
+            );
+
+            IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+            try {
+                tagDetected.addDataType("*/*");
+            } catch (IntentFilter.MalformedMimeTypeException e) {
+                Log.e("NFC", "Mime type error", e);
+            }
+
+            adapter.enableForegroundDispatch(activity, pendingIntent, new IntentFilter[]{ tagDetected }, null);
+            Log.d("NFC", "Foreground NFC reading enabled");
+        }
     }
     // ensures only one instance of NFCPlugin exsists
     public static NFCPlugin getInstance(Activity act) {

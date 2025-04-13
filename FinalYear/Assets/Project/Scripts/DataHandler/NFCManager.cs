@@ -77,6 +77,7 @@ public class NFCManager : MonoBehaviour
     //this function is called once NFC tag has been read and data retrived
     public void OnNFCRead(string jsonData)
     {
+        Debug.Log("Raw NFC data" + jsonData);
         characterSingleton character = JsonUtility.FromJson<characterSingleton>(jsonData);
         characterData database = characterData.LoadFromFile();
         database.UnlockCharacter(character);
