@@ -69,6 +69,8 @@ public class characterData
         if (characters.Exists(c => c.characterID == characterID))
         {
             currentCharacterID = characterID;
+            characterSingleton character = characters.Find(c => c.characterID == characterID);
+            gameManager.CharacterManager.ActiveCharacter.UpdateFrom(character);
             SaveToFile();
             Debug.Log("Current character set to: " + characterID);
         }
@@ -78,12 +80,20 @@ public class characterData
         }
     }
 
-    public void SwapCharacter(string newCharacterID)
+    public void UpdateCharacterInList(characterSingleton updatedCharacter)
     {
-        if (characters.Exists(c => c.characterID == newCharacterID))
+        int index = characters.FindIndex(c => c.characterID == updatedCharacter.characterID);
+        if (index != null)
         {
-            SetCurrentCharacter(newCharacterID);
-            Debug.Log("Swapped to: " + newCharacterID);
+            characters[index] = new characterSingleton(
+                updatedCharacter.characterID,
+                updatedCharacter.characterName,
+                updatedCharacter.characterLevel,
+                updatedCharacter.characterBool,
+                updatedCharacter.englishScore,
+                updatedCharacter.biologyScore,
+                updatedCharacter.mathsScore);
+            SaveToFile();
         }
         else
         {

@@ -15,16 +15,19 @@ public class mainScreen : MonoBehaviour
     public GameObject homeScreen;
     public Button playButton;
     public Button backToHome;
+    public GameObject levelUpScreen;
 
     [Header("CameraLocations")]
     [SerializeField] private Vector3 startLocation;
     public Vector3 endLocation;
+    public Vector3 endLocationLevel;
 
     [Header("CameraVariables")]
     public float correctionSpeed;
 
     [Header("Scripts")]
     public homePlayer homePlayer;
+    public levelUpScreen levelUpScript;
 
     // Flags
     private bool isMoving = false;
@@ -79,6 +82,30 @@ public class mainScreen : MonoBehaviour
         }
         isMoving = false; // sets to false for camera movement again
     }
-
-    
+    // this function is called when level up is clicked and works the same as play button click
+    public void levelClicked()
+    {
+        click.Play();
+        if (!isMoving)
+        {
+            homeScreen.SetActive(false);
+            StartCoroutine(moveCamToLevel());
+            levelUpScript.OnLevelScreen();
+            levelUpScreen.SetActive(true);
+            backToHome.gameObject.SetActive(true);
+        }
+    }
+    // this enumeration works the same as above but with different end location for level up screen
+    IEnumerator moveCamToLevel()
+    {
+        isMoving = true;
+        float t = 0f;
+        while (t < 1f) // runs until camera in correct position as adding correction speed to t each iteration
+        {
+            t += Time.deltaTime * correctionSpeed;
+            Main.transform.position = Vector3.Slerp(startLocation, endLocationLevel, t);
+            yield return null;
+        }
+        isMoving = false; // sets to false for camera movement again
+    }
 }

@@ -44,6 +44,12 @@ public class gameManager : MonoBehaviour
     private string currentCharacterID;
     private List<string> unlockedCharacterIDs = new List<string>();
     
+    // this is a global class for the active characters data to use for updating variables and overwritting to list
+    // this creates a temporary instance of the characterSingleton data class that will act as the current character
+    public static class CharacterManager
+    {
+        public static characterSingleton ActiveCharacter = new characterSingleton("","","","","","","");
+    }
     // Start is called before the first frame update
     void Start()
     {

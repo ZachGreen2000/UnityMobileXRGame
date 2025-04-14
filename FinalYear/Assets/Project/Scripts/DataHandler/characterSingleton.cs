@@ -35,4 +35,17 @@ public class characterSingleton
     {
         return JsonUtility.FromJson<characterSingleton>(json);
     }
+    // this is called to reuse current instance of character singleton
+    public void UpdateFrom(characterSingleton other)
+    {
+        if (other == null) return;
+
+        this.characterID = other.characterID;
+        this.characterName = other.characterName;
+        this.characterLevel = other.characterLevel;
+        this.characterBool = other.characterBool;
+        this.englishScore = other.englishScore;
+        this.biologyScore = other.biologyScore;
+        this.mathsScore = other.mathsScore;
+    }
 }
