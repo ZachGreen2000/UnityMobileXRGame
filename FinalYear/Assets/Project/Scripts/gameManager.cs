@@ -144,20 +144,24 @@ public class gameManager : MonoBehaviour
         
     }
     // this is called on a button only available in the unity editor for the development process
+    // this function also calls the loading json functions for manual character unlock to simulate the nfc scanning when in dev mode
     public void devButtonClick()
     {
         string text = input.text;
         if (text == "1")
         {
             switchCharacter(knight);
+            manualCharUnlock.unlockCharacter("1");
             lockedKnightImg.SetActive(false);
         }else if (text == "2")
         {
             switchCharacter(water);
+            manualCharUnlock.unlockCharacter("2");
             lockedWaterImg.SetActive(false);
         }else if (text == "3")
         {
             switchCharacter(girly);
+            manualCharUnlock.unlockCharacter("3");
             lockedGirlyImg.SetActive(false);
         }else
         {

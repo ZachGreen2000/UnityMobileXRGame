@@ -27,9 +27,9 @@ public class levelUpScreen : MonoBehaviour
     //private
     private string currentLevel = "0";
     private string starsToUse = "0";
-    private string speedCalc = "0";
-    private string damageCalc = "0";
-    private string healthCalc = "0";
+    private string speedCalc = "2";
+    private string damageCalc = "5";
+    private string healthCalc = "5";
     private int tempCurrentStars;
     private int tempStarsToUse;
     private int tempLevel;
@@ -71,11 +71,13 @@ public class levelUpScreen : MonoBehaviour
     // the purpose of this function is to calculate stats based on the level for ui display
     public string calcStat(string stat)
     {
+        Debug.Log("Calculating stat");
         if (stat == speedCalc)
         {
             int statInt;
             int.TryParse(stat, out statInt);
-            int calculatedStat = statInt * tempLevel;
+            int calculatedStat = statInt * tempLevel + 1;
+            Debug.Log("Speed is:" + calculatedStat);
             return calculatedStat.ToString();
         }
         else if (stat == healthCalc)
