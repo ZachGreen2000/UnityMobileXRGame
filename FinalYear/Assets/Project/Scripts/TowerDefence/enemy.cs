@@ -42,6 +42,15 @@ namespace Enemies
             Debug.Log("Speed stat set to: " + speed);
             GetComponent<Collider>().enabled = true;
         }
+
+        public void damageEnemy()
+        {
+            health--;
+            if (health <= 0)
+            {
+                enemyManager.Pool.Release(this);
+            }
+        }
     }
 }
 

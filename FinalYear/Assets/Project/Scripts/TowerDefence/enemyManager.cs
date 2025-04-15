@@ -32,7 +32,7 @@ public class enemyManager : MonoBehaviour
         }
     }
 
-    private enemy CreatePooledItem() // creates the item to be pooled, in this case it is our enemy.
+    private enemy CreatePooledItem() // creates the item to be pooled, in this case it is enemy.
     {
         enemy newEnemy = Instantiate (enemyPrefab, spawnLocation.transform.position, Quaternion.LookRotation(Vector3.down));
         newEnemy.gameObject.SetActive(false);
