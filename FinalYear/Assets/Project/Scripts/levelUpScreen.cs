@@ -38,6 +38,7 @@ public class levelUpScreen : MonoBehaviour
     public void OnLevelScreen()
     {
         accountData = accountData.LoadFromFile();
+        characterData = characterData.LoadFromFile();
         currentLevel = gameManager.CharacterManager.ActiveCharacter.characterLevel;
         int.TryParse(currentLevel, out tempLevel);
         setUIText();
@@ -135,5 +136,12 @@ public class levelUpScreen : MonoBehaviour
         GameObject child = currentChar.gameObject;
         Animator anim = child.GetComponent<Animator>();
         anim.SetBool("celebration", true);
+        StartCoroutine(resetCelebration(anim));
+    }
+
+    IEnumerator resetCelebration(Animator anim)
+    {
+        yield return new WaitForSeconds(5f);
+        anim.SetBool("celebration", false);
     }
 }
