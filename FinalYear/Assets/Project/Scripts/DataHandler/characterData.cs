@@ -55,6 +55,7 @@ public class characterData
         if (!characters.Exists(c => c.characterID == newCharacter.characterID)) // c is lambda expression that is used to loop through json objects to find ID
         {
             characters.Add(newCharacter);
+            currentCharacterID = newCharacter.characterID;
             SaveToFile();
             Debug.Log("New character unlocked");
         } else

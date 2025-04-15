@@ -8,9 +8,9 @@ public class manualCharUnlock
 {
     public static void unlockCharacter(string characterID)
     {
-        string knightPath = Application.persistentDataPath + "/knightUnlock.json";
-        string waterPath = Application.persistentDataPath + "/waterUnlock.json";
-        string girlyPath = Application.persistentDataPath + "/girlyUnlock.json";
+        string knightPath = Application.dataPath + "/Project/Scripts/devTools/knightUnlock.json";
+        string waterPath = Application.dataPath + "/Project/Scripts/devTools/waterUnlock.json";
+        string girlyPath = Application.dataPath + "/Project/Scripts/devTools/girlyUnlock.json";
 
         if (characterID == "1")
         {

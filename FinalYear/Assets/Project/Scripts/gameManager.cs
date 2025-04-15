@@ -75,16 +75,19 @@ public class gameManager : MonoBehaviour
     {
         if (currentCharacterID == "1")
         {
+            Debug.Log("current character is: Knight");
             switchCharacter(knight);
             charData.SetCurrentCharacter("1");
         }
         else if (currentCharacterID == "2")
         {
+            Debug.Log("current character is: Water");
             switchCharacter(water);
             charData.SetCurrentCharacter("2");
         }
         else if (currentCharacterID == "3")
         {
+            Debug.Log("current character is: Girly");
             switchCharacter(girly);
             charData.SetCurrentCharacter("3");
         }
@@ -301,6 +304,7 @@ public class gameManager : MonoBehaviour
     public void starBtn()
     {
         starsScreen.gameObject.SetActive(true);
+        setStar();
         click.Play();
     }
     // this button call sets star menu inactive
