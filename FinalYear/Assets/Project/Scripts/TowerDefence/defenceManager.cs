@@ -40,7 +40,7 @@ public class defenceManager : MonoBehaviour
             killCount = 0;
             enemyManager.enemyList.Clear();
             setNeededKills();
-            enemy.setStats(5, 1);
+            //enemy.setStats(5, 1);
         }
         if(roundFlag && enemyManager.enemyList.Count <= maxEnemies)
         {

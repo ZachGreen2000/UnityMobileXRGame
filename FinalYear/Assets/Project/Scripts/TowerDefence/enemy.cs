@@ -7,7 +7,7 @@ namespace Enemies
     public class enemy : MonoBehaviour
     {
         [Header("Enemy Stats")]
-        public enemy enemyPrefab;
+        //public enemy enemyPrefab;
         public int health;
         public GameObject target;
         public int speed;
@@ -33,6 +33,14 @@ namespace Enemies
         {
             health = health + h;
             speed = speed + s;
+        }
+        // this is called when an emey is taken from the pool
+        public void resetStats(int h, int s)
+        {
+            health = h;
+            speed = s;
+            Debug.Log("Speed stat set to: " + speed);
+            GetComponent<Collider>().enabled = true;
         }
     }
 }

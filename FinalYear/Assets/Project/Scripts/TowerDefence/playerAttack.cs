@@ -44,15 +44,17 @@ public class playerAttack : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
                 Debug.Log("Hit is tagged enemy");
-                enemy hitEnemy = hit.collider.GetComponent<enemy>();
+                enemy hitEnemy = hit.collider.GetComponentInParent<enemy>();
                 if (hitEnemy != null)
                 {
                     Debug.Log("Hit enemy is not null");
                     hitEnemy.health -= damage;
                     if (hitEnemy.health <= 0)
                     {
+                        hitEnemy.GetComponent<Collider>().enabled = false;
+                        hitEnemy.gameObject.SetActive(false);
                         Debug.Log("Hit enemy has no health");
-                        enemyManager.enemyPool.Release(hitEnemy);
+                        enemyManager.Pool.Release(hitEnemy.GetComponent<enemy>());
                         defenceManager.updateKillCount();
                     }
                 }

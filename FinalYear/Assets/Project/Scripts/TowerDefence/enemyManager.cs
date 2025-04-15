@@ -34,15 +34,21 @@ public class enemyManager : MonoBehaviour
 
     private enemy CreatePooledItem() // creates the item to be pooled, in this case it is our enemy.
     {
-        enemy newEnemy = Instantiate (enemyPrefab.enemyPrefab, spawnLocation.transform.position, Quaternion.LookRotation(Vector3.down));
+        enemy newEnemy = Instantiate (enemyPrefab, spawnLocation.transform.position, Quaternion.LookRotation(Vector3.down));
         newEnemy.gameObject.SetActive(false);
         return newEnemy;
     }
 
     private void OnTakeFromPool(enemy pooledEnemy)//sets enemy to be true as a spawn when called, also adds to list for iteration
     {
+        pooledEnemy.resetStats(1, 2);
         pooledEnemy.gameObject.SetActive(true);
+        pooledEnemy.tag = "Enemy";
+        pooledEnemy.gameObject.layer = LayerMask.NameToLayer("enemyLayer");
         enemyList.Add(pooledEnemy);
+        Debug.Log($"Collider: {pooledEnemy.GetComponent<Collider>().enabled}");
+        int layerIndex = LayerMask.NameToLayer("enemyLayer");
+        Debug.Log($"enemyLayer index: " + layerIndex);
     }
 
     public void OnReturnedToPool(enemy pooledEnemy)// called when enemy is returned to pool and sets to false, also removes from list 
@@ -50,7 +56,8 @@ public class enemyManager : MonoBehaviour
         //Debug.Log("Enemy retrurned to pool: " + pooledEnemy);
         pooledEnemy.gameObject.SetActive(false);
         //Debug.Log("Enemy is: " + pooledEnemy.gameObject.activeSelf);
-        //enemyList.Remove(pooledEnemy);
+        enemyList.Remove(pooledEnemy);
+        Debug.Log("On returned to pool");
     }
 
     private void OnDestroyPoolObject(enemy pooledEnemy) // destroys pooled enemy
@@ -60,7 +67,7 @@ public class enemyManager : MonoBehaviour
     // Awake is called before the first frame update
     void Awake()
     {
-       _ = Pool;
+        var _ = Pool;
     }
 
     // Update is called once per frame
@@ -109,9 +116,9 @@ public class enemyManager : MonoBehaviour
                 {
                     //Debug.Log("enemyPool is null");
                 }
-                var poolItem = enemyPool.Get(); // retrives the pool to set the transform position
+                var poolItem = Pool.Get(); // retrives the pool to set the transform position
                 poolItem.transform.position = spawnPosition;
-                //Debug.Log("Enemy spawned at: " + spawnPosition);
+                Debug.Log("Enemy spawned at");
             } else
             {
                 Debug.Log("Failed to find spawn position after " + maxAttempts);
