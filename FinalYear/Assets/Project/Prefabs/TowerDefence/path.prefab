@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4285034420938874022}
   - component: {fileID: 451947168531835361}
   - component: {fileID: 1002076144626597542}
+  - component: {fileID: 5233926445789287969}
+  - component: {fileID: 3562994316155469267}
   m_Layer: 0
   m_Name: path
   m_TagString: Spawnable
@@ -28,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690730702585012199}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.17, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 1, z: 42.65191}
+  m_LocalScale: {x: 104.96607, y: 1, z: 97.469086}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4a4b0339be8b0d242ade85df65c7e263, type: 2}
+  - {fileID: 2100000, guid: 367e1ed5c4f30454085d8cc7676d045c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,11 +120,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fd6327d56d23344a13e17af14ab890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
-    type: 3}
-  enemySpawnSpeed: 0
+  enemyPrefab: {fileID: 0}
   spawnLocation: {fileID: 1690730702585012199}
-  collectionChecks: 0
-  maxPoolSize: 10
+  collectionChecks: 1
+  maxPoolSize: 2000
   enemyList: []
   noSpawn: {fileID: 0}
+  tower: {fileID: 0}
+--- !u!114 &5233926445789287969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690730702585012199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f926635f9281e414fa032e2d3d7ce577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  round: 0
+  killCount: 0
+  neededKills: 0
+  maxEnemies: 0
+  spawnTime: 1
+  playerBase: {fileID: 0}
+  enemyManager: {fileID: 1002076144626597542}
+  towerHealth: {fileID: 0}
+  enemy: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb, type: 3}
+  knight: {fileID: 6065549743317853578, guid: 316a1db282fd7f04e9d0668f37cb6df4, type: 3}
+  water: {fileID: 6392343882927361884, guid: 495bff6be4136974fbdef6afb3dfa305, type: 3}
+  girly: {fileID: 7497643651781563430, guid: 6866ce0df82216146bb324bfb566e647, type: 3}
+--- !u!114 &3562994316155469267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690730702585012199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe2151fdb0e04344ac793773dde86c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectionChecks: 1
+  maxPoolSize: 100
+  spawnPoint: {fileID: 0}
+  waterBulletPrefab: {fileID: 0}
+  girlyBulletPrefab: {fileID: 0}
+  currentCharacterID: 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2652554837214702254}
   - component: {fileID: 2931365370756569126}
   - component: {fileID: 557566039638235351}
+  - component: {fileID: 7630178471387385952}
   m_Layer: 0
   m_Name: waterBullet
   m_TagString: waterBullet
@@ -108,7 +109,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4930,9 +4931,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7630178471387385952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5658681767439159568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511b20553e6b4b14180d9c816e5d809e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb, type: 3}
+  bulletManager: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}

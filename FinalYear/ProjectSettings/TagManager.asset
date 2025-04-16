@@ -12,6 +12,8 @@ TagManager:
   - Pet
   - tower
   - foodCatch
+  - waterBullet
+  - girlyBullet
   layers:
   - Default
   - TransparentFX

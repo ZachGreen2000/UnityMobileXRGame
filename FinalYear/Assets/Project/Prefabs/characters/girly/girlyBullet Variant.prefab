@@ -10,33 +10,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 11.444045
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 11.444045
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 11.444045
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
-        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3417
+      value: -10.346898
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8127
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.63761
+      value: 2.2490892
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
@@ -73,20 +58,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
       propertyPath: m_Name
       value: girlyBullet Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
-        type: 3}
-      propertyPath: m_TagString
-      value: girlyBullet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -95,11 +70,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 151098511909834681}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6384258116809111590}
+      addedObject: {fileID: 908325841294859383}
   m_SourcePrefab: {fileID: 100100000, guid: f04b0a8c4245c25488a6fe5d4eef57f4, type: 3}
 --- !u!1 &7068852242774277110 stripped
 GameObject:
@@ -107,51 +78,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7987400538235176615}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &151098511909834681
-SphereCollider:
+--- !u!114 &908325841294859383
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7068852242774277110}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.023303783
-  m_Center: {x: -0.00013583338, y: -0.00019140444, z: 0.008227201}
---- !u!54 &6384258116809111590
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7068852242774277110}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511b20553e6b4b14180d9c816e5d809e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb, type: 3}
+  bulletManager: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}

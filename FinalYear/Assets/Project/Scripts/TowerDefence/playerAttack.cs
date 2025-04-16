@@ -8,6 +8,8 @@ public class playerAttack : MonoBehaviour
     [Header("Attack Variables")]
     public Transform shootPosition;
     public float range;
+    public float gRange;
+    public float wRange;
     public int damage;
     public int type;
     public float bulletSpeed;
@@ -17,6 +19,8 @@ public class playerAttack : MonoBehaviour
     public enemy enemy;
     public enemyManager enemyManager;
     public defenceManager defenceManager;
+    public bulletManager bulletManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +34,7 @@ public class playerAttack : MonoBehaviour
         {
             Debug.Log("Shoot");
             attack();
+            updatedAttack();
         }
     }
 
@@ -60,6 +65,67 @@ public class playerAttack : MonoBehaviour
                 }
             }
         }
+    }
+    // this function will be called on attack and dependent on which character is active it triggers a different attack
+    // the function calls the bullet pools for range attacks and adds force to them from the set shoot position
+    public void updatedAttack()
+    {
+        Debug.Log("Updated shoot");
+        if (gameManager.CharacterManager.ActiveCharacter.characterID == "1")
+        {
+
+        }else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2")
+        {
+            Debug.Log("Water character detected: Shoot");
+            Transform spawnPos = findChild(this.transform, "shootPoint");
+            if (spawnPos != null)
+            {
+                var pooledBullet = bulletManager.wPool.Get();
+                pooledBullet.transform.position = spawnPos.position;
+                pooledBullet.transform.rotation = spawnPos.rotation;
+                var velocityModule = pooledBullet.GetComponent<ParticleSystem>().velocityOverLifetime;
+                velocityModule.enabled = true;
+                velocityModule.x = -wRange;
+            }else
+            {
+                Debug.Log("Cant find shootPoint");
+            }
+        }
+        else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3")
+        {
+            Transform spawnPos = this.transform.Find("shootPoint");
+            Transform spawnPos2 = this.transform.Find("shootPoint(1)");
+            var pooledBullet = bulletManager.gPool.Get();
+            var pooledBullet2 = bulletManager.gPool.Get();
+            pooledBullet.transform.position = spawnPos.position;
+            pooledBullet2.transform.position = spawnPos2.position;
+            Rigidbody rb = pooledBullet.GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.AddForce(spawnPos.forward * gRange, ForceMode.Impulse);
+            Rigidbody rb2 = pooledBullet2.GetComponent<Rigidbody>();
+            rb2.velocity = Vector3.zero;
+            rb2.angularVelocity = Vector3.zero;
+            rb2.AddForce(spawnPos2.forward * gRange, ForceMode.Impulse);
+        }
+    }
+    // this function is here to iterate through the children of the player parent to find the child shootPoint
+    // the reason for this function is so it can be reused for different characters
+    public Transform findChild(Transform parent, string childName)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName)
+            {
+                return child;
+            }
+            Transform found = findChild(child, childName);
+            if (found != null)
+            {
+                return found;
+            }
+        }
+        return null;
     }
 
     public void getTypeAndLevel()

@@ -15,9 +15,9 @@ public class Bullet : MonoBehaviour
         StartCoroutine(destroyDelay());
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             enemy.damageEnemy();
         }

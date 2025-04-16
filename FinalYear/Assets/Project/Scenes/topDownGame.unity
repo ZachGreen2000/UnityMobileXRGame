@@ -817,7 +817,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011849021}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -869,8 +869,8 @@ Transform:
   m_GameObject: {fileID: 1011849021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.084368, y: -3.72, z: -0.21}
-  m_LocalScale: {x: 15.083714, y: 1.0210232, z: 15.083714}
+  m_LocalPosition: {x: 0.084367, y: -3.72, z: -0.21}
+  m_LocalScale: {x: 35.26723, y: 1.0210232, z: 35.26723}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1734,6 +1734,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPosition: {fileID: 1546638918}
   range: 100
+  gRange: 10
+  wRange: 3
   damage: 5
   type: 0
   bulletSpeed: 5
@@ -1743,6 +1745,7 @@ MonoBehaviour:
   enemy: {fileID: 107622671}
   enemyManager: {fileID: 2108552618}
   defenceManager: {fileID: 2108552619}
+  bulletManager: {fileID: 3014696592354224489}
 --- !u!1 &1610212484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,45 +2430,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092886240}
   m_CullTransparentMesh: 1
---- !u!1 &2108552613 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1690730702585012199, guid: 115e65952b017db4a9c69e8082870b23,
-    type: 3}
-  m_PrefabInstance: {fileID: 3014696592354224488}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2108552618 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
     type: 3}
   m_PrefabInstance: {fileID: 3014696592354224488}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108552613}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27fd6327d56d23344a13e17af14ab890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2108552619
+--- !u!114 &2108552619 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}
+  m_PrefabInstance: {fileID: 3014696592354224488}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108552613}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f926635f9281e414fa032e2d3d7ce577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  round: 0
-  killCount: 0
-  neededKills: 0
-  maxEnemies: 0
-  spawnTime: 1
-  enemyManager: {fileID: 2108552618}
-  towerHealth: {fileID: 3535456848524957752}
-  enemy: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb, type: 3}
 --- !u!1 &2111555780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,6 +2562,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2867965215514737883, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 104.96607
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867965215514737883, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 97.469086
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867965215514737883, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.17
       objectReference: {fileID: 0}
@@ -2622,20 +2620,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1604444789}
+    - target: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: girlyBulletPrefab
+      value: 
+      objectReference: {fileID: 7068852242774277110, guid: 44e595eab1e32fd4dacccaaea965e6ad,
+        type: 3}
+    - target: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: waterBulletPrefab
+      value: 
+      objectReference: {fileID: 7788161215957327164, guid: 747b6cb26363cad4c928f970d04bf7cd,
+        type: 3}
     - target: {fileID: 4285034420938874022, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 367e1ed5c4f30454085d8cc7676d045c, type: 2}
+    - target: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: playerBase
+      value: 
+      objectReference: {fileID: 1604444789}
+    - target: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: towerHealth
+      value: 
+      objectReference: {fileID: 3535456848524957752}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1690730702585012199, guid: 115e65952b017db4a9c69e8082870b23,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2108552619}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 115e65952b017db4a9c69e8082870b23, type: 3}
+--- !u!114 &3014696592354224489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}
+  m_PrefabInstance: {fileID: 3014696592354224488}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe2151fdb0e04344ac793773dde86c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3535456848524957751
 PrefabInstance:
   m_ObjectHideFlags: 0

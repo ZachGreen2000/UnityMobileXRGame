@@ -13,11 +13,18 @@ public class defenceManager : MonoBehaviour
     private bool roundFlag = false;
     public float maxEnemies;
     public float spawnTime;
+    public GameObject playerBase;
+    private string currentChar;
 
     [Header("Scripts")]
     public enemyManager enemyManager;
     public towerHealth towerHealth;
     public enemy enemy;
+
+    [Header("Characters")]
+    public GameObject knight;
+    public GameObject water;
+    public GameObject girly;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +33,20 @@ public class defenceManager : MonoBehaviour
         score = 0;
         neededKills = 10;
         maxEnemies = 50;
+        // calling the set player and passing correct prefab based on active characters ID so character in use is used
+        if (gameManager.CharacterManager.ActiveCharacter.characterID == "1")
+        {
+            setPlayer(knight);
+        }else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2")
+        {
+            setPlayer(water);
+        }else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3")
+        {
+            setPlayer(girly);
+        }else
+        {
+            Debug.Log("No active character");
+        }
     }
 
     // Update is called once per frame
@@ -68,4 +89,23 @@ public class defenceManager : MonoBehaviour
     {
         roundFlag = true;
     } 
+    // this function is the same or at least similar to that in gameManager where in which is sets the prefab to the correct pos
+    public void setPlayer(GameObject currentChar)
+    {
+        Debug.Log("Player has no childs");
+        GameObject newChar = Instantiate(currentChar, playerBase.transform.position, Quaternion.Euler(0, 90, 0) * playerBase.transform.rotation);
+        newChar.transform.SetParent(playerBase.transform);
+        if (currentChar == water)
+        {
+            newChar.transform.localPosition = new Vector3(0f, -6f, 0f);
+        }
+        else if (currentChar == girly)
+        {
+            newChar.transform.localPosition = new Vector3(0f, 8.5f, 0f);
+        }
+        else if (currentChar == knight)
+        {
+            newChar.transform.localPosition = new Vector3(0f, 4f, 0f);
+        }
+    }
 }
