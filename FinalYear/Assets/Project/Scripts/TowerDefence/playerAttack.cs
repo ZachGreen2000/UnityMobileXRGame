@@ -33,7 +33,7 @@ public class playerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0)) // detects input
         {
             Debug.Log("Shoot");
-            attack();
+            //attack();
             updatedAttack();
         }
     }

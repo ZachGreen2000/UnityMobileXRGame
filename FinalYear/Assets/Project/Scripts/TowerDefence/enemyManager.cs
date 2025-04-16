@@ -41,8 +41,8 @@ public class enemyManager : MonoBehaviour
 
     private void OnTakeFromPool(enemy pooledEnemy)//sets enemy to be true as a spawn when called, also adds to list for iteration
     {
-        pooledEnemy.resetStats(1, 2);
         pooledEnemy.gameObject.SetActive(true);
+        pooledEnemy.resetStats(1, 2);
         pooledEnemy.tag = "Enemy";
         pooledEnemy.gameObject.layer = LayerMask.NameToLayer("enemyLayer");
         enemyList.Add(pooledEnemy);

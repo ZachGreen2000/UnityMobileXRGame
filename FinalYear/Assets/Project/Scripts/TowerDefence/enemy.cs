@@ -15,17 +15,34 @@ namespace Enemies
         [Header("Other")]
         public towerHealth towerHealth;
         public enemyManager enemyManager;
+
+        //private
+        private bool isReleased = false;
+        private bool isMoving = true;
         // Start is called before the first frame update
         void Start()
         {
             
         }
 
+        void Update()
+        {
+           /* if (health <= 0 && !isReleased)
+            {
+                isReleased = true;
+                isMoving = false;
+                enemyManager.Pool.Release(this.GetComponent<enemy>());
+                Debug.Log("enemy has been hit and is returning to pool");
+            }*/
+        }
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (isMoving)
+            {
+                this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+            }
             
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
             
         }
 
@@ -41,14 +58,21 @@ namespace Enemies
             speed = s;
             Debug.Log("Speed stat set to: " + speed);
             GetComponent<Collider>().enabled = true;
+            isReleased = false;
+            isMoving = true;
         }
 
         public void damageEnemy()
         {
-            health--;
-            if (health <= 0)
+            Debug.Log("enemy damaged");
+            health = health - 1;
+            Debug.Log("enemy health: " + health);
+            if (health <= 0 && !isReleased)
             {
+                isReleased = true;
+                isMoving = false;
                 enemyManager.Pool.Release(this);
+                Debug.Log("enemy has been hit and is returning to pool");
             }
         }
     }

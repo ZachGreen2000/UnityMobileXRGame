@@ -2887,6 +2887,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: changeableEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7870661490233784582, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 7.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870661490233784582, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 14.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870661490233784582, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -5.45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
