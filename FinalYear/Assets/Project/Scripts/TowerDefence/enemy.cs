@@ -10,7 +10,7 @@ namespace Enemies
         //public enemy enemyPrefab;
         public int health;
         public GameObject target;
-        public int speed;
+        public float speed;
 
         [Header("Other")]
         public towerHealth towerHealth;
@@ -18,7 +18,7 @@ namespace Enemies
 
         //private
         private bool isReleased = false;
-        private bool isMoving = true;
+        public bool isMoving = true;
         // Start is called before the first frame update
         void Start()
         {
@@ -27,13 +27,7 @@ namespace Enemies
 
         void Update()
         {
-           /* if (health <= 0 && !isReleased)
-            {
-                isReleased = true;
-                isMoving = false;
-                enemyManager.Pool.Release(this.GetComponent<enemy>());
-                Debug.Log("enemy has been hit and is returning to pool");
-            }*/
+           
         }
         // Update is called once per frame
         void FixedUpdate()
@@ -46,34 +40,16 @@ namespace Enemies
             
         }
 
-        public void setStats(int h, int s) // this function will set the stats based on the round
-        {
-            health = health + h;
-            speed = speed + s;
-        }
         // this is called when an emey is taken from the pool
-        public void resetStats(int h, int s)
+        public void resetStats(int h, float s)
         {
             health = h;
             speed = s;
             Debug.Log("Speed stat set to: " + speed);
             GetComponent<Collider>().enabled = true;
+            GetComponent<Animator>().enabled = true;
             isReleased = false;
             isMoving = true;
-        }
-
-        public void damageEnemy()
-        {
-            Debug.Log("enemy damaged");
-            health = health - 1;
-            Debug.Log("enemy health: " + health);
-            if (health <= 0 && !isReleased)
-            {
-                isReleased = true;
-                isMoving = false;
-                enemyManager.Pool.Release(this);
-                Debug.Log("enemy has been hit and is returning to pool");
-            }
         }
     }
 }

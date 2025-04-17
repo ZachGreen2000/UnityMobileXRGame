@@ -4952,3 +4952,7 @@ MonoBehaviour:
   enemy: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb, type: 3}
   bulletManager: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
     type: 3}
+  enemyManager: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}
+  defenceManager: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}

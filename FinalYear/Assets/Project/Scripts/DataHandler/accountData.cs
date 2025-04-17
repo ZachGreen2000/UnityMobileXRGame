@@ -8,10 +8,14 @@ using System.IO;
 public class accountData
 {
     public int starCount;
+    public float defenceHighRound;
+    public float defenceHighScore;
 
-    public accountData(int starCount)
+    public accountData(int starCount, float defenceHighRound, float defenceHighScore)
     {
         this.starCount = starCount;
+        this.defenceHighRound = defenceHighRound;
+        this.defenceHighScore = defenceHighScore;
     }
     // the following code is to save and pull to and from json respectively
     // it works by converting the data from json to account data or the opposite
@@ -50,7 +54,7 @@ public class accountData
 
     public static accountData CreateDefaultFile()
     {
-        accountData defaultData = new accountData(0);
+        accountData defaultData = new accountData(0, 0, 0);
         defaultData.SaveToFile();
         return defaultData;
     }

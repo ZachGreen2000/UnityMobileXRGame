@@ -10,18 +10,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 14.373
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 14.373
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 14.373
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.346898
+      value: -6.12514
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2490892
+      value: -39.852036
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
@@ -58,6 +73,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f04b0a8c4245c25488a6fe5d4eef57f4,
         type: 3}
       propertyPath: m_Name
@@ -92,4 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb, type: 3}
   bulletManager: {fileID: 3562994316155469267, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}
+  enemyManager: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
+    type: 3}
+  defenceManager: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
     type: 3}

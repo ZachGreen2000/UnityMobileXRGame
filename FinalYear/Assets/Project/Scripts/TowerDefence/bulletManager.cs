@@ -53,6 +53,7 @@ public class bulletManager : MonoBehaviour
     private void OnTakeFromPoolW(ParticleSystem pooledBullet)//sets bullet to be true as a spawn when called, also adds to list for iteration
     {
         pooledBullet.gameObject.SetActive(true);
+        pooledBullet.GetComponent<Bullet>().onReuse();
     }
 
     public void OnReturnedToPoolW(ParticleSystem pooledBullet)// called when bullet is returned to pool and sets to false, also removes from list 

@@ -7,32 +7,64 @@ public class Bullet : MonoBehaviour
 {
     public enemy enemy;
     public bulletManager bulletManager;
+    public enemyManager enemyManager;
+    public defenceManager defenceManager;
     private ParticleSystem ps;
 
     void Start()
     {
-        TryGetComponent(out ps);
+        if (TryGetComponent<ParticleSystem>(out ps))// gets particle system
+        {
+            Debug.Log("ParticleSystem found");
+        }
         StartCoroutine(destroyDelay());
     }
-
-    void OnTriggerEnter(Collider collision)
+    // this calls when the bullet colliders with enemy and returns enemy to the pool
+    void OnTriggerEnter(Collider obj)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (obj.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("enemy hit");
-            enemy.damageEnemy();
+            obj.GetComponent<Animator>().enabled = false;
+            obj.GetComponent<enemy>().isMoving = false;
+            obj.gameObject.SetActive(false);
+            enemyManager.Pool.Release(obj.GetComponent<enemy>());
+            defenceManager.updateKillCount();
+            //returns bullet to pool on collision
+            if (this.gameObject.CompareTag("girlyBullet"))
+            {
+                bulletManager.gPool.Release(this.gameObject);
+            }
+            else if (this.gameObject.CompareTag("waterBullet"))
+            {
+                this.gameObject.SetActive(false);
+                bulletManager.wPool.Release(ps);
+            }
         }
     }
-
+    // called on reuse
+    public void onReuse()
+    {
+        if (TryGetComponent<ParticleSystem>(out ps))// gets particle system
+        {
+            Debug.Log("ParticleSystem found");
+        }
+        StartCoroutine(destroyDelay());
+    }
+    // this returns the bullet to its pool after a certain amount of time
     IEnumerator destroyDelay()
     {
         yield return new WaitForSeconds(5);
-        if (this.gameObject.CompareTag("girlyBullet"))
+        if (this.gameObject != null)
         {
-            bulletManager.gPool.Release(this.gameObject);
-        }else if (this.gameObject.CompareTag("waterBullet"))
-        {
-            bulletManager.wPool.Release(ps);
+            if (this.gameObject.CompareTag("girlyBullet"))
+            {
+                bulletManager.gPool.Release(this.gameObject);
+            }
+            else if (this.gameObject.CompareTag("waterBullet"))
+            {
+                bulletManager.wPool.Release(ps);
+            }
         }
     }
 }

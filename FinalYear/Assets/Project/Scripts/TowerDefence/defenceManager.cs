@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enemies;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class defenceManager : MonoBehaviour
 {
@@ -12,9 +14,10 @@ public class defenceManager : MonoBehaviour
     public float neededKills;
     private bool roundFlag = false;
     public float maxEnemies;
-    public float spawnTime;
     public GameObject playerBase;
     private string currentChar;
+    public float spawnInterval;
+    private float spawnTimer;
 
     [Header("Scripts")]
     public enemyManager enemyManager;
@@ -25,6 +28,18 @@ public class defenceManager : MonoBehaviour
     public GameObject knight;
     public GameObject water;
     public GameObject girly;
+
+    [Header("UI")]
+    public TMP_Text scoreText;
+    public TMP_Text roundText;
+    public GameObject confirmation;
+    public TMP_Text roundStart;
+    public TMP_Text roundEnd;
+    public GameObject endScreen;
+    public TMP_Text endRound;
+    public TMP_Text endScore;
+    public TMP_Text highRound;
+    public TMP_Text highScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +62,8 @@ public class defenceManager : MonoBehaviour
         {
             Debug.Log("No active character");
         }
+        scoreText.text = ("Score: " + score);
+        roundText.text = ("Roound: " + round);
     }
 
     // Update is called once per frame
@@ -61,12 +78,25 @@ public class defenceManager : MonoBehaviour
             killCount = 0;
             enemyManager.enemyList.Clear();
             setNeededKills();
-            //enemy.setStats(5, 1);
+            if (spawnInterval >= 1)
+            {
+                spawnInterval = spawnTimer - 1;
+            }
+            roundEnd.gameObject.SetActive(true);
+            StartCoroutine(PopUp(roundEnd.gameObject));
         }
-        if(roundFlag && enemyManager.enemyList.Count <= maxEnemies)
+        if (roundFlag)
         {
-            enemyManager.Spawn(); // calls spawn function in enemyManager to start enemy spawning
+            spawnTimer += Time.deltaTime; // adds time each frame
+            if (spawnTimer >= spawnInterval && enemyManager.enemyList.Count <= maxEnemies)
+            {
+                enemyManager.Spawn(); // calls spawn function in enemyManager to start enemy spawning
+                spawnTimer = 0f;           
+            }
         }
+        // changes text display on screen
+        scoreText.text = ("Score: " + score);
+        roundText.text = ("Round: " + round);
     }
 
     public void setNeededKills() // this is called for needed kills to complete round
@@ -77,17 +107,21 @@ public class defenceManager : MonoBehaviour
     // updates kills count based on kills
     public void updateKillCount()
     {
+        Debug.Log("updating kill count and score");
         killCount++;
+        updateScore();
     }
     //updates score when round is complete
     public void updateScore()
     {
-        score = score + 10;
+        score = score + 3;
     }
     // this will be calle on button click
     public void onPlay()
     {
         roundFlag = true;
+        roundStart.gameObject.SetActive(true);
+        StartCoroutine(PopUp(roundStart.gameObject));
     } 
     // this function is the same or at least similar to that in gameManager where in which is sets the prefab to the correct pos
     public void setPlayer(GameObject currentChar)
@@ -101,11 +135,64 @@ public class defenceManager : MonoBehaviour
         }
         else if (currentChar == girly)
         {
-            newChar.transform.localPosition = new Vector3(0f, 8.5f, 0f);
+            newChar.transform.localPosition = new Vector3(0f, 6f, 0f);
         }
         else if (currentChar == knight)
         {
             newChar.transform.localPosition = new Vector3(0f, 4f, 0f);
         }
+    }
+    // this button call is for when the user wants to quit the game
+    public void onQuit()
+    {
+        if (!roundFlag)
+        {
+            confirmation.SetActive(true);
+        }
+    }
+    // this button call allows a user to reverse their choice to quit
+    public void onCancel()
+    {
+        confirmation.SetActive(false);
+    }
+    // this button call allows the user to confirm the quit
+    public void onConfirmQuit()
+    {
+        SceneManager.LoadScene("Main");
+    }
+    // this will run for the pop ups and deavtivate them after a while
+    IEnumerator PopUp(GameObject type)
+    {
+        yield return new WaitForSeconds(2f);
+        type.SetActive(false);
+    }
+
+    public void endGame()
+    {
+        endScreen.SetActive(true);
+        accountData account = accountData.LoadFromFile();
+        endRound.text = ("Final Round: " + round);
+        endScore.text = ("Final Score: " + score);
+        if (account.defenceHighRound < round)
+        {
+            account.defenceHighRound = round;
+        }
+        if (account.defenceHighScore < score)
+        {
+            account.defenceHighScore = score;
+        }
+        highRound.text = ("Personal high Round: " + account.defenceHighRound);
+        highScore.text = ("Personal High Score" + account.defenceHighScore);
+        account.SaveToFile();
+    }
+
+    public void endScreenTryAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void endScreenQuit()
+    {
+        SceneManager.LoadScene("main");
     }
 }

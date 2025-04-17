@@ -42,7 +42,7 @@ public class enemyManager : MonoBehaviour
     private void OnTakeFromPool(enemy pooledEnemy)//sets enemy to be true as a spawn when called, also adds to list for iteration
     {
         pooledEnemy.gameObject.SetActive(true);
-        pooledEnemy.resetStats(1, 2);
+        pooledEnemy.resetStats(1, 2f);
         pooledEnemy.tag = "Enemy";
         pooledEnemy.gameObject.layer = LayerMask.NameToLayer("enemyLayer");
         enemyList.Add(pooledEnemy);
@@ -80,7 +80,7 @@ public class enemyManager : MonoBehaviour
     {
         Vector3 spawnPosition;
         bool canSpawn = false;
-        int maxAttempts = 10;
+        int maxAttempts = 3;
         int attempts = 0;
         float noSpawnRadius = noSpawn.transform.localScale.x / 2;
         if (spawnLocation.CompareTag("Spawnable"))

@@ -13,6 +13,7 @@ public class towerHealth : MonoBehaviour
     [Header("Scripts")]
     public enemy enemy;
     public enemyManager enemyManager;
+    public defenceManager defenceManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,18 +32,13 @@ public class towerHealth : MonoBehaviour
     {
         if (health == 0)
         {
-            endGame();
+            defenceManager.endGame();
         }
     }
     // this function is called from the enemy file when an enemy collides with the tower
     public void damage()
     {
         health--;
-    }
-    // this is called when the health reaches 0 and ends the game
-    public void endGame()
-    {
-        // game end logic
     }
 
     public void setRound(float rnd)
