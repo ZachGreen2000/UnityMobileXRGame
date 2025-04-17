@@ -37,8 +37,8 @@ public class Bullet : MonoBehaviour
         if (obj.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("enemy hit");
-            obj.GetComponent<Animator>().SetBool("Moving", false);
             obj.GetComponent<enemy>().isMoving = false;
+            obj.GetComponent<Animator>().SetBool("Moving", false);
             enemyManager.Pool.Release(obj.GetComponent<enemy>());
             defenceManager.updateKillCount();
             //returns bullet to pool on collision
