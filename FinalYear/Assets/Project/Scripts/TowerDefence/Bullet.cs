@@ -5,19 +5,31 @@ using Enemies;
 
 public class Bullet : MonoBehaviour
 {
-    public enemy enemy;
-    public bulletManager bulletManager;
-    public enemyManager enemyManager;
-    public defenceManager defenceManager;
+    private bulletManager bulletManager;
+    private enemyManager enemyManager;
+    private defenceManager defenceManager;
     private ParticleSystem ps;
-
+    private Coroutine lifeTimer;
+    // the following functions are used to inject the needed scripts at runtime as prefabs cant have singleton scripts in the scene attached
+    public void SetupManager(defenceManager defman)
+    {
+        defenceManager = defman;
+    }
+    public void SetupEnemyManager(enemyManager enman)
+    {
+        enemyManager = enman;
+    }
+    public void SetupBulletManager(bulletManager bulman)
+    {
+        bulletManager = bulman;
+    }
     void Start()
     {
         if (TryGetComponent<ParticleSystem>(out ps))// gets particle system
         {
             Debug.Log("ParticleSystem found");
         }
-        StartCoroutine(destroyDelay());
+        lifeTimer = StartCoroutine(destroyDelay());
     }
     // this calls when the bullet colliders with enemy and returns enemy to the pool
     void OnTriggerEnter(Collider obj)
@@ -25,9 +37,8 @@ public class Bullet : MonoBehaviour
         if (obj.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("enemy hit");
-            obj.GetComponent<Animator>().enabled = false;
+            obj.GetComponent<Animator>().SetBool("Moving", false);
             obj.GetComponent<enemy>().isMoving = false;
-            obj.gameObject.SetActive(false);
             enemyManager.Pool.Release(obj.GetComponent<enemy>());
             defenceManager.updateKillCount();
             //returns bullet to pool on collision
@@ -37,6 +48,7 @@ public class Bullet : MonoBehaviour
             }
             else if (this.gameObject.CompareTag("waterBullet"))
             {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                 this.gameObject.SetActive(false);
                 bulletManager.wPool.Release(ps);
             }
@@ -47,9 +59,15 @@ public class Bullet : MonoBehaviour
     {
         if (TryGetComponent<ParticleSystem>(out ps))// gets particle system
         {
+            ps.Play();
             Debug.Log("ParticleSystem found");
         }
-        StartCoroutine(destroyDelay());
+        // checks and stops coroutines to prevent stacking
+        if (lifeTimer != null)
+        {
+            StopCoroutine(lifeTimer);
+        }
+        lifeTimer = StartCoroutine(destroyDelay());
     }
     // this returns the bullet to its pool after a certain amount of time
     IEnumerator destroyDelay()

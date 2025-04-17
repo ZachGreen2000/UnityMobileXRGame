@@ -40,6 +40,13 @@ public class defenceManager : MonoBehaviour
     public TMP_Text endScore;
     public TMP_Text highRound;
     public TMP_Text highScore;
+
+    public static defenceManager Instance; // static reference for global use
+
+    void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +70,7 @@ public class defenceManager : MonoBehaviour
             Debug.Log("No active character");
         }
         scoreText.text = ("Score: " + score);
-        roundText.text = ("Roound: " + round);
+        roundText.text = ("Round: " + round);
     }
 
     // Update is called once per frame
@@ -80,7 +87,7 @@ public class defenceManager : MonoBehaviour
             setNeededKills();
             if (spawnInterval >= 1)
             {
-                spawnInterval = spawnTimer - 1;
+                spawnInterval = spawnInterval - 1;
             }
             roundEnd.gameObject.SetActive(true);
             StartCoroutine(PopUp(roundEnd.gameObject));
@@ -94,9 +101,6 @@ public class defenceManager : MonoBehaviour
                 spawnTimer = 0f;           
             }
         }
-        // changes text display on screen
-        scoreText.text = ("Score: " + score);
-        roundText.text = ("Round: " + round);
     }
 
     public void setNeededKills() // this is called for needed kills to complete round
@@ -109,12 +113,17 @@ public class defenceManager : MonoBehaviour
     {
         Debug.Log("updating kill count and score");
         killCount++;
+        Debug.Log("Killcount: " + killCount);
         updateScore();
     }
     //updates score when round is complete
     public void updateScore()
     {
         score = score + 3;
+        Debug.Log("Score is now: " + score);
+        // changes text display on screen
+        scoreText.text = ("Score: " + score);
+        roundText.text = ("Round: " + round);
     }
     // this will be calle on button click
     public void onPlay()
@@ -196,3 +205,5 @@ public class defenceManager : MonoBehaviour
         SceneManager.LoadScene("main");
     }
 }
+
+

@@ -7,37 +7,26 @@ namespace Enemies
     public class enemy : MonoBehaviour
     {
         [Header("Enemy Stats")]
-        //public enemy enemyPrefab;
         public int health;
         public GameObject target;
         public float speed;
 
-        [Header("Other")]
-        public towerHealth towerHealth;
-        public enemyManager enemyManager;
-
         //private
         private bool isReleased = false;
         public bool isMoving = true;
-        // Start is called before the first frame update
-        void Start()
+        
+        void Start ()
         {
-            
-        }
-
-        void Update()
-        {
-           
+            Animator anim = this.GetComponent<Animator>();
+            anim.SetBool("Moving", true);
         }
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             if (isMoving)
             {
                 this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
             }
-            
-            
         }
 
         // this is called when an emey is taken from the pool
@@ -50,6 +39,8 @@ namespace Enemies
             GetComponent<Animator>().enabled = true;
             isReleased = false;
             isMoving = true;
+            Animator anim = this.GetComponent<Animator>();
+            anim.SetBool("Moving", true);
         }
     }
 }

@@ -18,6 +18,9 @@ public class bulletManager : MonoBehaviour
 
     [Header("Var")]
     public string currentCharacterID; 
+
+    public static bulletManager Instance; // static reference for global use
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +56,11 @@ public class bulletManager : MonoBehaviour
     private void OnTakeFromPoolW(ParticleSystem pooledBullet)//sets bullet to be true as a spawn when called, also adds to list for iteration
     {
         pooledBullet.gameObject.SetActive(true);
-        pooledBullet.GetComponent<Bullet>().onReuse();
+        Bullet bullet = pooledBullet.GetComponent<Bullet>();
+        bullet.SetupManager(defenceManager.Instance); // following code is for injecting instances of scripts at runtime
+        bullet.SetupEnemyManager(enemyManager.Instance);
+        bullet.SetupBulletManager(bulletManager.Instance);
+        bullet.onReuse();
     }
 
     public void OnReturnedToPoolW(ParticleSystem pooledBullet)// called when bullet is returned to pool and sets to false, also removes from list 
@@ -106,5 +113,6 @@ public class bulletManager : MonoBehaviour
     {
         var _ = wPool;
         var __ = gPool;
+        Instance = this;
     }
 }

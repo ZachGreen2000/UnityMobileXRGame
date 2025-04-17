@@ -19,6 +19,8 @@ public class enemyManager : MonoBehaviour
     [Header("Other")]
     public GameObject noSpawn;
     public GameObject tower;
+
+    public static enemyManager Instance; // static reference for global use
     // setting up the object pool for the enemies
     public IObjectPool<enemy> Pool
     {
@@ -68,6 +70,7 @@ public class enemyManager : MonoBehaviour
     void Awake()
     {
         var _ = Pool;
+        Instance = this;
     }
 
     // Update is called once per frame
