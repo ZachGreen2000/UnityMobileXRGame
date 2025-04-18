@@ -21,6 +21,9 @@ public class playerAttack : MonoBehaviour
     public defenceManager defenceManager;
     public bulletManager bulletManager;
 
+    private Animator anim;
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,15 +33,28 @@ public class playerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) // detects input
+        if (Input.GetKey(KeyCode.Mouse0) && rb.velocity == Vector3.zero) // detects input
         {
             Debug.Log("Shoot");
             //attack();
             updatedAttack();
+            anim.SetBool("attack", true);
+        }else if (Input.GetKey(KeyCode.Mouse0) && rb.velocity != Vector3.zero)
+        {
+            updatedAttack();
+            anim.SetBool("attackWalking", true);
+        }else if (!Input.GetKey(KeyCode.Mouse0) && rb.velocity != Vector3.zero)
+        {
+            anim.SetBool("walking", true);
+        }else
+        {
+            anim.SetBool("walking", false);
+            anim.SetBool("attackWalking", false);
+            anim.SetBool("attack", false);
         }
     }
 
-    public void attack() // this function is called on input to use raycast to damage enemies
+    public void attack() // this function is now obsolete however it is left in as raycast is useful for testing
     {
         RaycastHit hit;
 
@@ -126,6 +142,12 @@ public class playerAttack : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void setComponents()
+    {
+        anim = this.transform.GetChild(3).GetComponent<Animator>();
+        rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
     public void getTypeAndLevel()

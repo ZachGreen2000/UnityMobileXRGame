@@ -4385,8 +4385,13 @@ PrefabInstance:
       objectReference: {fileID: 1505736243}
     - target: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
+      propertyPath: playerAttack
+      value: 
+      objectReference: {fileID: 1604444796}
+    - target: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
       propertyPath: spawnInterval
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -18,11 +18,13 @@ public class defenceManager : MonoBehaviour
     private string currentChar;
     public float spawnInterval;
     private float spawnTimer;
+    public float enemyCount;
 
     [Header("Scripts")]
     public enemyManager enemyManager;
     public towerHealth towerHealth;
     public enemy enemy;
+    public playerAttack playerAttack;
 
     [Header("Characters")]
     public GameObject knight;
@@ -42,7 +44,7 @@ public class defenceManager : MonoBehaviour
     public TMP_Text highScore;
 
     public static defenceManager Instance; // static reference for global use
-
+ 
     void Awake()
     {
         Instance = this;
@@ -55,6 +57,7 @@ public class defenceManager : MonoBehaviour
         score = 0;
         neededKills = 10;
         maxEnemies = 50;
+        enemyCount = 0;
         // calling the set player and passing correct prefab based on active characters ID so character in use is used
         if (gameManager.CharacterManager.ActiveCharacter.characterID == "1")
         {
@@ -83,6 +86,7 @@ public class defenceManager : MonoBehaviour
             roundFlag = false;
             towerHealth.setRound(round); // sets round so tower can indentify what health it should have
             killCount = 0;
+            enemyCount = 0;
             enemyManager.enemyList.Clear();
             setNeededKills();
             if (spawnInterval >= 1)
@@ -95,14 +99,17 @@ public class defenceManager : MonoBehaviour
         if (roundFlag)
         {
             spawnTimer += Time.deltaTime; // adds time each frame
-            if (spawnTimer >= spawnInterval && enemyManager.enemyList.Count <= maxEnemies)
+            if (spawnTimer >= spawnInterval && enemyCount <= maxEnemies)
             {
                 enemyManager.Spawn(); // calls spawn function in enemyManager to start enemy spawning
                 spawnTimer = 0f;           
             }
         }
     }
-
+    public void updateEnemyCount()
+    {
+        enemyCount++;
+    }   
     public void setNeededKills() // this is called for needed kills to complete round
     {
         neededKills = neededKills * (round / 2); // calculates needed kills for each round using the round counter for infinite increasing
@@ -141,14 +148,17 @@ public class defenceManager : MonoBehaviour
         if (currentChar == water)
         {
             newChar.transform.localPosition = new Vector3(0f, -6f, 0f);
+            playerAttack.setComponents();
         }
         else if (currentChar == girly)
         {
             newChar.transform.localPosition = new Vector3(0f, 6f, 0f);
+            playerAttack.setComponents();
         }
         else if (currentChar == knight)
         {
             newChar.transform.localPosition = new Vector3(0f, 4f, 0f);
+            playerAttack.setComponents();
         }
     }
     // this button call is for when the user wants to quit the game

@@ -51,6 +51,7 @@ public class enemyManager : MonoBehaviour
         Debug.Log($"Collider: {pooledEnemy.GetComponent<Collider>().enabled}");
         int layerIndex = LayerMask.NameToLayer("enemyLayer");
         Debug.Log($"enemyLayer index: " + layerIndex);
+        defenceManager.Instance.updateEnemyCount();
     }
 
     public void OnReturnedToPool(enemy pooledEnemy)// called when enemy is returned to pool and sets to false, also removes from list 
@@ -83,7 +84,7 @@ public class enemyManager : MonoBehaviour
     {
         Vector3 spawnPosition;
         bool canSpawn = false;
-        int maxAttempts = 3;
+        int maxAttempts = 10;
         int attempts = 0;
         float noSpawnRadius = noSpawn.transform.localScale.x / 2;
         if (spawnLocation.CompareTag("Spawnable"))

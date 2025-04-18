@@ -30,8 +30,9 @@ public class towerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health == 0)
+        if (health <= 0)
         {
+            Debug.Log("Tower is dead: " + health);
             defenceManager.endGame();
         }
     }
@@ -44,6 +45,15 @@ public class towerHealth : MonoBehaviour
     public void setRound(float rnd)
     {
         round = rnd;
+        float targetHealth = health / round; // calculates health to be smaller each round
+        if (targetHealth > 1) // controls minimum health
+        {
+            health = targetHealth;
+        }
+        else
+        {
+            health = 1;
+        }
     }
 
     public void OnTriggerEnter(Collider obj) // detects collision from enemy and returns enemy to pool
