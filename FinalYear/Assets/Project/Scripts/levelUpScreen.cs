@@ -23,6 +23,8 @@ public class levelUpScreen : MonoBehaviour
 
     [Header("GameObjects")]
     public GameObject player;
+    public AudioSource click;
+    public AudioSource celebration;
 
     //private
     private string currentLevel = "0";
@@ -55,6 +57,7 @@ public class levelUpScreen : MonoBehaviour
         currentStars.text = accountData.starCount.ToString();
         int.TryParse(currentStars.text, out tempCurrentStars);
         useStars.text = starsToUse;
+        tempStarsToUse = 0;
         level.text = currentLevel;
         speed.text = calcStat(speedCalc);
         health.text = calcStat(healthCalc);
@@ -106,6 +109,7 @@ public class levelUpScreen : MonoBehaviour
     // called on increase star to use arrow to and updates UI to show user the effects of the level increase
     public void increaseStarBtn()
     {
+        click.Play();
         if (tempCurrentStars > tempStarsToUse)
         {
             tempStarsToUse++;
@@ -116,6 +120,7 @@ public class levelUpScreen : MonoBehaviour
     // opposite of increase button
     public void decreaseStarBtn()
     {
+        click.Play();
         if (tempStarsToUse > 0)
         {
             tempStarsToUse--;
@@ -127,11 +132,13 @@ public class levelUpScreen : MonoBehaviour
     // this function also triggers the character celebration animation
     public void confirmBtn()
     {
+        celebration.Play();
         int starUpdate = tempCurrentStars - tempStarsToUse;
         accountData.starCount = starUpdate;
         accountData.SaveToFile();
         gameManager.CharacterManager.ActiveCharacter.characterLevel = tempLevel.ToString();
         characterData.UpdateCharacterInList(gameManager.CharacterManager.ActiveCharacter);
+        setUIText();
         Transform currentChar = player.transform.GetChild(0);
         GameObject child = currentChar.gameObject;
         Animator anim = child.GetComponent<Animator>();

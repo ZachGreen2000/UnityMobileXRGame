@@ -19,6 +19,12 @@ public class quizManager : MonoBehaviour
     public GameObject questionScreen;
     public Button quitBtn;
 
+    [Header("Audio")]
+    public AudioSource click;
+    public AudioSource right;
+    public AudioSource wrong;
+    public AudioSource celebration;
+
     [Header("Scripts")]
     public questionDatabase qD;
     public gameManager gameManager;
@@ -95,6 +101,7 @@ public class quizManager : MonoBehaviour
             Debug.Log("Resetting quiz");
             answerStore.SetActive(false);
             quitBtn.gameObject.SetActive(true);
+            celebration.Play();
         }
         
     }
@@ -133,11 +140,13 @@ public class quizManager : MonoBehaviour
                 if (answer1.text == qD.correctAnswer)
                 {
                     Debug.Log("Correct");
+                    right.Play();
                     correct.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }else
                 {
                     Debug.Log("Incorrect");
+                    wrong.Play();
                     tryAgain.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }
@@ -146,12 +155,14 @@ public class quizManager : MonoBehaviour
                 if (answer2.text == qD.correctAnswer)
                 {
                     Debug.Log("Correct");
+                    right.Play();
                     correct.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }
                 else
                 {
                     Debug.Log("Incorrect");
+                    wrong.Play();
                     tryAgain.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }
@@ -160,12 +171,14 @@ public class quizManager : MonoBehaviour
                 if (answer3.text == qD.correctAnswer)
                 {
                     Debug.Log("Correct");
+                    right.Play();
                     correct.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }
                 else
                 {
                     Debug.Log("Incorrect");
+                    wrong.Play();
                     tryAgain.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }
@@ -174,12 +187,14 @@ public class quizManager : MonoBehaviour
                 if (answer4.text == qD.correctAnswer)
                 {
                     Debug.Log("Correct");
+                    right.Play();
                     correct.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }
                 else
                 {
                     Debug.Log("Incorrect");
+                    wrong.Play();
                     tryAgain.gameObject.SetActive(true);
                     answerStore.SetActive(false);
                 }
@@ -189,26 +204,31 @@ public class quizManager : MonoBehaviour
     // called when first button is pressed reading left to right
     public void answer1Btn()
     {
+        click.Play();
         answerTracker(0);
     }
     // called when second button is pressed
     public void answer2Btn()
     {
+        click.Play();
         answerTracker(1);
     }
     // called when third button is pressed
     public void answer3Btn()
     {
+        click.Play();
         answerTracker(2);
     }
     // called when fourth button is pressed
     public void answer4Btn()
     {
+        click.Play();
         answerTracker(3);
     }
     // called when maths is selected setting subject to maths to retrieve question of same type later
     public void mathsBtn()
     {
+        click.Play();
         qD.resetAskedQuestions();
         questionScreen.SetActive(true);
         quitBtn.gameObject.SetActive(false);
@@ -219,6 +239,7 @@ public class quizManager : MonoBehaviour
     // called when english is selected
     public void englishBtn()
     {
+        click.Play();
         qD.resetAskedQuestions();
         questionScreen.SetActive(true);
         quitBtn.gameObject.SetActive(false);
@@ -229,6 +250,7 @@ public class quizManager : MonoBehaviour
     // called when biology is selected
     public void biologyBtn()
     {
+        click.Play();
         qD.resetAskedQuestions();
         questionScreen.SetActive(true);
         quitBtn.gameObject.SetActive(false);
@@ -239,6 +261,7 @@ public class quizManager : MonoBehaviour
     // if user gets asnwer correct this button appears and allows them to continue
     public void correctBtn()
     {
+        click.Play();
         correct.gameObject.SetActive(false);
         answerStore.SetActive(true);
         questionTracker();
@@ -246,12 +269,14 @@ public class quizManager : MonoBehaviour
     // if user gets asnswer incorrect this button appears and allows them to try again
     public void tryAgainBtn()
     {
+        click.Play();
         tryAgain.gameObject.SetActive(false);
         answerStore.SetActive(true);
     }
     // quits question activity and applies logic such as star increase and timer start
     public void quit()
     {
+        click.Play();
         questionScreen.SetActive(false);
         gameManager.currentStarStore += 5;
         gameManager.setStar();

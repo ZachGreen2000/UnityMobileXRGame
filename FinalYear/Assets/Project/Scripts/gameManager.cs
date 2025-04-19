@@ -219,8 +219,8 @@ public class gameManager : MonoBehaviour
     // this function triggers when home button is pressed to reload the scene 
     public void backToHomeButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         click.Play();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     // sets temp selection to knight
     public void knightSelect()
@@ -264,6 +264,7 @@ public class gameManager : MonoBehaviour
         {
             Debug.Log("No character selected");
         }
+        homeScreen.gameObject.SetActive(true);
     }
     //this function will enable menu ui
     public void menuOn()
