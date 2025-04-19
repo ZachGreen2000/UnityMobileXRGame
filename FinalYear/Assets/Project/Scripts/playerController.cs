@@ -174,7 +174,7 @@ public class playerController : MonoBehaviour
         }else { moveRight = false; }
     }
 
-    void handleMobileInput()
+    void handleMobileInput() // handles mobile inputs 
     {
         Vector2 input = joystick.Direction;
 

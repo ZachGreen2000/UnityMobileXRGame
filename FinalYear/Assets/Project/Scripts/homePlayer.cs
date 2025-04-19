@@ -8,6 +8,7 @@ public class homePlayer : MonoBehaviour
     [Header("Variables")]
     public float speed;
     public float walkSpeed;
+    public bool mobileBuild;
 
     [Header("GameObjects")]
     public GameObject target;
@@ -16,6 +17,11 @@ public class homePlayer : MonoBehaviour
     //flags 
     private bool isMoving;
     private bool controllable = false;
+    private bool moveForward = false;
+    private bool moveBack = false;
+    private bool moveRight = false;
+    private bool moveLeft = false;
+    [SerializeField] private Joystick joystick;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +33,14 @@ public class homePlayer : MonoBehaviour
     {
         if (controllable)
         {
-            zoomCam();
+            if (mobileBuild)
+            {
+                handleMobileInput();
+            }else
+            {
+                zoomCam();
+                handlePCInput();
+            }
         }
     }
 
@@ -76,6 +89,41 @@ public class homePlayer : MonoBehaviour
         controllable = true;
         Debug.Log("Pet is now controllable");
     }
+
+    void handlePCInput() // handles pc input seperately to allow for different builds
+    {
+        if (Input.GetKey(KeyCode.W)) // Move forward 
+        {
+            moveForward = true;
+        }
+        else { moveForward = false; }
+        if (Input.GetKey(KeyCode.S)) // Move back
+        {
+            moveBack = true;
+        }
+        else { moveBack = false; }
+        if (Input.GetKey(KeyCode.A)) // Move left
+        {
+            moveLeft = true;
+        }
+        else { moveLeft = false; }
+        if (Input.GetKey(KeyCode.D)) // Move right
+        {
+            moveRight = true;
+        }
+        else { moveRight = false; }
+    }
+
+    void handleMobileInput() // handles mobile inputs
+    {
+        Vector2 input = joystick.Direction;
+
+        moveForward = input.y > 0.1f;
+        moveBack = input.y < -0.1f;
+        moveRight = input.x > 0.1f;
+        moveLeft = input.x < -0.1f;
+    }
+
     //this function is for the basic movement on the home screen
     public void movement()
     {
@@ -90,19 +138,19 @@ public class homePlayer : MonoBehaviour
         Vector3 currentVelocity = this.gameObject.GetComponent<Rigidbody>().velocity;
         //pc
         Vector3 moveDirection = Vector3.zero;
-        if (Input.GetKey(KeyCode.W)) // Move forward 
+        if (moveForward) // Move forward 
         {
             moveDirection += cameraForward;
         }
-        if (Input.GetKey(KeyCode.S)) // Move back
+        if (moveBack) // Move back
         {
             moveDirection -= cameraForward;
         }
-        if (Input.GetKey(KeyCode.A)) // Move left
+        if (moveLeft) // Move left
         {
             moveDirection -= cameraRight;
         }
-        if (Input.GetKey(KeyCode.D)) // Move right
+        if (moveRight) // Move right
         {
             moveDirection += cameraRight;
         }
@@ -128,8 +176,6 @@ public class homePlayer : MonoBehaviour
             Animator anim = child.GetComponent<Animator>();
             anim.SetBool("walking", false);
         }
-        
-        //mobile
     }
 
     public void zoomCam()
@@ -137,5 +183,10 @@ public class homePlayer : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         mainCam.fieldOfView -= scroll * 10f;
         mainCam.fieldOfView = Mathf.Clamp(mainCam.fieldOfView, 20f, 60f);
+    }
+
+    public void mobileZoomCam()
+    {
+
     }
 }

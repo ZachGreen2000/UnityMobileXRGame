@@ -24,6 +24,8 @@ public class gameManager : MonoBehaviour
     public GameObject starsScreen;
     public AudioSource click;
     public TMP_Text currentStars;
+    public GameObject joystick;
+    public GameObject homeScreen;
 
     [Header("Characters")]
     public string character;
@@ -267,12 +269,14 @@ public class gameManager : MonoBehaviour
     public void menuOn()
     {
         menuScreen.gameObject.SetActive(true);
+        homeScreen.gameObject.SetActive(false);
         click.Play();
     }
     // this function called on button clicked closes menu window
     public void menuBack()
     {
         menuScreen.gameObject.SetActive(false);
+        homeScreen.gameObject.SetActive(true);
         click.Play();
     }
     // this button call will enable the nfc screen and also start the nfc reader session
@@ -304,6 +308,7 @@ public class gameManager : MonoBehaviour
     public void starBtn()
     {
         starsScreen.gameObject.SetActive(true);
+        homeScreen.gameObject.SetActive(false);
         setStar();
         click.Play();
     }
@@ -311,6 +316,7 @@ public class gameManager : MonoBehaviour
     public void starBackBtn()
     {
         starsScreen.gameObject.SetActive(false);
+        homeScreen.gameObject.SetActive(true);
         click.Play();
     }
 

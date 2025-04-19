@@ -52,7 +52,7 @@ public class NFCManager : MonoBehaviour
         Debug.Log("Starting reading session");
 #if UNITY_IOS && !UNITY_EDITOR
         startScanning();
-#elif UNITY_ANDROID
+#elif UNITY_ANDROID && !UNITY_EDITOR
         NFCAndroidPlugin.Call("startReading");
 #else
         Debug.Log("NFC read only available on mobile");
@@ -67,7 +67,7 @@ public class NFCManager : MonoBehaviour
         string jsonData = currentCharacter.ToJson();
 #if UNITY_IOS && !UNITY_EDITOR
         startWriting(jsonData);
-#elif UNITY_ANDROID
+#elif UNITY_ANDROID && !UNITY_EDITOR
         NFCAndroidPlugin.Call("writeToNFC", jsonData);
 #else 
         Debug.Log("NFC write only available on mobile");

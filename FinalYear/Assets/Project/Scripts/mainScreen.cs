@@ -10,6 +10,7 @@ public class mainScreen : MonoBehaviour
     public Camera Main;
     public GameObject waypoints;
     public AudioSource click;
+    public GameObject joystick;
 
     [Header("UI")]
     public GameObject homeScreen;
@@ -67,6 +68,9 @@ public class mainScreen : MonoBehaviour
             homeScreen.SetActive(false);
             StartCoroutine(moveCamera());
             backToHome.gameObject.SetActive(true);
+#if UNITY_ANDROID 
+            joystick.SetActive(true);
+#endif
         }
     }
 
