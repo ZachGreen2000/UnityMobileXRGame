@@ -21,6 +21,11 @@ public class playerAttack : MonoBehaviour
     public defenceManager defenceManager;
     public bulletManager bulletManager;
 
+    [Header("Audio")]
+    public AudioSource shootW;
+    public AudioSource shootG;
+    public AudioSource attackK;
+
     private Animator anim;
     private Rigidbody rb;
 
@@ -53,6 +58,8 @@ public class playerAttack : MonoBehaviour
             anim.SetBool("walking", false);
             anim.SetBool("attackWalking", false);
             anim.SetBool("attack", false);
+            shootG.Stop();
+            shootW.Stop();
         }
     }
 
@@ -89,11 +96,12 @@ public class playerAttack : MonoBehaviour
     public void updatedAttack()
     {
         Debug.Log("Updated shoot");
-        if (gameManager.CharacterManager.ActiveCharacter.characterID == "1")
+        if (gameManager.CharacterManager.ActiveCharacter.characterID == "1") // knight character
         {
-
-        }else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2")
+            attackK.Play();
+        }else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2") // water character
         {
+            shootW.Play();
             Debug.Log("Water character detected: Shoot");
             Transform spawnPos = findChild(this.transform, "shootPoint");
             if (spawnPos != null)
@@ -109,8 +117,9 @@ public class playerAttack : MonoBehaviour
                 Debug.Log("Cant find shootPoint");
             }
         }
-        else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3")
+        else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3") // girly character
         {
+            shootG.Play();
             Transform spawnPos = this.transform.Find("shootPoint");
             Transform spawnPos2 = this.transform.Find("shootPoint(1)");
             var pooledBullet = bulletManager.gPool.Get();

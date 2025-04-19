@@ -14,10 +14,17 @@ public class towerHealth : MonoBehaviour
     public enemy enemy;
     public enemyManager enemyManager;
     public defenceManager defenceManager;
+
+    [Header("Audio")]
+    public AudioSource boyDmg;
+    public AudioSource girlDmg;
+
+    private string currentCharacterID;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentCharacterID = gameManager.CharacterManager.ActiveCharacter.characterID;
     }
 
     // Update is called once per frame
@@ -34,6 +41,13 @@ public class towerHealth : MonoBehaviour
     {
         health--;
         Debug.Log("Health is now: " + health);
+        if (currentCharacterID == "1" || currentCharacterID == "2")
+        {
+            boyDmg.Play();
+        }else if (currentCharacterID == "3")
+        {
+            girlDmg.Play();
+        }
     }
 
     public void setRound(float rnd)

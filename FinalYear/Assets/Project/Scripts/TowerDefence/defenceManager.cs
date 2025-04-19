@@ -43,6 +43,12 @@ public class defenceManager : MonoBehaviour
     public TMP_Text highRound;
     public TMP_Text highScore;
     public TMP_Text enemiesStopped;
+    public GameObject joystick;
+
+    [Header("Audio")]
+    public AudioSource backingtrack;
+    public AudioSource click;
+    public AudioSource celebration;
 
     public static defenceManager Instance; // static reference for global use
  
@@ -77,6 +83,9 @@ public class defenceManager : MonoBehaviour
         scoreText.text = ("Score: " + score);
         roundText.text = ("Round: " + round);
         enemiesStopped.text = ("Enemies Stopped: " + killCount);
+#if UNITY_ANDROID
+        joystick.SetActive(true);
+#endif
     }
 
     // Update is called once per frame
@@ -119,6 +128,7 @@ public class defenceManager : MonoBehaviour
                 enemyManager.Pool.Release(obj.GetComponent<enemy>());
             }
         }
+        backingtrack.Stop();
     }
     public void updateEnemyCount() // updates enemyCount when emenies spawn
     {
@@ -150,6 +160,8 @@ public class defenceManager : MonoBehaviour
     // this will be calle on button click
     public void onPlay()
     {
+        click.Play();
+        backingtrack.Play();
         roundFlag = true;
         roundStart.gameObject.SetActive(true);
         StartCoroutine(PopUp(roundStart.gameObject));
@@ -181,17 +193,20 @@ public class defenceManager : MonoBehaviour
     {
         if (!roundFlag)
         {
+            click.Play();
             confirmation.SetActive(true);
         }
     }
     // this button call allows a user to reverse their choice to quit
     public void onCancel()
     {
+        click.Play();
         confirmation.SetActive(false);
     }
     // this button call allows the user to confirm the quit
     public void onConfirmQuit()
     {
+        click.Play();
         SceneManager.LoadScene("Main");
     }
     // this will run for the pop ups and deavtivate them after a while
@@ -205,6 +220,7 @@ public class defenceManager : MonoBehaviour
     {
         clearEnemies();
         endScreen.SetActive(true);
+        celebration.Play();
         Time.timeScale = 0;
         accountData account = accountData.LoadFromFile();
         endRound.text = ("Final Round: " + round);
@@ -224,12 +240,14 @@ public class defenceManager : MonoBehaviour
 
     public void endScreenTryAgain()
     {
+        click.Play();
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void endScreenQuit()
     {
+        click.Play();
         Time.timeScale = 1;
         SceneManager.LoadScene("main");
     }

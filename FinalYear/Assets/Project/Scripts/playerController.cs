@@ -353,22 +353,22 @@ public class playerController : MonoBehaviour
         playerRight.Normalize();
 
         // Check for input and set moveDirection accordingly
-        if (Input.GetKey(keyForForward.ToLower())) // Move forward 
+        if (moveForward) // Move forward 
         {
             moveDirection += cameraForward;
             isMovingBack = false;
         }
-        if (Input.GetKey(keyForBackward.ToLower())) // Move back
+        if (moveBack) // Move back
         {
             moveDirection -= cameraForward;
             isMovingBack = true;
         }
-        if (Input.GetKey(keyForLeft.ToLower())) // Move left
+        if (moveLeft) // Move left
         {
             moveDirection -= cameraRight;
             isMovingBack = false;
         }
-        if (Input.GetKey(keyForRight.ToLower())) // Move right
+        if (moveRight) // Move right
         {
             moveDirection += cameraRight;
             isMovingBack = false;
