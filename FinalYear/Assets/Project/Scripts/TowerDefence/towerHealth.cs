@@ -17,14 +17,7 @@ public class towerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float targetHealth = health / round; // calculates health to be smaller each round
-        if (targetHealth > 1) // controls minimum health
-        {
-            health = targetHealth;
-        }else
-        {
-            health = 1;
-        }
+        
     }
 
     // Update is called once per frame
@@ -40,6 +33,7 @@ public class towerHealth : MonoBehaviour
     public void damage()
     {
         health--;
+        Debug.Log("Health is now: " + health);
     }
 
     public void setRound(float rnd)

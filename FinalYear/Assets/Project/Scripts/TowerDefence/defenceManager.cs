@@ -42,6 +42,7 @@ public class defenceManager : MonoBehaviour
     public TMP_Text endScore;
     public TMP_Text highRound;
     public TMP_Text highScore;
+    public TMP_Text enemiesStopped;
 
     public static defenceManager Instance; // static reference for global use
  
@@ -53,6 +54,7 @@ public class defenceManager : MonoBehaviour
     void Start()
     {
         round = 1;
+        towerHealth.setRound(round);
         killCount = 0;
         score = 0;
         neededKills = 10;
@@ -74,6 +76,7 @@ public class defenceManager : MonoBehaviour
         }
         scoreText.text = ("Score: " + score);
         roundText.text = ("Round: " + round);
+        enemiesStopped.text = ("Enemies Stopped: " + killCount);
     }
 
     // Update is called once per frame
@@ -83,6 +86,7 @@ public class defenceManager : MonoBehaviour
         {
             round++;
             updateScore();
+            clearEnemies();
             roundFlag = false;
             towerHealth.setRound(round); // sets round so tower can indentify what health it should have
             killCount = 0;
@@ -106,7 +110,17 @@ public class defenceManager : MonoBehaviour
             }
         }
     }
-    public void updateEnemyCount()
+    public void clearEnemies() // called at fail or round end to wipe remaining enemies
+    {
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            if (obj.activeSelf)
+            {
+                enemyManager.Pool.Release(obj.GetComponent<enemy>());
+            }
+        }
+    }
+    public void updateEnemyCount() // updates enemyCount when emenies spawn
     {
         enemyCount++;
     }   
@@ -131,6 +145,7 @@ public class defenceManager : MonoBehaviour
         // changes text display on screen
         scoreText.text = ("Score: " + score);
         roundText.text = ("Round: " + round);
+        enemiesStopped.text = ("Enemies Stopped: " + killCount);
     }
     // this will be calle on button click
     public void onPlay()
@@ -188,7 +203,9 @@ public class defenceManager : MonoBehaviour
 
     public void endGame()
     {
+        clearEnemies();
         endScreen.SetActive(true);
+        Time.timeScale = 0;
         accountData account = accountData.LoadFromFile();
         endRound.text = ("Final Round: " + round);
         endScore.text = ("Final Score: " + score);
@@ -207,11 +224,13 @@ public class defenceManager : MonoBehaviour
 
     public void endScreenTryAgain()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void endScreenQuit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("main");
     }
 }

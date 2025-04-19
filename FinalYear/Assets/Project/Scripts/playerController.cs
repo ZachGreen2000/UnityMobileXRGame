@@ -67,6 +67,9 @@ public class playerController : MonoBehaviour
     public string keyForJump;
     public string keyForSprint;
     public string keyForCamChange;
+
+    [Header("Mobile Input System")]
+    [SerializeField] private Joystick joystick;
     
     // Start is called before the first frame update
     void Start()
@@ -173,7 +176,12 @@ public class playerController : MonoBehaviour
 
     void handleMobileInput()
     {
+        Vector2 input = joystick.Direction;
 
+        moveForward = input.y > 0.1f;
+        moveBack = input.y < -0.1f;
+        moveRight = input.x > 0.1f;
+        moveLeft = input.x < -0.1f;
     }
 
     void Movement() // controls vector for player movement

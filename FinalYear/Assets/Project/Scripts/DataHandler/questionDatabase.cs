@@ -16,17 +16,49 @@ public class questionDatabase : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string persistentPath = System.IO.Path.Combine(Application.persistentDataPath, "questions.db");
+
+#if UNITY_ANDROID && !UNITY_EDITOR // this is the sqlite logic for android as the path system works differently (not streaming assets)
+        if (!System.IO.File.Exists(persistentPath))
+        {
+            string streamingPath = System.IO.Path.Combine(Application.streamingAssetsPath, "questions.db");
+            StartCoroutine(CopyDbAndroid(streamingPath, persistentPath)); // needs coroutine as file needs copied to persistent path
+        }
+        else 
+        {
+            db = new SQLiteConnection(persistentPath, SQLiteOpenFlags.ReadOnly);
+        }
+#else
         // the following code creates a connection to the SQLite database that stores the questions
         string dbPath = System.IO.Path.Combine(Application.streamingAssetsPath, "questions.db");
         db = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadOnly);
-
+#endif
+        // store questions needed
         var allQuestions = db.Table<Questions>().ToList();
         /*foreach (var q in allQuestions)
         {
             Debug.Log($"Subject: {q.subject} | Question: {q.question}");
         }*/
     }
-
+    // this enumerator using unitys web requests to copy the data from streaming assets to a persistent data path
+    // this is because android devices dont have access to streaming data
+    IEnumerator CopyDbAndroid(string source, string target)
+    {
+        using (UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(source))
+        {
+            yield return www.SendWebRequest();
+            if (www.result != UnityEngine.Networking.UnityWebRequest.Result.Success)
+            {
+                Debug.Log("Failed to load database from StreamingAssets" + www.error);
+            }
+            else
+            {
+                System.IO.File.WriteAllBytes(target, www.downloadHandler.data);
+                Debug.Log("Database has been copies to " + target);
+                db = new SQLiteConnection(target, SQLiteOpenFlags.ReadOnly);
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {

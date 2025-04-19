@@ -33,17 +33,19 @@ public class playerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && rb.velocity == Vector3.zero) // detects input
+        bool isMoving = rb.velocity.magnitude > 0.1f; // true if ridigbody has velocity
+
+        if (Input.GetKey(KeyCode.Mouse0) && !isMoving) // detects input
         {
+            anim.SetBool("attack", true);
             Debug.Log("Shoot");
             //attack();
             updatedAttack();
-            anim.SetBool("attack", true);
-        }else if (Input.GetKey(KeyCode.Mouse0) && rb.velocity != Vector3.zero)
+        }else if (Input.GetKey(KeyCode.Mouse0) && isMoving)
         {
-            updatedAttack();
             anim.SetBool("attackWalking", true);
-        }else if (!Input.GetKey(KeyCode.Mouse0) && rb.velocity != Vector3.zero)
+            updatedAttack();
+        }else if (!Input.GetKey(KeyCode.Mouse0) && isMoving)
         {
             anim.SetBool("walking", true);
         }else
