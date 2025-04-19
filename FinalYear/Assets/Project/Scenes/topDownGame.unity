@@ -6336,9 +6336,19 @@ PrefabInstance:
       objectReference: {fileID: 107622671}
     - target: {fileID: 6785173350295192380, guid: acd35b1d3a20c574aa19140ac56382fe,
         type: 3}
+      propertyPath: boyDmg
+      value: 
+      objectReference: {fileID: 446165043}
+    - target: {fileID: 6785173350295192380, guid: acd35b1d3a20c574aa19140ac56382fe,
+        type: 3}
       propertyPath: health
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6785173350295192380, guid: acd35b1d3a20c574aa19140ac56382fe,
+        type: 3}
+      propertyPath: girlDmg
+      value: 
+      objectReference: {fileID: 1597532910}
     - target: {fileID: 6785173350295192380, guid: acd35b1d3a20c574aa19140ac56382fe,
         type: 3}
       propertyPath: enemyManager

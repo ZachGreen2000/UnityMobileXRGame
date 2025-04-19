@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviour
     // this returns the bullet to its pool after a certain amount of time
     IEnumerator destroyDelay()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         if (this.gameObject != null)
         {
             if (this.gameObject.CompareTag("girlyBullet"))
