@@ -117,7 +117,7 @@ public class defenceManager : MonoBehaviour
             setNeededKills();
             if (spawnInterval >= 1)
             {
-                spawnInterval = spawnInterval - 0.2;
+                spawnInterval = spawnInterval - 0.2f;
             }else
             {
                 spawnInterval = 1;
