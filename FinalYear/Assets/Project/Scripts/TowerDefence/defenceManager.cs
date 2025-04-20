@@ -117,7 +117,10 @@ public class defenceManager : MonoBehaviour
             setNeededKills();
             if (spawnInterval >= 1)
             {
-                spawnInterval = spawnInterval - 1;
+                spawnInterval = spawnInterval - 0.2;
+            }else
+            {
+                spawnInterval = 1;
             }
             roundEnd.gameObject.SetActive(true);
             StartCoroutine(PopUp(roundEnd.gameObject));

@@ -48,6 +48,7 @@ namespace Enemies
             health = h + defenceManager.round;
             speed = s;
             Debug.Log("Speed stat set to: " + speed);
+            Debug.Log("Health stat set to: " + health);
             GetComponent<Collider>().enabled = true;
             GetComponent<Animator>().enabled = true;
             isReleased = false;
@@ -62,6 +63,7 @@ namespace Enemies
             Debug.Log("Enemy damaged: " + health);
             if (health <= 0)
             {
+                defenceManager.updateKillCount();
                 enemyManager.Pool.Release(this);
             }
         }

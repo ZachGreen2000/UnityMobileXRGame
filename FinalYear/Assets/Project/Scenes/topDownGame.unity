@@ -6247,7 +6247,7 @@ PrefabInstance:
     - target: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
       propertyPath: spawnInterval
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}

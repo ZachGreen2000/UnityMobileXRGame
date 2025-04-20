@@ -44,11 +44,11 @@ public class enemyManager : MonoBehaviour
     private void OnTakeFromPool(enemy pooledEnemy)//sets enemy to be true as a spawn when called, also adds to list for iteration
     {
         pooledEnemy.gameObject.SetActive(true);
+        pooledEnemy.SetUpDefenceManager(defenceManager.Instance);
         pooledEnemy.resetStats(1, 2f);
         pooledEnemy.tag = "Enemy";
         pooledEnemy.gameObject.layer = LayerMask.NameToLayer("enemyLayer");
         pooledEnemy.SetupEnemyManager(enemyManager.Instance);
-        pooledEnemy.SetUpDefenceManager(defenceManager.Instance);
         enemyList.Add(pooledEnemy);
         Debug.Log($"Collider: {pooledEnemy.GetComponent<Collider>().enabled}");
         int layerIndex = LayerMask.NameToLayer("enemyLayer");

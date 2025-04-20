@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
             //obj.GetComponent<Animator>().SetBool("Moving", false);
             //enemyManager.Pool.Release(obj.GetComponent<enemy>());
             obj.GetComponent<enemy>().DmgNDead(defenceManager.playerDamage);
-            defenceManager.updateKillCount();
+            //defenceManager.updateKillCount();
             //returns bullet to pool on collision
             if (this.gameObject.CompareTag("girlyBullet"))
             {
