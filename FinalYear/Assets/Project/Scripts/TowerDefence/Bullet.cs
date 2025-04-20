@@ -31,15 +31,16 @@ public class Bullet : MonoBehaviour
         }
         lifeTimer = StartCoroutine(destroyDelay());
     }
-    // this calls when the bullet colliders with enemy and returns enemy to the pool
+    // this calls when the bullet colliders with enemy and damages enemy
     void OnTriggerEnter(Collider obj)
     {
         if (obj.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("enemy hit");
-            obj.GetComponent<enemy>().isMoving = false;
-            obj.GetComponent<Animator>().SetBool("Moving", false);
-            enemyManager.Pool.Release(obj.GetComponent<enemy>());
+            //obj.GetComponent<enemy>().isMoving = false;
+            //obj.GetComponent<Animator>().SetBool("Moving", false);
+            //enemyManager.Pool.Release(obj.GetComponent<enemy>());
+            obj.GetComponent<enemy>().DmgNDead(defenceManager.playerDamage);
             defenceManager.updateKillCount();
             //returns bullet to pool on collision
             if (this.gameObject.CompareTag("girlyBullet"))

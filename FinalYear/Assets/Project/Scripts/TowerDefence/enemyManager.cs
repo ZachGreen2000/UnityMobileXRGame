@@ -47,6 +47,8 @@ public class enemyManager : MonoBehaviour
         pooledEnemy.resetStats(1, 2f);
         pooledEnemy.tag = "Enemy";
         pooledEnemy.gameObject.layer = LayerMask.NameToLayer("enemyLayer");
+        pooledEnemy.SetupEnemyManager(enemyManager.Instance);
+        pooledEnemy.SetUpDefenceManager(defenceManager.Instance);
         enemyList.Add(pooledEnemy);
         Debug.Log($"Collider: {pooledEnemy.GetComponent<Collider>().enabled}");
         int layerIndex = LayerMask.NameToLayer("enemyLayer");

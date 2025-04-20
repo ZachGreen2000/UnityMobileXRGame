@@ -20,20 +20,23 @@ public class towerHealth : MonoBehaviour
     public AudioSource girlDmg;
 
     private string currentCharacterID;
+    private bool dead = false;
 
     // Start is called before the first frame update
     void Start()
     {
         currentCharacterID = gameManager.CharacterManager.ActiveCharacter.characterID;
+        dead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
+        if (health <= 0 && dead == false)
         {
             Debug.Log("Tower is dead: " + health);
             defenceManager.endGame();
+            dead = true;
         }
     }
     // this function is called from the enemy file when an enemy collides with the tower
@@ -53,7 +56,7 @@ public class towerHealth : MonoBehaviour
     public void setRound(float rnd)
     {
         round = rnd;
-        float targetHealth = health / round; // calculates health to be smaller each round
+        float targetHealth = health + (defenceManager.playerHealth / round); // calculates health to be smaller each round
         if (targetHealth > 1) // controls minimum health
         {
             health = targetHealth;

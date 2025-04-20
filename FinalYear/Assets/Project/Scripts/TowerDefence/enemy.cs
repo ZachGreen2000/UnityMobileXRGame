@@ -7,14 +7,27 @@ namespace Enemies
     public class enemy : MonoBehaviour
     {
         [Header("Enemy Stats")]
-        public int health;
+        public float health;
         public GameObject target;
         public float speed;
 
         //private
         private bool isReleased = false;
         public bool isMoving = true;
-        
+        private enemyManager enemyManager;
+        private defenceManager defenceManager;
+
+        // injects sccript at runtime
+        public void SetupEnemyManager(enemyManager enemyMng)
+        {
+            enemyManager = enemyMng;
+        }
+        // injects sccript at runtime
+        public void SetUpDefenceManager(defenceManager defMan)
+        {
+            defenceManager = defMan;
+        }
+
         void Start ()
         {
             Animator anim = this.GetComponent<Animator>();
@@ -32,7 +45,7 @@ namespace Enemies
         // this is called when an emey is taken from the pool
         public void resetStats(int h, float s)
         {
-            health = h;
+            health = h + defenceManager.round;
             speed = s;
             Debug.Log("Speed stat set to: " + speed);
             GetComponent<Collider>().enabled = true;
@@ -41,6 +54,16 @@ namespace Enemies
             isMoving = true;
             Animator anim = this.GetComponent<Animator>();
             anim.SetBool("Moving", true);
+        }
+        // calls when damaged and returns enemy to pool when needed
+        public void DmgNDead(float dmg)
+        {
+            health -= dmg;
+            Debug.Log("Enemy damaged: " + health);
+            if (health <= 0)
+            {
+                enemyManager.Pool.Release(this);
+            }
         }
     }
 }

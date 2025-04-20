@@ -50,6 +50,13 @@ public class defenceManager : MonoBehaviour
     public AudioSource click;
     public AudioSource celebration;
 
+    [Header("Player Stats")]
+    public float playerDamage;
+    public float playerSpeed;
+    public float playerHealth;
+    private string playerLevel;
+    private float playerLevelFloat;
+
     public static defenceManager Instance; // static reference for global use
  
     void Awake()
@@ -59,6 +66,12 @@ public class defenceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerLevel = gameManager.CharacterManager.ActiveCharacter.characterLevel;
+        float.TryParse(playerLevel, out playerLevelFloat);
+        playerDamage = calcStat(playerDamage);
+        playerSpeed = calcStat(playerSpeed);
+        playerHealth = calcStat(playerHealth);
+
         round = 1;
         towerHealth.setRound(round);
         killCount = 0;
@@ -121,6 +134,7 @@ public class defenceManager : MonoBehaviour
     }
     public void clearEnemies() // called at fail or round end to wipe remaining enemies
     {
+        roundFlag = false;
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             if (obj.activeSelf)
@@ -221,7 +235,7 @@ public class defenceManager : MonoBehaviour
         clearEnemies();
         endScreen.SetActive(true);
         celebration.Play();
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         accountData account = accountData.LoadFromFile();
         endRound.text = ("Final Round: " + round);
         endScore.text = ("Final Score: " + score);
@@ -234,22 +248,48 @@ public class defenceManager : MonoBehaviour
             account.defenceHighScore = score;
         }
         highRound.text = ("Personal high Round: " + account.defenceHighRound);
-        highScore.text = ("Personal High Score" + account.defenceHighScore);
+        highScore.text = ("Personal High Score: " + account.defenceHighScore);
         account.SaveToFile();
     }
 
     public void endScreenTryAgain()
     {
         click.Play();
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void endScreenQuit()
     {
         click.Play();
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         SceneManager.LoadScene("main");
+    }
+
+    // the purpose of this function is to calculate stats based on the level for tower defence use
+    public float calcStat(float stat)
+    {
+        Debug.Log("Calculating stat");
+        if (stat == playerSpeed)
+        {
+            float calculatedStat = stat * playerLevelFloat + 1;
+            Debug.Log("Speed is:" + calculatedStat);
+            return calculatedStat;
+        }
+        else if (stat == playerHealth)
+        {
+            float calculatedStat = stat * playerLevelFloat + 3;
+            return calculatedStat;
+        }
+        else if (stat == playerDamage)
+        {
+            float calculatedStat = stat * (playerLevelFloat / 2);
+            return calculatedStat;
+        }
+        else
+        {
+            return 0f;
+        }
     }
 }
 
