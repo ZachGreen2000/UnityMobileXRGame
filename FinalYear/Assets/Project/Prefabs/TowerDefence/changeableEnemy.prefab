@@ -108,7 +108,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.1, y: 7.1, z: 14.82}
+  m_Size: {x: 6.1, y: 7.1, z: 20.1}
   m_Center: {x: 0, y: 0, z: -5.45}
 --- !u!114 &919177559890366703
 MonoBehaviour:
@@ -125,10 +125,7 @@ MonoBehaviour:
   health: -104
   target: {fileID: 8761191311831547892, guid: acd35b1d3a20c574aa19140ac56382fe, type: 3}
   speed: 1
-  towerHealth: {fileID: 6785173350295192380, guid: acd35b1d3a20c574aa19140ac56382fe,
-    type: 3}
-  enemyManager: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
-    type: 3}
+  isMoving: 1
 --- !u!54 &836098632234586221
 Rigidbody:
   m_ObjectHideFlags: 0

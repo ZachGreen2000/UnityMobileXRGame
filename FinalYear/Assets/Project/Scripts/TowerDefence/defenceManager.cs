@@ -201,7 +201,7 @@ public class defenceManager : MonoBehaviour
         }
         else if (currentChar == knight)
         {
-            newChar.transform.localPosition = new Vector3(0f, 4f, 0f);
+            newChar.transform.localPosition = new Vector3(0f, 1.9f, 0f);
             playerAttack.setComponents();
         }
     }

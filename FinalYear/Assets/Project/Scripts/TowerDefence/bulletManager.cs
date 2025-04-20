@@ -97,6 +97,11 @@ public class bulletManager : MonoBehaviour
     private void OnTakeFromPoolG(GameObject pooledBullet)//sets bullet to be true as a spawn when called, also adds to list for iteration
     {
         pooledBullet.gameObject.SetActive(true);
+        Bullet bullet = pooledBullet.GetComponent<Bullet>();
+        bullet.SetupManager(defenceManager.Instance); // following code is for injecting instances of scripts at runtime
+        bullet.SetupEnemyManager(enemyManager.Instance);
+        bullet.SetupBulletManager(bulletManager.Instance);
+        bullet.onReuse();
     }
 
     public void OnReturnedToPoolG(GameObject pooledBullet)// called when bullet is returned to pool and sets to false, also removes from list 

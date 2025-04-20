@@ -53,6 +53,7 @@ public class playerAttack : MonoBehaviour
         }else if (!Input.GetKey(KeyCode.Mouse0) && isMoving)
         {
             anim.SetBool("walking", true);
+            storeWeapon();
         }else
         {
             anim.SetBool("walking", false);
@@ -60,6 +61,7 @@ public class playerAttack : MonoBehaviour
             anim.SetBool("attack", false);
             shootG.Stop();
             shootW.Stop();
+            storeWeapon();
         }
     }
 
@@ -99,7 +101,14 @@ public class playerAttack : MonoBehaviour
         if (gameManager.CharacterManager.ActiveCharacter.characterID == "1") // knight character
         {
             attackK.Play();
-        }else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2") // water character
+            Transform weaponTrans = findChild(this.transform, "weapon");
+            GameObject weapon = weaponTrans.gameObject;
+            Transform storePos = findChild(this.transform, "weaponBack");
+            Transform spawnPos = findChild(this.transform, "equipPoint");
+            weapon.transform.position = spawnPos.position;
+            weapon.transform.rotation = spawnPos.transform.rotation * Quaternion.Euler(0, 15, 0);
+        }
+        else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2") // water character
         {
             shootW.Play();
             Debug.Log("Water character detected: Shoot");
@@ -120,20 +129,22 @@ public class playerAttack : MonoBehaviour
         else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3") // girly character
         {
             shootG.Play();
-            Transform spawnPos = this.transform.Find("shootPoint");
-            Transform spawnPos2 = this.transform.Find("shootPoint(1)");
+            Transform spawnPos = findChild(this.transform, "shootPoint");
+            Transform spawnPos2 = findChild(this.transform, "shootPoint (1)");
             var pooledBullet = bulletManager.gPool.Get();
             var pooledBullet2 = bulletManager.gPool.Get();
             pooledBullet.transform.position = spawnPos.position;
             pooledBullet2.transform.position = spawnPos2.position;
+            pooledBullet.transform.rotation = spawnPos.transform.rotation * Quaternion.Euler(0, -90, 0);
+            pooledBullet2.transform.rotation = spawnPos2.transform.rotation * Quaternion.Euler(0, -90, 0);
             Rigidbody rb = pooledBullet.GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.AddForce(spawnPos.forward * gRange, ForceMode.Impulse);
+            rb.AddForce(-spawnPos.right * gRange, ForceMode.Impulse);
             Rigidbody rb2 = pooledBullet2.GetComponent<Rigidbody>();
             rb2.velocity = Vector3.zero;
             rb2.angularVelocity = Vector3.zero;
-            rb2.AddForce(spawnPos2.forward * gRange, ForceMode.Impulse);
+            rb2.AddForce(-spawnPos2.right * gRange, ForceMode.Impulse);
         }
     }
     // this function is here to iterate through the children of the player parent to find the child shootPoint
@@ -159,6 +170,18 @@ public class playerAttack : MonoBehaviour
     {
         anim = this.transform.GetChild(3).GetComponent<Animator>();
         rb = this.gameObject.GetComponent<Rigidbody>();
+    }
+
+    public void storeWeapon()
+    {
+        if (gameManager.CharacterManager.ActiveCharacter.characterID == "1")
+        {
+            Transform weaponTrans = findChild(this.transform, "weapon");
+            GameObject weapon = weaponTrans.gameObject;
+            Transform storePos = findChild(this.transform, "weaponBack");
+            weapon.transform.position = storePos.position;
+            weapon.transform.rotation = storePos.rotation * Quaternion.Euler(45, 0, 0);
+        }  
     }
 
     public void getTypeAndLevel()

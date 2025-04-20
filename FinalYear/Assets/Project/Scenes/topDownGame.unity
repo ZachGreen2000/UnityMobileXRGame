@@ -6061,7 +6061,8 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyPrefab
       value: 
-      objectReference: {fileID: 107622671}
+      objectReference: {fileID: 919177559890366703, guid: ecb14a567bb3ee24aa64831ebd7ce5cb,
+        type: 3}
     - target: {fileID: 1002076144626597542, guid: 115e65952b017db4a9c69e8082870b23,
         type: 3}
       propertyPath: maxPoolSize
