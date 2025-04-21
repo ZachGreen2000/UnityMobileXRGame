@@ -26,6 +26,12 @@ public class gameManager : MonoBehaviour
     public TMP_Text currentStars;
     public GameObject joystick;
     public GameObject homeScreen;
+    public GameObject selectionBorder;
+    public GameObject accountStatsScreen;
+    public GameObject settingsScreen;
+    public TMP_Text starCountm;
+    public TMP_Text defenceRoundStat;
+    public TMP_Text defenceScoreStat;
 
     [Header("Characters")]
     public string character;
@@ -80,18 +86,24 @@ public class gameManager : MonoBehaviour
             Debug.Log("current character is: Knight");
             switchCharacter(knight);
             charData.SetCurrentCharacter("1");
+            selectionBorder.SetActive(true);
+            selectionBorder.transform.position = lockedKnightImg.transform.position;
         }
         else if (currentCharacterID == "2")
         {
             Debug.Log("current character is: Water");
             switchCharacter(water);
             charData.SetCurrentCharacter("2");
+            selectionBorder.SetActive(true);
+            selectionBorder.transform.position = lockedWaterImg.transform.position;
         }
         else if (currentCharacterID == "3")
         {
             Debug.Log("current character is: Girly");
             switchCharacter(girly);
             charData.SetCurrentCharacter("3");
+            selectionBorder.SetActive(true);
+            selectionBorder.transform.position = lockedGirlyImg.transform.position;
         }
         else
         {
@@ -228,18 +240,21 @@ public class gameManager : MonoBehaviour
         characterSelected = "Knight";
         Debug.Log("Knight selected");
         click.Play();
+        selectionBorder.transform.position = lockedKnightImg.transform.position;
     }
     //sets temp selection to girly
     public void girlySelect()
     {
         characterSelected = "Girly";
         click.Play();
+        selectionBorder.transform.position = lockedGirlyImg.transform.position;
     }
     //sets temp selection to water
     public void waterSelect()
     {
         characterSelected = "Water";
         click.Play();
+        selectionBorder.transform.position = lockedWaterImg.transform.position;
     }
     //triggers once button pressed to confirm switch character by taking into account temp selection
     public void confirmSwitch()
@@ -272,6 +287,7 @@ public class gameManager : MonoBehaviour
         menuScreen.gameObject.SetActive(true);
         homeScreen.gameObject.SetActive(false);
         click.Play();
+        detectCurrentChatacter();
     }
     // this function called on button clicked closes menu window
     public void menuBack()
@@ -285,6 +301,8 @@ public class gameManager : MonoBehaviour
     {
         nfcScreen.gameObject.SetActive(true);
         selectScreen.gameObject.SetActive(false);
+        accountStatsScreen.SetActive(false);
+        settingsScreen.SetActive(false);
         click.Play();
         NFCManager.StartNFCReading();
     }
@@ -293,6 +311,8 @@ public class gameManager : MonoBehaviour
     {
         nfcScreen.gameObject.SetActive(true);
         selectScreen.gameObject.SetActive(false);
+        accountStatsScreen.SetActive(false);
+        settingsScreen.SetActive(false);
         click.Play();
         NFCManager.StartNFCWriting();
     }
@@ -303,7 +323,29 @@ public class gameManager : MonoBehaviour
         checkForUnlockedCharacters();
         selectScreen.gameObject.SetActive(true);
         nfcScreen.gameObject.SetActive(false);
+        accountStatsScreen.SetActive(false);
+        settingsScreen.SetActive(false);
         click.Play();
+    }
+    // this button enables account stats screen
+    public void accountStatsBtn()
+    {
+        account = accountData.LoadFromFile();
+        starCountm.text = "Current Stars: " + account.starCount.ToString();
+        defenceRoundStat.text = "Highest Round: " + account.defenceHighRound.ToString();
+        defenceScoreStat.text = "Highest Score: " + account.defenceHighScore.ToString();
+        selectScreen.gameObject.SetActive(false);
+        nfcScreen.gameObject.SetActive(false);
+        settingsScreen.SetActive(false);
+        accountStatsScreen.SetActive(true);
+    }
+    // this button enables the settings screen
+    public void settingsScreenBtn()
+    {
+        selectScreen.gameObject.SetActive(false);
+        nfcScreen.gameObject.SetActive(false);
+        accountStatsScreen.SetActive(false);
+        settingsScreen.SetActive(true);
     }
     // this button call enables stars menu
     public void starBtn()
@@ -327,5 +369,10 @@ public class gameManager : MonoBehaviour
         currentStars.text = currentStarStore.ToString();
         account.starCount = currentStarStore;
         account.SaveToFile(); // saves star count to file each time it changes
+    }
+    // this is called when the subject score needs updating for a character
+    public void saveSubjectScore()
+    {
+        charData.UpdateCharacterInList(gameManager.CharacterManager.ActiveCharacter);
     }
 }

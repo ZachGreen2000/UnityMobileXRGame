@@ -278,7 +278,32 @@ public class quizManager : MonoBehaviour
     {
         click.Play();
         questionScreen.SetActive(false);
-        gameManager.currentStarStore += 5;
+        gameManager.currentStarStore += 1;
         gameManager.setStar();
+        if (subject == "Maths")
+        {
+            int tempMathsScore;
+            int.TryParse(gameManager.CharacterManager.ActiveCharacter.mathsScore, out tempMathsScore);
+            int calcMathsScore = tempMathsScore + 1;
+            string mathsScore = calcMathsScore.ToString();
+            gameManager.CharacterManager.ActiveCharacter.mathsScore = mathsScore;
+        }
+        else if (subject == "English")
+        {
+            int tempEnglishScore;
+            int.TryParse(gameManager.CharacterManager.ActiveCharacter.englishScore, out tempEnglishScore);
+            int calcEnglishScore = tempEnglishScore + 1;
+            string englishScore = calcEnglishScore.ToString();
+            gameManager.CharacterManager.ActiveCharacter.englishScore = englishScore;
+        }
+        else if (subject == "Biology")
+        {
+            int tempBiologyScore;
+            int.TryParse(gameManager.CharacterManager.ActiveCharacter.biologyScore, out tempBiologyScore);
+            int calcBiologyScore = tempBiologyScore + 1;
+            string biologyScore = calcBiologyScore.ToString();
+            gameManager.CharacterManager.ActiveCharacter.biologyScore = biologyScore;
+        }
+        gameManager.saveSubjectScore();
     }
 }

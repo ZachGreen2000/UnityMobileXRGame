@@ -3027,7 +3027,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4542,6 +4542,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1604444796}
   m_SourcePrefab: {fileID: 100100000, guid: ea13dd12c19327642a47acbd82295104, type: 3}
+--- !u!114 &1626833467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1811077854186159413, guid: ea13dd12c19327642a47acbd82295104,
+    type: 3}
+  m_PrefabInstance: {fileID: 1626833466}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604444789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0122ce76dbcff4145bc0c6f70c5ee3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1673463184
 GameObject:
   m_ObjectHideFlags: 0
@@ -6255,6 +6267,11 @@ PrefabInstance:
       propertyPath: enemiesStopped
       value: 
       objectReference: {fileID: 1683653001}
+    - target: {fileID: 5233926445789287969, guid: 115e65952b017db4a9c69e8082870b23,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1626833467}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

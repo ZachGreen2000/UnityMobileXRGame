@@ -61,6 +61,7 @@ public class playerAttack : MonoBehaviour
             anim.SetBool("attack", false);
             shootG.Stop();
             shootW.Stop();
+            attackK.Stop();
             storeWeapon();
         }
     }

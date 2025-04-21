@@ -20,6 +20,7 @@ public class NFCManager : MonoBehaviour
     public static NFCManager Instance { get; private set; }
     public characterData characterDatabase;
     public characterSingleton currentCharacter;
+    public gameManager gameManager;
     private void Awake()
     {
         if (Instance == null)
@@ -81,6 +82,7 @@ public class NFCManager : MonoBehaviour
         characterSingleton character = JsonUtility.FromJson<characterSingleton>(jsonData);
         characterData database = characterData.LoadFromFile();
         database.UnlockCharacter(character);
+        gameManager.menuBack();
     }
 
     private void OnNFCError(string message)

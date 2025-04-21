@@ -25,6 +25,7 @@ public class defenceManager : MonoBehaviour
     public towerHealth towerHealth;
     public enemy enemy;
     public playerAttack playerAttack;
+    public playerController playerController;
 
     [Header("Characters")]
     public GameObject knight;
@@ -71,6 +72,7 @@ public class defenceManager : MonoBehaviour
         playerDamage = calcStat(playerDamage);
         playerSpeed = calcStat(playerSpeed);
         playerHealth = calcStat(playerHealth);
+        playerController.setMovementVariables(playerSpeed);
 
         round = 1;
         towerHealth.setRound(round);

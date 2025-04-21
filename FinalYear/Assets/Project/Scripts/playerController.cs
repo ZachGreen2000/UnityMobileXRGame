@@ -71,6 +71,13 @@ public class playerController : MonoBehaviour
     [Header("Mobile Input System")]
     [SerializeField] private Joystick joystick;
     
+    // function for setting stats if needed
+    public void setMovementVariables(float playerSpd)
+    {
+        playerCurrentSpeed = playerSpd * 100;
+        Debug.Log("playerCurrentSpeed is: " + playerCurrentSpeed);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
