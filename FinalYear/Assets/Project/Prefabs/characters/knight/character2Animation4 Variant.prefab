@@ -153,11 +153,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a1d38e965ff7074bbad3fb7a488e28a,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7249775681900524701}
+      addedObject: {fileID: 6496738637393254298}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a1d38e965ff7074bbad3fb7a488e28a,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6496738637393254298}
+      addedObject: {fileID: 6838458604350045670}
   m_SourcePrefab: {fileID: 100100000, guid: 5a1d38e965ff7074bbad3fb7a488e28a, type: 3}
 --- !u!4 &1702397624371032956 stripped
 Transform:
@@ -171,8 +171,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1164911558072456343}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7249775681900524701
-BoxCollider:
+--- !u!114 &6496738637393254298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084024450607147462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44edae01c80b8046939f0632549086b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &6838458604350045670
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -186,24 +198,14 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.4, y: 4.31, z: 13.25}
-  m_Center: {x: -0.010030866, y: 0.016389849, z: 7}
---- !u!114 &6496738637393254298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2084024450607147462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44edae01c80b8046939f0632549086b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Radius: 3.84
+  m_Height: 14.17
+  m_Direction: 2
+  m_Center: {x: -0.010030866, y: 0.016389774, z: 6.84}
 --- !u!1001 &6407567336624167131
 PrefabInstance:
   m_ObjectHideFlags: 0
