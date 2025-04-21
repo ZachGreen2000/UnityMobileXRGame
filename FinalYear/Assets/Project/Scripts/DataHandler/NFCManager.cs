@@ -83,6 +83,7 @@ public class NFCManager : MonoBehaviour
         characterData database = characterData.LoadFromFile();
         database.UnlockCharacter(character);
         gameManager.menuBack();
+        gameManager.playCelebration();
     }
 
     private void OnNFCError(string message)

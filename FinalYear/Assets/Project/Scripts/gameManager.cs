@@ -375,4 +375,26 @@ public class gameManager : MonoBehaviour
     {
         charData.UpdateCharacterInList(gameManager.CharacterManager.ActiveCharacter);
     }
+    // this function will be called when a character is scanned and trigger an animation of said character
+    public void playCelebration()
+    {
+        if (playerBase.transform.childCount > 0)
+        {
+            Transform currentChild = playerBase.transform.GetChild(0);
+            GameObject childObj = currentChild.gameObject;
+            if (childObj != null)
+            {
+                Animator anim = childObj.GetComponent<Animator>();
+                anim.SetBool("celebration", true);
+                StartCoroutine(stopPlayerCelebration(childObj));
+            }
+        }
+    }
+    // stops celebration as to not repeat animation
+    IEnumerator stopPlayerCelebration(GameObject childObj)
+    {
+        yield return new WaitForSeconds(2f);
+        Animator anim = childObj.GetComponent<Animator>();
+        anim.SetBool("celebration", false);
+    }
 }
