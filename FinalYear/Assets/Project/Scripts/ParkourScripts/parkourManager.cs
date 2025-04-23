@@ -14,6 +14,14 @@ public class parkourManager : MonoBehaviour
     public Transform lastCube;
     public List<GameObject> cubeCount;
 
+    [Header("Player Score")]
+    public float heightScore;
+
+    [Header("Characters")]
+    public GameObject knight;
+    public GameObject water;
+    public GameObject girly;
+
     public static parkourManager Instance;
 
     void Awake()
@@ -23,6 +31,23 @@ public class parkourManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // calling the set player and passing correct prefab based on active characters ID so character in use is used
+        if (gameManager.CharacterManager.ActiveCharacter.characterID == "1")
+        {
+            setPlayer(knight);
+        }
+        else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2")
+        {
+            setPlayer(water);
+        }
+        else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3")
+        {
+            setPlayer(girly);
+        }
+        else
+        {
+            Debug.Log("No active character");
+        }
         getCubePos();
     }
 
@@ -34,12 +59,8 @@ public class parkourManager : MonoBehaviour
         {
             getCubePos();
         }
-        /*if (cubeCount.Count > 11)
-        {
-            GameObject cubeToRemove = cubeCount[0];
-            cubeManager.Instance.Pool.Release(cubeToRemove);
-            cubeCount.RemoveAt(0);
-        }*/
+
+        heightScore = player.position.y;
     }
 
     public void getCubePos()
@@ -59,5 +80,28 @@ public class parkourManager : MonoBehaviour
         GameObject cube = cubeManager.Instance.Pool.Get();
         lastCube = cube.transform;
         cubeCount.Add(cube);
+    }
+
+    // this function is the same or at least similar to that in gameManager where in which is sets the prefab to the correct pos
+    public void setPlayer(GameObject currentChar)
+    {
+        Debug.Log("Player has no childs");
+        GameObject newChar = Instantiate(currentChar, player.position, Quaternion.Euler(0, 90, 0) * player.rotation);
+        newChar.transform.SetParent(player);
+        if (currentChar == water)
+        {
+            newChar.transform.localPosition = new Vector3(0f, -6f, 0f);
+            
+        }
+        else if (currentChar == girly)
+        {
+            newChar.transform.localPosition = new Vector3(0f, 6f, 0f);
+            
+        }
+        else if (currentChar == knight)
+        {
+            newChar.transform.localPosition = new Vector3(0f, 1.9f, 0f);
+            
+        }
     }
 }
