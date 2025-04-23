@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class miniGameTrigger : MonoBehaviour
 {
-    public GameObject miniGames;
+    public GameObject miniGameTower;
+    public GameObject miniGameParkour;
+    public GameObject miniGameFood;
     private bool colliderable = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +29,19 @@ public class miniGameTrigger : MonoBehaviour
         {
             if (obj.gameObject.CompareTag("Player"))
             {
-                miniGames.gameObject.SetActive(true);
                 colliderable = false;
+                if (this.gameObject.CompareTag("tower"))
+                {
+                    miniGameTower.gameObject.SetActive(true);
+                }
+                else if (this.gameObject.CompareTag("foodCatch"))
+                {
+                    miniGameFood.gameObject.SetActive(true);
+                }
+                else
+                {
+                    miniGameParkour.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -57,6 +71,8 @@ public class miniGameTrigger : MonoBehaviour
 
     public void cancel()
     {
-        miniGames.gameObject.SetActive(false);
+        miniGameFood.gameObject.SetActive(false);
+        miniGameParkour.gameObject.SetActive(false);
+        miniGameTower.gameObject.SetActive(false);
     }
 }

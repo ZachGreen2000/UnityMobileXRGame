@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18371016, g: 0.22913538, b: 0.30483133, a: 1}
+  m_IndirectSpecularColor: {r: 0.17281803, g: 0.21596135, b: 0.29790568, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -894,7 +894,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -943,13 +943,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428147485}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5151998, y: -0.7982915, z: 0.16954015, w: 0.2618319}
-  m_LocalPosition: {x: 15.9, y: 42.6, z: 63.7}
+  m_LocalRotation: {x: 0.48757762, y: -0.4875775, z: 0.5121212, w: 0.5121212}
+  m_LocalPosition: {x: 1.54, y: 39.34, z: -2.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 32.716, y: -163.188, z: -60.707}
+  m_LocalEulerAnglesHint: {x: 87.187, y: 0, z: 90}
 --- !u!1 &1871503370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,9 +1095,9 @@ MonoBehaviour:
   lastCube: {fileID: 0}
   cubeCount: []
   heightScore: 0
-  knight: {fileID: 0}
-  water: {fileID: 0}
-  girly: {fileID: 0}
+  knight: {fileID: 6065549743317853578, guid: 316a1db282fd7f04e9d0668f37cb6df4, type: 3}
+  water: {fileID: 6392343882927361884, guid: 495bff6be4136974fbdef6afb3dfa305, type: 3}
+  girly: {fileID: 7497643651781563430, guid: 6866ce0df82216146bb324bfb566e647, type: 3}
 --- !u!1 &2068720358
 GameObject:
   m_ObjectHideFlags: 0
