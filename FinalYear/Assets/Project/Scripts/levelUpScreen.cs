@@ -54,6 +54,7 @@ public class levelUpScreen : MonoBehaviour
     // this will be called when the level screen is activated to apply starting values for ui text
     public void setUIText()
     {
+        currentLevel = gameManager.CharacterManager.ActiveCharacter.characterLevel;
         currentStars.text = accountData.starCount.ToString();
         int.TryParse(currentStars.text, out tempCurrentStars);
         useStars.text = starsToUse;

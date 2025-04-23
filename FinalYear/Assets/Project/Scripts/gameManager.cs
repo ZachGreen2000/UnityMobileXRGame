@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
+using System.IO;
 
 public class gameManager : MonoBehaviour
 {
@@ -51,12 +53,13 @@ public class gameManager : MonoBehaviour
     private characterData charData;
     private string currentCharacterID;
     private List<string> unlockedCharacterIDs = new List<string>();
-    
+
     // this is a global class for the active characters data to use for updating variables and overwritting to list
     // this creates a temporary instance of the characterSingleton data class that will act as the current character
     public static class CharacterManager
     {
         public static characterSingleton ActiveCharacter = new characterSingleton("","","","","","","");
+        public static string ToJson() { return JsonUtility.ToJson(ActiveCharacter, true); } // called for nfc writing
     }
     // Start is called before the first frame update
     void Start()
@@ -293,8 +296,13 @@ public class gameManager : MonoBehaviour
     public void menuBack()
     {
         menuScreen.gameObject.SetActive(false);
+        nfcScreen.gameObject.SetActive(false);
+        selectScreen.gameObject.SetActive(false);
+        accountStatsScreen.SetActive(false);
+        settingsScreen.SetActive(false);
         homeScreen.gameObject.SetActive(true);
         click.Play();
+        detectCurrentChatacter();
     }
     // this button call will enable the nfc screen and also start the nfc reader session
     public void unlockCharacterBtn()

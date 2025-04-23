@@ -65,11 +65,11 @@ public class NFCManager : MonoBehaviour
     {
         Debug.Log("Writting session has begun");
 
-        string jsonData = currentCharacter.ToJson();
+        string jsonData = gameManager.CharacterManager.ToJson();
 #if UNITY_IOS && !UNITY_EDITOR
         startWriting(jsonData);
 #elif UNITY_ANDROID && !UNITY_EDITOR
-        NFCAndroidPlugin.Call("writeToNFC", jsonData);
+        NFCAndroidPlugin.Call("startWriting", jsonData);
 #else 
         Debug.Log("NFC write only available on mobile");
 #endif

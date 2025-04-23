@@ -21,6 +21,8 @@ public class NFCPlugin {
     private Activity activity;
     private NfcAdapter nfcAdapter;
     private Tag currentTag;
+    private static boolean isWriteMode = false;
+    private static String dataToWrite = null;
     //calls from unity to start reading process
     public void startReading() {
         Activity activity = UnityPlayer.currentActivity;
@@ -31,7 +33,34 @@ public class NFCPlugin {
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(
-                activity, 0, intent, PendingIntent.FLAG_MUTABLE // use FLAG_UPDATE_CURRENT for older API
+                activity, 0, intent, PendingIntent.FLAG_MUTABLE 
+            );
+
+            IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+            try {
+                tagDetected.addDataType("*/*");
+            } catch (IntentFilter.MalformedMimeTypeException e) {
+                Log.e("NFC", "Mime type error", e);
+            }
+
+            adapter.enableForegroundDispatch(activity, pendingIntent, new IntentFilter[]{ tagDetected }, null);
+            Log.d("NFC", "Foreground NFC reading enabled");
+        }
+    }
+    // start writing function to make use of same foreground intent as startReading, the only difference is it sets a write mode
+    public void startWriting(String data) {
+        Activity activity = UnityPlayer.currentActivity;
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(activity);
+
+        if (adapter != null) {
+            this.isWriteMode = true;
+            this.dataToWrite = data;
+
+            Intent intent = new Intent(activity, activity.getClass());
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(
+                activity, 0, intent, PendingIntent.FLAG_MUTABLE 
             );
 
             IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
@@ -90,16 +119,30 @@ public class NFCPlugin {
             Log.d("NFCPlugin", "cannot read or process data");
             return;
         }
-        // retrieve messages in NDEF format from NFC intent, extracting the record and convert into a string uising UTF_8
-        Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
-        if (rawMsgs != null && rawMsgs.length > 0) {
-            NdefMessage ndefMessage = (NdefMessage) rawMsgs[0];
-            NdefRecord record = ndefMessage.getRecords()[0];
-            String data = new String(record.getPayload(), StandardCharsets.UTF_8);
-            Log.d("NFCPlugin", "Data from NFC" + data);
-            UnityPlayer.UnitySendMessage("NFCManager", "OnNFCRead", data); // send the data to Unity
+        // this section is called when writting to take use of same foreground intent
+        NFCPlugin plugin = getInstance(UnityPlayer.currentActivity);
+        if (isWriteMode) {
+            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            if (tag != null) {
+                plugin.setCurrentTag(tag);
+                plugin.writeToNFC(dataToWrite);
+            } else {
+                UnityPlayer.UnitySendMessage("NFCManager", "OnNFCError", "No NFC tag detected");
+            }
+            isWriteMode = false;
         }else {
-            Log.d("NFCPlugin", "cannot read or process data"); 
+            // retrieve messages in NDEF format from NFC intent, extracting the record and convert into a string uising UTF_8
+            Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            if (rawMsgs != null && rawMsgs.length > 0) {
+                NdefMessage ndefMessage = (NdefMessage) rawMsgs[0];
+                NdefRecord record = ndefMessage.getRecords()[0];
+                String data = new String(record.getPayload(), StandardCharsets.UTF_8);
+                Log.d("NFCPlugin", "Data from NFC" + data);
+                UnityPlayer.UnitySendMessage("NFCManager", "OnNFCRead", data); // send the data to Unity
+            }else {
+                Log.d("NFCPlugin", "cannot read or process data"); 
+            }
         }
+        
     }
 }
