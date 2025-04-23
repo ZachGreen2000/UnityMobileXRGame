@@ -86,6 +86,15 @@ public class NFCManager : MonoBehaviour
         gameManager.playCelebration();
     }
 
+    // this function is called when nfc has writen to a nfc tag
+    public void OnNFCWrite(string message)
+    {
+        Debug.Log("NFC write outcome: " + message);
+        gameManager.menuBack();
+        gameManager.playCelebration();
+    }
+
+    // called when there is an error in nfc scanning
     private void OnNFCError(string message)
     {
         Debug.Log("Error: " + message);

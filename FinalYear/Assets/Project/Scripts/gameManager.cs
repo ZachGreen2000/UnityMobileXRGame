@@ -302,6 +302,8 @@ public class gameManager : MonoBehaviour
         settingsScreen.SetActive(false);
         homeScreen.gameObject.SetActive(true);
         click.Play();
+        charData = characterData.LoadFromFile();
+        currentCharacterID = charData.currentCharacterID;
         detectCurrentChatacter();
     }
     // this button call will enable the nfc screen and also start the nfc reader session
