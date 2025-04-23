@@ -1074,11 +1074,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1
+  maxRadius: 50
   angle: 0
-  heightIncrease: 1
+  heightIncrease: 2
   player: {fileID: 146575129}
   spawnDistance: 10
   lastCube: {fileID: 0}
+  cubeCount: []
 --- !u!1 &2068720358
 GameObject:
   m_ObjectHideFlags: 0
