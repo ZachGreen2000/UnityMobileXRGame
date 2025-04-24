@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class catchManager : MonoBehaviour
+public class foodManager : MonoBehaviour
 {
     [Header("Pool Variables")]
     public IObjectPool<GameObject> foodPool;
@@ -17,7 +17,7 @@ public class catchManager : MonoBehaviour
     private Sprite active;
     private string tag;
 
-    public static catchManager Instance;
+    public static foodManager Instance;
 
     // setting up the object pool for the food
     public IObjectPool<GameObject> Pool
@@ -44,7 +44,8 @@ public class catchManager : MonoBehaviour
         SpriteRenderer fs = food.GetComponent<SpriteRenderer>();
         fs.sprite = active;
         food.tag = tag;
-        food.transform.rotation = Quaternion.Euler(0, 90, 0);
+        food.transform.rotation = Quaternion.Euler(0, 180, 0);
+        food.transform.position = spawnPos;
         food.SetActive(true);
     }
 
@@ -70,6 +71,7 @@ public class catchManager : MonoBehaviour
         spawnPos = pos;
     }
 
+    // this jfunction sets the sprite and tag of the chosen food
     public void setType(int rand)
     {
         active = foodSprites[rand];

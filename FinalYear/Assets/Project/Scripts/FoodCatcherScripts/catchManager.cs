@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class foodManager : MonoBehaviour
+public class catchManager : MonoBehaviour
 {
     [Header("Objects")]
     public Transform player;
@@ -17,6 +17,7 @@ public class foodManager : MonoBehaviour
     private float spawnInterval = 2f;
     private bool isRound = true;
 
+    public static catchManager Instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,11 @@ public class foodManager : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -48,9 +54,9 @@ public class foodManager : MonoBehaviour
                 int randPoint = Random.Range(0, spawnPoints.Count);
                 int randPoint2 = Random.Range(0, 5);
                 Transform pnt = spawnPoints[randPoint];
-                catchManager.Instance.setNextSpawn(pnt.position);
-                catchManager.Instance.setType(randPoint2);
-                catchManager.Instance.Pool.Get();
+                foodManager.Instance.setNextSpawn(pnt.position);
+                foodManager.Instance.setType(randPoint2);
+                foodManager.Instance.Pool.Get();
                 timer = 0f;
             }
         }
@@ -77,5 +83,11 @@ public class foodManager : MonoBehaviour
             newChar.transform.localPosition = new Vector3(0f, 1.9f, 0f);
 
         }
+    }
+
+    // this function will handle the caught food and the outcome
+    public void foodCaught(string tag)
+    {
+
     }
 }
