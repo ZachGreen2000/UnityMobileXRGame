@@ -10,6 +10,7 @@ public class playerController : MonoBehaviour
     [Header("Pick Camera Mode")] // gives ability to chose camera mode for different games
     public bool firstNThirdPerspective;
     public bool topDownPerspective;
+    public bool sideScrollPerspective;
     public bool pcInputSystem;
     public bool mobileInputSystem;
 
@@ -115,6 +116,11 @@ public class playerController : MonoBehaviour
                     player1stCamera.gameObject.SetActive(false);
                     player3rdCamera.gameObject.SetActive(false);
                     topDownCamera.gameObject.SetActive(true);
+                } else if (sideScrollPerspective)
+                {
+                    player1stCamera.gameObject.SetActive(true);
+                    player3rdCamera.gameObject.SetActive(false);
+                    topDownCamera.gameObject.SetActive(false);
                 }
             }
         }
@@ -136,7 +142,7 @@ public class playerController : MonoBehaviour
         } else if (topDownPerspective)
         {
             topDownCamMovement();
-        }
+        } 
     }
 
     void FixedUpdate() // calls in sync with physics systsyem
@@ -148,7 +154,10 @@ public class playerController : MonoBehaviour
             adjustSpeedForFall();
         } else if (topDownPerspective)
         {
-            topDownMovvement();
+            topDownMovement();
+        } else if (sideScrollPerspective)
+        {
+            sideScrollMovement();
         }
     }
 
@@ -339,7 +348,7 @@ public class playerController : MonoBehaviour
         }
     }
     // top down code
-    void topDownMovvement()
+    void topDownMovement()
     {
         currentVelocity = playerRigidbody.velocity;
 
@@ -408,7 +417,7 @@ public class playerController : MonoBehaviour
             isMoving = true;
         }
     }
-
+    // called for the top down movement mode
     void topDownCamMovement()
     {
         Vector3 playerPosition = player.transform.position; // takes the players position and stores it in a vector
@@ -421,5 +430,28 @@ public class playerController : MonoBehaviour
             Vector3 desiredCamPos = playerPosition - cameraOffset; // calculates camera position for when following
             topDownCamera.transform.position = desiredCamPos;
         }
+    }
+    // called for the side scroll movement mode
+    void sideScrollMovement()
+    {
+        currentVelocity = playerRigidbody.velocity;
+        moveDirection = Vector3.zero; // creates Vector and sets to zero for no movement
+        // get the right angle of camera for player rotation 
+        Vector3 cameraRight = player3rdCamera.transform.right;
+        cameraRight.y = 0;
+        cameraRight.Normalize();
+        // Check for input and set moveDirection accordingly
+        if (moveLeft) // Move left
+        {
+            moveDirection -= cameraRight;
+            isMovingBack = false;
+        }
+        if (moveRight) // Move right
+        {
+            moveDirection += cameraRight;
+            isMovingBack = false;
+        }
+        moveDirection = moveDirection.normalized; // avoids diagonal speed boost
+        playerRigidbody.velocity = (moveDirection * playerCurrentSpeed * Time.fixedDeltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
     }
 }
