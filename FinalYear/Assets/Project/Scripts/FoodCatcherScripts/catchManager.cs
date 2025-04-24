@@ -12,6 +12,7 @@ public class catchManager : MonoBehaviour
     public GameObject endScreen;
     public TMP_Text score;
     public TMP_Text title;
+    public TMP_Text healthT;
 
     [Header("Characters")]
     public GameObject knight;
@@ -27,7 +28,7 @@ public class catchManager : MonoBehaviour
     private float spawnInterval = 2f;
     private bool isRound = false;
     private string caughtFood;
-    private float targetAmount = 0;
+    private float targetAmount = 5;
     private float currentAmount= 0;
     private int scoreint;
 
@@ -48,6 +49,8 @@ public class catchManager : MonoBehaviour
         {
             setPlayer(girly);
         }
+        score.text = "Score: " + scoreint.ToString();
+        healthT.text = "Health: " + health.ToString();
     }
 
     void Awake()
@@ -129,6 +132,7 @@ public class catchManager : MonoBehaviour
         else
         {
             health--;
+            healthT.text = "Health: " + health.ToString();
         }
     }
 
