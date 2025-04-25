@@ -10,12 +10,14 @@ public class accountData
     public int starCount;
     public float defenceHighRound;
     public float defenceHighScore;
+    public int foodHighScore;
 
-    public accountData(int starCount, float defenceHighRound, float defenceHighScore)
+    public accountData(int starCount, float defenceHighRound, float defenceHighScore, int foodHighScore)
     {
         this.starCount = starCount;
         this.defenceHighRound = defenceHighRound;
         this.defenceHighScore = defenceHighScore;
+        this.foodHighScore = foodHighScore;
     }
     // the following code is to save and pull to and from json respectively
     // it works by converting the data from json to account data or the opposite
@@ -54,7 +56,7 @@ public class accountData
 
     public static accountData CreateDefaultFile()
     {
-        accountData defaultData = new accountData(0, 0, 0);
+        accountData defaultData = new accountData(0, 0, 0, 0);
         defaultData.SaveToFile();
         return defaultData;
     }

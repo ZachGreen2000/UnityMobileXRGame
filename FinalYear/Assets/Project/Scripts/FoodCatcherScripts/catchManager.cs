@@ -13,6 +13,9 @@ public class catchManager : MonoBehaviour
     public TMP_Text score;
     public TMP_Text title;
     public TMP_Text healthT;
+    public TMP_Text endScore;
+    public TMP_Text highScore;
+    public GameObject quitOptions;
 
     [Header("Characters")]
     public GameObject knight;
@@ -24,6 +27,9 @@ public class catchManager : MonoBehaviour
     public string currentTarget;
     public List<string> foodTypes;
 
+    [Header("Scripts")]
+    public playerController playerController;
+
     private float timer;
     private float spawnInterval = 2f;
     private bool isRound = false;
@@ -31,6 +37,11 @@ public class catchManager : MonoBehaviour
     private float targetAmount = 5;
     private float currentAmount= 0;
     private int scoreint;
+    private float playerLevelFloat;
+    private string playerLevel;
+    private float playerSpeed;
+    private float playerHealth;
+    private float playerDamage;
 
     public static catchManager Instance;
     // Start is called before the first frame update
@@ -50,6 +61,15 @@ public class catchManager : MonoBehaviour
             setPlayer(girly);
         }
         score.text = "Score: " + scoreint.ToString();
+        
+        // set players stats for miniGame
+        playerLevel = gameManager.CharacterManager.ActiveCharacter.characterLevel;
+        float.TryParse(playerLevel, out playerLevelFloat);
+        playerDamage = calcStat(playerDamage);
+        playerSpeed = calcStat(playerSpeed);
+        playerHealth = calcStat(playerHealth);
+        playerController.setMovementVariables(playerSpeed);
+        health = playerHealth;
         healthT.text = "Health: " + health.ToString();
     }
 
@@ -91,8 +111,8 @@ public class catchManager : MonoBehaviour
         // game fails when player loses all health
         if (health <= 0)
         {
-            endScreen.SetActive(true);
             isRound = false;
+            endScreenDisplay();
         }
     }
 
@@ -146,12 +166,64 @@ public class catchManager : MonoBehaviour
         currentTarget = type;
     }
 
-    // this button call is for when the quit button is pressed
-    public void quit()
+    // this button call is called when quit is pressed but only runs when round now playing
+    public void initialQuit()
     {
         if (!isRound)
         {
-            SceneManager.LoadScene("Main");
+            quitOptions.SetActive(true);
+        }
+    }
+
+    // this button call is called when the player cancels their quit press
+    public void cancelQuit()
+    {
+        quitOptions.SetActive(false);
+    }
+
+    // this button call is for when the quit confirm button is pressed
+    public void quit()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
+    // this function when user dies and end screen activates to display their score and show high score and save if new high score
+    public void endScreenDisplay()
+    {
+        endScore.text = "Score: " + scoreint;
+        accountData account = accountData.LoadFromFile();
+        if (account.foodHighScore < scoreint)
+        {
+            account.foodHighScore = scoreint;
+        }
+        highScore.text = "High Score: " + account.foodHighScore;
+        account.SaveToFile();
+        endScreen.SetActive(true);
+    }
+
+    // the purpose of this function is to calculate stats based on the level for tower defence use
+    public float calcStat(float stat)
+    {
+        Debug.Log("Calculating stat");
+        if (stat == playerSpeed)
+        {
+            float calculatedStat = stat * playerLevelFloat + 1;
+            Debug.Log("Speed is:" + calculatedStat);
+            return calculatedStat;
+        }
+        else if (stat == playerHealth)
+        {
+            float calculatedStat = stat * playerLevelFloat + 3;
+            return calculatedStat;
+        }
+        else if (stat == playerDamage)
+        {
+            float calculatedStat = stat * (playerLevelFloat / 2);
+            return calculatedStat;
+        }
+        else
+        {
+            return 0f;
         }
     }
 }
