@@ -29,6 +29,7 @@ public class cubeManager : MonoBehaviour
     private GameObject CreatePooledItemW() // creates the item to be pooled, in this case it is cube.
     {
         GameObject cube = Instantiate(cubePrefab, spawnPos, Quaternion.LookRotation(Vector3.up));
+        cube.transform.rotation = Quaternion.Euler(0, 90, 0);
         cube.SetActive(false);
         return cube;
     }

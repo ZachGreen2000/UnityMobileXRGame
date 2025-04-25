@@ -53,6 +53,7 @@ public class playerController : MonoBehaviour
     private bool moveLeft;
     private bool moveBack;
     private bool moveUp;
+    private bool isJumping;
 
     [Header("Misc")] // generic features to be manipulated
     public bool contraintAxis;
@@ -87,6 +88,7 @@ public class playerController : MonoBehaviour
         {
             playerCapsuleCollider = GetComponent<CapsuleCollider>();
             playerRigidbody = GetComponent<Rigidbody>();
+            cameraOffset = player3rdCamera.transform.position - player.transform.position;
 
             // locks the rotation of player so they do not 'fall over'
             if (contraintAxis)
@@ -188,6 +190,11 @@ public class playerController : MonoBehaviour
         {
             moveRight = true;
         }else { moveRight = false; }
+
+        if (Input.GetKey(keyForJump.ToLower()))
+        {
+            isJumping = true;
+        }else { isJumping = false; }
     }
 
     void handleMobileInput() // handles mobile inputs 
@@ -198,6 +205,11 @@ public class playerController : MonoBehaviour
         moveBack = input.y < -0.1f;
         moveRight = input.x > 0.1f;
         moveLeft = input.x < -0.1f;
+    }
+
+    public void mobileJumpBtn() // this function is for when a mobile jump button is needed
+    {
+        isJumping = true;
     }
 
     void Movement() // controls vector for player movement
@@ -267,15 +279,18 @@ public class playerController : MonoBehaviour
 
     void jump() // Handles logic for jump by adding force to rigid body as long as charcter is grounded
     {
-       if (Input.GetKeyDown(keyForJump.ToLower()) && playerGrounded)
+       if (isJumping && playerGrounded)
         {
             playerRigidbody.velocity = (Vector3.up * playerJumpForce); // applies force upwards for jump making use of impulse mode for quick pulse upwards
             playerGrounded = false;
             jumpCount++;
-        }else if (Input.GetKeyDown(keyForJump.ToLower()) && !playerGrounded && jumpCount < 2) // checks if character in the air and if the jump count is below 2 for double jump
+            isJumping = false;
+        }
+        else if (isJumping && !playerGrounded && jumpCount < 2) // checks if character in the air and if the jump count is below 2 for double jump
         {
             playerRigidbody.velocity = (Vector3.up * playerJumpForce); 
             jumpCount++;
+            isJumping = false;
         }
     }
 
@@ -332,19 +347,11 @@ public class playerController : MonoBehaviour
             player.transform.Rotate(0, rotation1stX, 0); // for first person
         }else // for third person
         {
-            if (!isMoving) // rotate camera around when character not moving for entire view of character
-            {
-                player3rdCamera.transform.RotateAround(playerPosition, Vector3.up, rotationX);
-                player3rdCamera.transform.rotation = Quaternion.Slerp(player3rdCamera.transform.rotation, lookAtPlayer, cameraCorrectionSpeed * Time.deltaTime);
-                cameraOffset = playerPosition - currentCamPos; // calculates the offset for when moving
-            }
-            else if (isMoving) // more natural camera movement for when player is in action
-            {
-                // ----- this is the problem? --- camera not clamping, set rotation of character to match x when moving, stop camera rolling on Z ///
-                Vector3 desiredCamPos = playerPosition - cameraOffset; // calculates camera position for when following
-                player3rdCamera.transform.position = Vector3.Lerp(currentCamPos, desiredCamPos, cameraCorrectionSpeed * Time.deltaTime); // for camera follow
-                player3rdCamera.transform.Rotate(clampedCameraX, clampedCameraY, 0); // applies rotation on x and y axis in bounds of clamping
-            }
+            Quaternion rotation = Quaternion.Euler(clampedCameraX, rotationX, 0f); // calc needed rotation
+            cameraOffset = rotation * cameraOffset; // apply rotation to cam offset
+            Vector3 desiredCamPos = playerPosition + cameraOffset; // calculates camera position for when following
+            player3rdCamera.transform.position = Vector3.Lerp(currentCamPos, desiredCamPos, cameraCorrectionSpeed * Time.deltaTime); // apply calculated cam pos
+            player3rdCamera.transform.rotation = Quaternion.Slerp(player3rdCamera.transform.rotation, lookAtPlayer, cameraCorrectionSpeed * Time.deltaTime); // apply calc cam rotation
         }
     }
     // top down code
@@ -399,7 +406,7 @@ public class playerController : MonoBehaviour
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, playerRotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(keyForSprint.ToLower()) && !isMovingBack) // checks player is not moving backwards
+        if (Input.GetKey(keyForSprint.ToLower())) // checks player is not moving backwards
         {
             playerRigidbody.velocity = (moveDirection * playerSprintSpeed * Time.fixedDeltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
         }

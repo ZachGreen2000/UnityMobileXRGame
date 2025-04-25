@@ -15,6 +15,9 @@ public class parkourManager : MonoBehaviour
     public Transform lastCube;
     public List<GameObject> cubeCount;
     public TMP_Text heightText;
+    public bool mobileBuild;
+    public GameObject joystick;
+    public GameObject jumpBtn;
 
     [Header("Player Score")]
     public float heightScore;
@@ -69,6 +72,12 @@ public class parkourManager : MonoBehaviour
 
         // first cube
         getCubePos();
+
+        if (mobileBuild)
+        {
+            joystick.SetActive(true);
+            jumpBtn.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -79,9 +88,11 @@ public class parkourManager : MonoBehaviour
         {
             getCubePos();
         }
-
-        heightScore = player.position.y;
-        heightText.text = "Height: " + heightScore;
+        if (heightScore < player.position.y)
+        {
+            heightScore = player.position.y;
+            heightText.text = "Height: " + heightScore;
+        }
     }
     // this function uses simple maths to create a procedural spawning system that spawns cubes in a spiral
     // the gap between the cubes increases with each spawn to increase the difficulty of the parkour.
@@ -94,10 +105,10 @@ public class parkourManager : MonoBehaviour
         angle += 0.1f;
         if (radius <= maxRadius)
         {
-            radius += 0.5f;
+            radius += 2f;
         }
   
-        Vector3 spawnPos = new Vector3 (x, y, z);
+        Vector3 spawnPos = new Vector3 (x, y + 0.1f, z);
         cubeManager.Instance.setNextSpawn(spawnPos);
         GameObject cube = cubeManager.Instance.Pool.Get();
         lastCube = cube.transform;
