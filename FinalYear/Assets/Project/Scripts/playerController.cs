@@ -53,7 +53,7 @@ public class playerController : MonoBehaviour
     private bool moveLeft;
     private bool moveBack;
     private bool moveUp;
-    private bool isJumping;
+    public bool isJumping;
 
     [Header("Misc")] // generic features to be manipulated
     public bool contraintAxis;
@@ -406,7 +406,7 @@ public class playerController : MonoBehaviour
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotation, playerRotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(keyForSprint.ToLower())) // checks player is not moving backwards
+        if (Input.GetKey(keyForSprint.ToLower())) // checks for sprint
         {
             playerRigidbody.velocity = (moveDirection * playerSprintSpeed * Time.fixedDeltaTime + Vector3.up * currentVelocity.y); // adds movement to rigidbody using velocity
         }

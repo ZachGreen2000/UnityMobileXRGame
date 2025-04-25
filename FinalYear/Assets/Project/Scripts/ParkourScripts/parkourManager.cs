@@ -18,6 +18,7 @@ public class parkourManager : MonoBehaviour
     public bool mobileBuild;
     public GameObject joystick;
     public GameObject jumpBtn;
+    public Rigidbody rb;
 
     [Header("Player Score")]
     public float heightScore;
@@ -35,6 +36,7 @@ public class parkourManager : MonoBehaviour
     private float playerHealth = 4f;
     private string playerLevel;
     private float playerLevelFloat;
+    private Animator anim;
 
     public static parkourManager Instance;
 
@@ -93,6 +95,7 @@ public class parkourManager : MonoBehaviour
             heightScore = player.position.y;
             heightText.text = "Height: " + heightScore;
         }
+        animationCall();
     }
     // this function uses simple maths to create a procedural spawning system that spawns cubes in a spiral
     // the gap between the cubes increases with each spawn to increase the difficulty of the parkour.
@@ -123,18 +126,18 @@ public class parkourManager : MonoBehaviour
         newChar.transform.SetParent(player);
         if (currentChar == water)
         {
-            newChar.transform.localPosition = new Vector3(0f, -6f, 0f);
-            
+            newChar.transform.localPosition = new Vector3(0f, -2.5f, 0f);
+            anim = newChar.GetComponent<Animator>();
         }
         else if (currentChar == girly)
         {
-            newChar.transform.localPosition = new Vector3(0f, 6f, 0f);
-            
+            newChar.transform.localPosition = new Vector3(0f, 0.7f, 0f);
+            anim = newChar.GetComponent<Animator>();
         }
         else if (currentChar == knight)
         {
-            newChar.transform.localPosition = new Vector3(0f, 1.9f, 0f);
-            
+            newChar.transform.localPosition = new Vector3(0f, -0.1f, 0f);
+            anim = newChar.GetComponent<Animator>();
         }
     }
 
@@ -172,5 +175,21 @@ public class parkourManager : MonoBehaviour
             account.parkourHeight = heightScore;
         }
         account.SaveToFile();
+    }
+    // this function will manage the characters animations
+    public void animationCall()
+    {
+        if (playerController.isJumping)
+        {
+            anim.SetBool("jump", true);
+        }else if (rb.velocity.magnitude > 0.1f)
+        {
+            anim.SetBool("walking", true);
+            anim.SetBool("jump", false);
+        }else
+        {
+            anim.SetBool("walking", false);
+            anim.SetBool("jump", false);
+        }
     }
 }
