@@ -39,9 +39,9 @@ public class catchManager : MonoBehaviour
     private int scoreint;
     private float playerLevelFloat;
     private string playerLevel;
-    private float playerSpeed;
-    private float playerHealth;
-    private float playerDamage;
+    private float playerSpeed = 2f;
+    private float playerHealth = 4f;
+    private float playerDamage = 3f;
 
     public static catchManager Instance;
     // Start is called before the first frame update
@@ -70,7 +70,7 @@ public class catchManager : MonoBehaviour
         playerHealth = calcStat(playerHealth);
         playerController.setMovementVariables(playerSpeed);
         health = playerHealth;
-        healthT.text = "Health: " + health.ToString();
+        healthT.text = "Health: " + health;
     }
 
     void Awake()
@@ -218,7 +218,7 @@ public class catchManager : MonoBehaviour
         }
         else if (stat == playerDamage)
         {
-            float calculatedStat = stat * (playerLevelFloat / 2);
+            float calculatedStat = stat * playerLevelFloat + 2;
             return calculatedStat;
         }
         else

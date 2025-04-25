@@ -52,9 +52,9 @@ public class defenceManager : MonoBehaviour
     public AudioSource celebration;
 
     [Header("Player Stats")]
-    public float playerDamage;
-    public float playerSpeed;
-    public float playerHealth;
+    public float playerDamage = 3f;
+    public float playerSpeed = 2f;
+    public float playerHealth = 4f;
     private string playerLevel;
     private float playerLevelFloat;
 
@@ -288,7 +288,7 @@ public class defenceManager : MonoBehaviour
         }
         else if (stat == playerDamage)
         {
-            float calculatedStat = stat * (playerLevelFloat / 2);
+            float calculatedStat = stat * playerLevelFloat + 2;
             return calculatedStat;
         }
         else

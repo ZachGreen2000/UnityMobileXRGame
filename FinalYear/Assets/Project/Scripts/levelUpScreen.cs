@@ -30,8 +30,8 @@ public class levelUpScreen : MonoBehaviour
     private string currentLevel = "0";
     private string starsToUse = "0";
     private string speedCalc = "2";
-    private string damageCalc = "5";
-    private string healthCalc = "5";
+    private string damageCalc = "3";
+    private string healthCalc = "4";
     private int tempCurrentStars;
     private int tempStarsToUse;
     private int tempLevel;
@@ -92,6 +92,7 @@ public class levelUpScreen : MonoBehaviour
             int levelInt;
             int.TryParse(currentLevel, out levelInt);
             int calculatedStat = statInt * tempLevel + 3;
+            Debug.Log("Health is:" + calculatedStat);
             return calculatedStat.ToString();
         }
         else if (stat == damageCalc)
@@ -100,7 +101,8 @@ public class levelUpScreen : MonoBehaviour
             int.TryParse(stat, out statInt);
             int levelInt;
             int.TryParse(currentLevel, out levelInt);
-            int calculatedStat = statInt * (tempLevel / 2);
+            int calculatedStat = statInt * tempLevel + 2;
+            Debug.Log("Damage is:" + calculatedStat);
             return calculatedStat.ToString();
         }else
         {

@@ -34,6 +34,8 @@ public class gameManager : MonoBehaviour
     public TMP_Text starCountm;
     public TMP_Text defenceRoundStat;
     public TMP_Text defenceScoreStat;
+    public TMP_Text foodCatchScoreStat;
+    public TMP_Text parkourScoreStat;
 
     [Header("Characters")]
     public string character;
@@ -341,9 +343,11 @@ public class gameManager : MonoBehaviour
     public void accountStatsBtn()
     {
         account = accountData.LoadFromFile();
-        starCountm.text = "Current Stars: " + account.starCount.ToString();
-        defenceRoundStat.text = "Highest Round: " + account.defenceHighRound.ToString();
-        defenceScoreStat.text = "Highest Score: " + account.defenceHighScore.ToString();
+        starCountm.text = "Current Stars: " + account.starCount;
+        defenceRoundStat.text = "Highest Round: " + account.defenceHighRound;
+        defenceScoreStat.text = "Highest Score: " + account.defenceHighScore;
+        foodCatchScoreStat.text = "Highest Score: " + account.foodHighScore;
+        parkourScoreStat.text = "Highest Score: " + account.parkourHeight;
         selectScreen.gameObject.SetActive(false);
         nfcScreen.gameObject.SetActive(false);
         settingsScreen.SetActive(false);

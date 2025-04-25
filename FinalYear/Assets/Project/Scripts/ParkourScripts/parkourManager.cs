@@ -27,9 +27,9 @@ public class parkourManager : MonoBehaviour
     [Header("Scripts")]
     public playerController playerController;
 
-    private float playerDamage;
-    private float playerSpeed;
-    private float playerHealth;
+    private float playerDamage = 3f;
+    private float playerSpeed = 2f;
+    private float playerHealth = 4f;
     private string playerLevel;
     private float playerLevelFloat;
 
@@ -144,7 +144,7 @@ public class parkourManager : MonoBehaviour
         }
         else if (stat == playerDamage)
         {
-            float calculatedStat = stat * (playerLevelFloat / 2);
+            float calculatedStat = stat * playerLevelFloat + 2;
             return calculatedStat;
         }
         else
