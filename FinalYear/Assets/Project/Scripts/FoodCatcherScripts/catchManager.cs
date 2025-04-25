@@ -16,6 +16,12 @@ public class catchManager : MonoBehaviour
     public TMP_Text endScore;
     public TMP_Text highScore;
     public GameObject quitOptions;
+    public AudioSource click;
+    public AudioSource maleHurt;
+    public AudioSource femaleHurt;
+    public AudioSource correct;
+    public AudioSource backingTrack;
+    public AudioSource celebration;
 
     [Header("Characters")]
     public GameObject knight;
@@ -42,6 +48,7 @@ public class catchManager : MonoBehaviour
     private float playerSpeed = 2f;
     private float playerHealth = 4f;
     private float playerDamage = 3f;
+    private string charID;
 
     public static catchManager Instance;
     // Start is called before the first frame update
@@ -51,14 +58,17 @@ public class catchManager : MonoBehaviour
         if (gameManager.CharacterManager.ActiveCharacter.characterID == "1")
         {
             setPlayer(knight);
+            charID = "1";
         }
         else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2")
         {
             setPlayer(water);
+            charID = "2";
         }
         else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3")
         {
             setPlayer(girly);
+            charID = "3";
         }
         score.text = "Score: " + scoreint.ToString();
         
@@ -113,6 +123,7 @@ public class catchManager : MonoBehaviour
         {
             isRound = false;
             endScreenDisplay();
+            celebration.Play();
         }
     }
 
@@ -145,13 +156,21 @@ public class catchManager : MonoBehaviour
         caughtFood = tag;
         if (caughtFood == currentTarget)
         {
+            correct.Play();
             currentAmount++;
             scoreint++;
             score.text = "Score: " + scoreint.ToString();
         }
         else
         {
-            health--;
+            if (charID == "1" || charID == "2")
+            {
+                maleHurt.Play();
+            } else if (charID == "3")
+            {
+                femaleHurt.Play();
+            }
+            health -= 5f;
             healthT.text = "Health: " + health.ToString();
         }
     }
@@ -159,6 +178,7 @@ public class catchManager : MonoBehaviour
     // this button call is for when the play button is pressed
     public void play()
     {
+        click.Play();
         isRound = true;
         int rand = Random.Range(0, foodTypes.Count);
         string type = foodTypes[rand];
@@ -171,6 +191,7 @@ public class catchManager : MonoBehaviour
     {
         if (!isRound)
         {
+            click.Play();
             quitOptions.SetActive(true);
         }
     }
@@ -178,12 +199,14 @@ public class catchManager : MonoBehaviour
     // this button call is called when the player cancels their quit press
     public void cancelQuit()
     {
+        click.Play();
         quitOptions.SetActive(false);
     }
 
     // this button call is for when the quit confirm button is pressed
     public void quit()
     {
+        click.Play();
         SceneManager.LoadScene("Main");
     }
 
