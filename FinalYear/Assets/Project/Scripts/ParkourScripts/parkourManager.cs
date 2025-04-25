@@ -105,7 +105,7 @@ public class parkourManager : MonoBehaviour
         angle += 0.1f;
         if (radius <= maxRadius)
         {
-            radius += 2f;
+            radius += 4f;
         }
   
         Vector3 spawnPos = new Vector3 (x, y + 0.1f, z);
