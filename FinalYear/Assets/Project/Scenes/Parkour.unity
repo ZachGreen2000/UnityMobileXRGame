@@ -1305,10 +1305,12 @@ MonoBehaviour:
   spawnDistance: 10
   lastCube: {fileID: 0}
   cubeCount: []
+  heightText: {fileID: 548707969}
   heightScore: 0
   knight: {fileID: 6065549743317853578, guid: 316a1db282fd7f04e9d0668f37cb6df4, type: 3}
   water: {fileID: 6392343882927361884, guid: 495bff6be4136974fbdef6afb3dfa305, type: 3}
   girly: {fileID: 7497643651781563430, guid: 6866ce0df82216146bb324bfb566e647, type: 3}
+  playerController: {fileID: 146575130}
 --- !u!1 &2068720358
 GameObject:
   m_ObjectHideFlags: 0

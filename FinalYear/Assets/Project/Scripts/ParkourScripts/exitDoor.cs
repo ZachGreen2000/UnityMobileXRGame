@@ -7,6 +7,7 @@ public class exitDoor : MonoBehaviour
 {
     void OnTriggerEnter(Collider obj)
     {
+        parkourManager.Instance.saveScore();
         SceneManager.LoadScene("Main");
     }
 }

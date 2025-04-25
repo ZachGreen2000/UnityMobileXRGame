@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class parkourManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class parkourManager : MonoBehaviour
     public float spawnDistance;
     public Transform lastCube;
     public List<GameObject> cubeCount;
+    public TMP_Text heightText;
 
     [Header("Player Score")]
     public float heightScore;
@@ -21,6 +23,15 @@ public class parkourManager : MonoBehaviour
     public GameObject knight;
     public GameObject water;
     public GameObject girly;
+
+    [Header("Scripts")]
+    public playerController playerController;
+
+    private float playerDamage;
+    private float playerSpeed;
+    private float playerHealth;
+    private string playerLevel;
+    private float playerLevelFloat;
 
     public static parkourManager Instance;
 
@@ -48,6 +59,15 @@ public class parkourManager : MonoBehaviour
         {
             Debug.Log("No active character");
         }
+        // sets player stats
+        playerLevel = gameManager.CharacterManager.ActiveCharacter.characterLevel;
+        float.TryParse(playerLevel, out playerLevelFloat);
+        playerDamage = calcStat(playerDamage);
+        playerSpeed = calcStat(playerSpeed);
+        playerHealth = calcStat(playerHealth);
+        playerController.setMovementVariables(playerSpeed);
+
+        // first cube
         getCubePos();
     }
 
@@ -61,8 +81,10 @@ public class parkourManager : MonoBehaviour
         }
 
         heightScore = player.position.y;
+        heightText.text = "Height: " + heightScore;
     }
-
+    // this function uses simple maths to create a procedural spawning system that spawns cubes in a spiral
+    // the gap between the cubes increases with each spawn to increase the difficulty of the parkour.
     public void getCubePos()
     {
         float x = radius * Mathf.Cos(angle);
@@ -103,5 +125,41 @@ public class parkourManager : MonoBehaviour
             newChar.transform.localPosition = new Vector3(0f, 1.9f, 0f);
             
         }
+    }
+
+    // the purpose of this function is to calculate stats based on the level for tower defence use
+    public float calcStat(float stat)
+    {
+        Debug.Log("Calculating stat");
+        if (stat == playerSpeed)
+        {
+            float calculatedStat = stat * playerLevelFloat + 1;
+            Debug.Log("Speed is:" + calculatedStat);
+            return calculatedStat;
+        }
+        else if (stat == playerHealth)
+        {
+            float calculatedStat = stat * playerLevelFloat + 3;
+            return calculatedStat;
+        }
+        else if (stat == playerDamage)
+        {
+            float calculatedStat = stat * (playerLevelFloat / 2);
+            return calculatedStat;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+    // this is called on exit and saves the players new score if its a new personal best
+    public void saveScore()
+    {
+        accountData account = accountData.LoadFromFile();
+        if (account.parkourHeight < heightScore)
+        {
+            account.parkourHeight = heightScore;
+        }
+        account.SaveToFile();
     }
 }
