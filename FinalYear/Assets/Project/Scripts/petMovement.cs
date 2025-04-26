@@ -7,7 +7,9 @@ public class petMovement : MonoBehaviour
     public GameObject[] wayPoints;
     public float speed;
     private GameObject target;
-    private Vector3 offset = new Vector3(1f, 1f, 1f);
+    private Vector3 offset = new Vector3(1f, 0f, 1f);
+
+    private float fixedHeight;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +20,21 @@ public class petMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.transform.position != target.transform.position + offset)
+        Vector3 targetPos = target.transform.position + offset;
+        fixedHeight = this.transform.position.y;
+        targetPos.y = fixedHeight;
+        if (Vector3.Distance(this.transform.position, targetPos) > 0.1f)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
-            this.transform.LookAt(target.transform);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, targetPos, speed * Time.deltaTime);
+            
+            Vector3 lookDirection = target.transform.position - this.transform.position;
+            lookDirection.y = 0;
+            if (lookDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+                targetRotation *= Quaternion.Euler(0f, 90f, 0f);
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * 5f);
+            }
         } else
         {
             changeDestination();
