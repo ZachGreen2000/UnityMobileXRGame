@@ -5150,12 +5150,13 @@ MonoBehaviour:
   endScore: {fileID: 1245537481}
   highScore: {fileID: 1749387820}
   quitOptions: {fileID: 1505969032}
-  click: {fileID: 0}
-  maleHurt: {fileID: 0}
-  femaleHurt: {fileID: 0}
-  correct: {fileID: 0}
-  backingTrack: {fileID: 0}
-  celebration: {fileID: 0}
+  click: {fileID: 227357047}
+  maleHurt: {fileID: 1264773462}
+  femaleHurt: {fileID: 193943540}
+  correct: {fileID: 2123788310}
+  backingTrack: {fileID: 2063476789}
+  celebration: {fileID: 1079443389}
+  basket: {fileID: 0}
   knight: {fileID: 6065549743317853578, guid: 316a1db282fd7f04e9d0668f37cb6df4, type: 3}
   water: {fileID: 6392343882927361884, guid: 495bff6be4136974fbdef6afb3dfa305, type: 3}
   girly: {fileID: 7497643651781563430, guid: 6866ce0df82216146bb324bfb566e647, type: 3}

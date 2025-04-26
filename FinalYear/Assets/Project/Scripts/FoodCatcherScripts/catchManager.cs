@@ -22,6 +22,7 @@ public class catchManager : MonoBehaviour
     public AudioSource correct;
     public AudioSource backingTrack;
     public AudioSource celebration;
+    public GameObject basket;
 
     [Header("Characters")]
     public GameObject knight;
@@ -59,6 +60,7 @@ public class catchManager : MonoBehaviour
         {
             setPlayer(knight);
             charID = "1";
+            basket.transform.position = basket.transform.position + new Vector3(0f, 2f, 0f); // reposition for basket as knight is taller
         }
         else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2")
         {
