@@ -644,6 +644,7 @@ GameObject:
   - component: {fileID: 87978078}
   - component: {fileID: 87978080}
   - component: {fileID: 87978079}
+  - component: {fileID: 87978081}
   m_Layer: 5
   m_Name: arrow
   m_TagString: Untagged
@@ -667,7 +668,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.364}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 139.7, y: 32.3}
+  m_AnchoredPosition: {x: 139.9, y: 55.4}
   m_SizeDelta: {x: 452, y: 193}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &87978079
@@ -708,6 +709,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87978077}
   m_CullTransparentMesh: 1
+--- !u!95 &87978081
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87978077}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52701a05402829343ac0f2371c5e320e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &97663945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5427,6 +5450,7 @@ GameObject:
   - component: {fileID: 512774954}
   - component: {fileID: 512774956}
   - component: {fileID: 512774955}
+  - component: {fileID: 512774957}
   m_Layer: 5
   m_Name: character
   m_TagString: Untagged
@@ -5491,6 +5515,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512774953}
   m_CullTransparentMesh: 1
+--- !u!95 &512774957
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512774953}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 613981797ae745f4fa9d8e97d29def59, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &513298245
 GameObject:
   m_ObjectHideFlags: 0
@@ -20792,6 +20838,7 @@ MonoBehaviour:
   miniGirly: {fileID: 4049387677144269715}
   NFCManager: {fileID: 946787040}
   currentStarStore: 0
+  idleTimeThreshold: 50
 --- !u!82 &1807594269
 AudioSource:
   m_ObjectHideFlags: 0

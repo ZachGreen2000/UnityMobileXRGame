@@ -287,16 +287,19 @@ public class gameManager : MonoBehaviour
         if (characterSelected == "Knight")
         {
             setCurrentCharacterID("1");
+            selectScreen.gameObject.SetActive(false);
             menuScreen.gameObject.SetActive(false);
         }
         else if (characterSelected == "Girly")
         {
             setCurrentCharacterID("3");
+            selectScreen.gameObject.SetActive(false);
             menuScreen.gameObject.SetActive(false);
         }
         else if (characterSelected == "Water")
         {
             setCurrentCharacterID("2");
+            selectScreen.gameObject.SetActive(false);
             menuScreen.gameObject.SetActive(false);
         }
         else

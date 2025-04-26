@@ -28,6 +28,7 @@ public class playerAttack : MonoBehaviour
 
     private Animator anim;
     private Rigidbody rb;
+    private bool isPlaying;
 
     // Start is called before the first frame update
     void Start()
@@ -101,7 +102,7 @@ public class playerAttack : MonoBehaviour
         Debug.Log("Updated shoot");
         if (gameManager.CharacterManager.ActiveCharacter.characterID == "1") // knight character
         {
-            attackK.Play();
+            StartCoroutine(playAttackSound(attackK));
             Transform weaponTrans = findChild(this.transform, "weapon");
             GameObject weapon = weaponTrans.gameObject;
             Transform storePos = findChild(this.transform, "weaponBack");
@@ -111,7 +112,7 @@ public class playerAttack : MonoBehaviour
         }
         else if (gameManager.CharacterManager.ActiveCharacter.characterID == "2") // water character
         {
-            shootW.Play();
+            StartCoroutine(playAttackSound(shootW));
             Debug.Log("Water character detected: Shoot");
             Transform spawnPos = findChild(this.transform, "shootPoint");
             if (spawnPos != null)
@@ -129,7 +130,7 @@ public class playerAttack : MonoBehaviour
         }
         else if (gameManager.CharacterManager.ActiveCharacter.characterID == "3") // girly character
         {
-            shootG.Play();
+            StartCoroutine(playAttackSound(shootG));
             Transform spawnPos = findChild(this.transform, "shootPoint");
             Transform spawnPos2 = findChild(this.transform, "shootPoint (1)");
             var pooledBullet = bulletManager.gPool.Get();
@@ -183,6 +184,18 @@ public class playerAttack : MonoBehaviour
             weapon.transform.position = storePos.position;
             weapon.transform.rotation = storePos.rotation * Quaternion.Euler(45, 0, 0);
         }  
+    }
+
+    // this will handle attack sound plays to stop rapid playing
+    IEnumerator playAttackSound(AudioSource sound)
+    {
+        if (!isPlaying)
+        {
+            isPlaying = true;
+            yield return new WaitForSeconds(1f);
+            sound.Play();
+            isPlaying = false;
+        }
     }
 
     public void getTypeAndLevel()

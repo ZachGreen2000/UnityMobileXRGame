@@ -1598,7 +1598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &708333317
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4467,6 +4467,11 @@ PrefabInstance:
     - target: {fileID: 1811077854186159413, guid: ea13dd12c19327642a47acbd82295104,
         type: 3}
       propertyPath: firstNThirdPerspective
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945521997734095373, guid: ea13dd12c19327642a47acbd82295104,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2735944141722411730, guid: ea13dd12c19327642a47acbd82295104,
