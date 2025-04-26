@@ -34,6 +34,7 @@ public class playerController : MonoBehaviour
     public float cameraCorrectionSpeed;
     private float currentPitchY;
     private float currentPitchX;
+    private Vector2 mobileCamRotation = Vector2.zero;
 
     [Header("Movement Variables")] // variables to control movement of player
     public float playerCurrentSpeed;
@@ -60,6 +61,8 @@ public class playerController : MonoBehaviour
     public bool playerGrounded;
     public string tagForGround;
     private Vector3 directionToPlayer;
+    private Vector2 lastTouchPos;
+    private bool isDragging = false;
 
     [Header("KeyBinds")]
     public string keyForForward;
@@ -205,6 +208,33 @@ public class playerController : MonoBehaviour
         moveBack = input.y < -0.1f;
         moveRight = input.x > 0.1f;
         moveLeft = input.x < -0.1f;
+
+        // camera input check
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.position.x > Screen.width / 2) // only gets input on right side of screen
+            {
+                if (touch.phase == TouchPhase.Began) // detects if touch is happening
+                {
+                    lastTouchPos = touch.position;
+                    isDragging = true;
+                } else if (touch.phase == TouchPhase.Moved && isDragging)
+                {
+                    Vector2 camRot = touch.position - lastTouchPos;
+                    lastTouchPos = touch.position;
+
+                    mobileCamRotation = camRot;
+                } else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) // detects if touch has ended
+                {
+                    isDragging = false;
+                    mobileCamRotation = Vector2.zero;
+                }
+            }
+        } else
+        {
+            mobileCamRotation = Vector2.zero;
+        }
     }
 
     public void mobileJumpBtn() // this function is for when a mobile jump button is needed
@@ -321,6 +351,12 @@ public class playerController : MonoBehaviour
 
         float mouseX = Input.GetAxis("Mouse X"); // gets input of mouse movement
         float mouseY = Input.GetAxis("Mouse Y");
+        // for mobile input
+        if (mobileInputSystem)
+        {
+            mouseX = mobileCamRotation.x * 0.1f;
+            mouseY = mobileCamRotation.y * 0.1f;
+        }
 
         // calculating rotations
         float rotationX = mouseX * thirdCameraSensitivity * Time.deltaTime;

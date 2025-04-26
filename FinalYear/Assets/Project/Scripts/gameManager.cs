@@ -36,12 +36,18 @@ public class gameManager : MonoBehaviour
     public TMP_Text defenceScoreStat;
     public TMP_Text foodCatchScoreStat;
     public TMP_Text parkourScoreStat;
+    public List<Transform> petWayPoints;
 
     [Header("Characters")]
     public string character;
     public GameObject knight;
     public GameObject water;
     public GameObject girly;
+
+    [Header("Mini Pets")]
+    public GameObject miniKnight;
+    public GameObject miniWater;
+    public GameObject miniGirly;
 
     [Header("Scripts")]
     public NFCManager NFCManager;
@@ -82,6 +88,7 @@ public class gameManager : MonoBehaviour
         // the below called both get the current character or character last used and load which characters are unlocked
         detectCurrentChatacter();
         checkForUnlockedCharacters();
+        miniPets();
     }
     // called for instantiating correct character based on current Id retrieved from saved data
     public void detectCurrentChatacter()
@@ -285,6 +292,7 @@ public class gameManager : MonoBehaviour
             Debug.Log("No character selected");
         }
         homeScreen.gameObject.SetActive(true);
+        miniPets();
     }
     //this function will enable menu ui
     public void menuOn()
@@ -410,5 +418,47 @@ public class gameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Animator anim = childObj.GetComponent<Animator>();
         anim.SetBool("celebration", false);
+    }
+
+    // this function handles the spawning and mangement of the mini pets in the background
+    // only the mini pets that arent current will spawn in and walk around
+    public void miniPets()
+    {
+        if (currentCharacterID != "1")
+        {
+            int rand = UnityEngine.Random.Range(0, petWayPoints.Count); // unity engine stops ambiguous reference
+            Transform spwnPt = petWayPoints[rand];
+            Vector3 offset = new Vector3(0f, 1f, 0);
+            miniKnight.SetActive(true);
+            miniKnight.transform.position = spwnPt.position + offset;
+            miniKnight.GetComponent<Animator>().SetBool("walking", true);
+        } else
+        {
+            miniKnight.SetActive(false);
+        }
+        if (currentCharacterID != "2")
+        {
+            int rand = UnityEngine.Random.Range(0, petWayPoints.Count);
+            Transform spwnPt = petWayPoints[rand];
+            Vector3 offset = new Vector3(0f, 1f, 0);
+            miniWater.SetActive(true);
+            miniWater.transform.position = spwnPt.position + offset;
+            miniWater.GetComponent<Animator>().SetBool("walking", true);
+        } else
+        {
+            miniWater.SetActive(false);
+        }
+        if (currentCharacterID != "3")
+        {
+            int rand = UnityEngine.Random.Range(0, petWayPoints.Count);
+            Transform spwnPt = petWayPoints[rand];
+            Vector3 offset = new Vector3(0f, 2f, 0);
+            miniGirly.SetActive(true);
+            miniGirly.transform.position = spwnPt.position + offset;
+            miniGirly.GetComponent<Animator>().SetBool("walking", true);
+        } else
+        {
+            miniGirly.SetActive(false);
+        }
     }
 }

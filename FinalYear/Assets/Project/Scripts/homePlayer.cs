@@ -35,6 +35,7 @@ public class homePlayer : MonoBehaviour
         {
             if (mobileBuild)
             {
+                mobileZoomCam();
                 handleMobileInput();
             }else
             {
@@ -187,6 +188,21 @@ public class homePlayer : MonoBehaviour
 
     public void mobileZoomCam()
     {
+        if (Input.touchCount ==  2)
+        {
+            Touch touchOne = Input.GetTouch(0);
+            Touch touchTwo = Input.GetTouch(1);
 
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+            Vector2 touchTwoPrevPos = touchTwo.position - touchTwo.deltaPosition;
+
+            float prevTouchMag = (touchOnePrevPos - touchTwoPrevPos).magnitude;
+            float touchMag = (touchOne.position - touchTwo.position).magnitude;
+
+            float magnitudeDiff = prevTouchMag - touchMag;
+
+            mainCam.fieldOfView += magnitudeDiff * 0.1f;
+            mainCam.fieldOfView = Mathf.Clamp(mainCam.fieldOfView, 20f, 60f);
+        }
     }
 }
