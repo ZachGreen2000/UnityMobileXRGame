@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System;
 using System.IO;
+using UnityEngine.EventSystems;
 
 public class gameManager : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class gameManager : MonoBehaviour
 
     [Header("Variables")]
     public int currentStarStore;
+    public float idleTimeThreshold;
 
     //variables
     private string characterSelected;
@@ -61,6 +63,7 @@ public class gameManager : MonoBehaviour
     private characterData charData;
     private string currentCharacterID;
     private List<string> unlockedCharacterIDs = new List<string>();
+    private float lastInputTime;
 
     // this is a global class for the active characters data to use for updating variables and overwritting to list
     // this creates a temporary instance of the characterSingleton data class that will act as the current character
@@ -170,7 +173,16 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // checks for ui canvas events
+        if (canvasEvent())
+        {
+            lastInputTime = Time.time; // resets timer
+        }
+        if (Time.time - lastInputTime > idleTimeThreshold && homeScreen.activeSelf) // after enough time passes the idle random is played
+        {
+            idleRandomPlay();
+            lastInputTime = Time.time; // reset timer
+        }
     }
     // this is called on a button only available in the unity editor for the development process
     // this function also calls the loading json functions for manual character unlock to simulate the nfc scanning when in dev mode
@@ -419,6 +431,13 @@ public class gameManager : MonoBehaviour
         Animator anim = childObj.GetComponent<Animator>();
         anim.SetBool("celebration", false);
     }
+    // stops idle random animation as to not repeat
+    IEnumerator stopPlayerIdleRandom(GameObject childObj)
+    {
+        yield return new WaitForSeconds(2f);
+        Animator anim = childObj.GetComponent<Animator>();
+        anim.SetBool("idleRandom", false);
+    }
 
     // this function handles the spawning and mangement of the mini pets in the background
     // only the mini pets that arent current will spawn in and walk around
@@ -459,6 +478,32 @@ public class gameManager : MonoBehaviour
         } else
         {
             miniGirly.SetActive(false);
+        }
+    }
+    // this function runs on call and returns if there has been a canvas event 
+    public bool canvasEvent()
+    {
+        if (Input.touchCount > 0)
+        {
+            return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+        } else
+        {
+            return EventSystem.current.IsPointerOverGameObject();
+        }
+    }
+    // this function runs an idle random animation that plays if the home screen is active without an event for a set time
+    public void idleRandomPlay()
+    {
+        if (playerBase.transform.childCount > 0)
+        {
+            Transform currentChild = playerBase.transform.GetChild(0);
+            GameObject childObj = currentChild.gameObject;
+            if (childObj != null)
+            {
+                Animator anim = childObj.GetComponent<Animator>();
+                anim.SetBool("idleRandom", true);
+                StartCoroutine(stopPlayerIdleRandom(childObj));
+            }
         }
     }
 }
