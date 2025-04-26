@@ -19,6 +19,7 @@ public class defenceManager : MonoBehaviour
     public float spawnInterval;
     private float spawnTimer;
     public float enemyCount;
+    public bool mobileBuild;
 
     [Header("Scripts")]
     public enemyManager enemyManager;
@@ -98,9 +99,10 @@ public class defenceManager : MonoBehaviour
         scoreText.text = ("Score: " + score);
         roundText.text = ("Round: " + round);
         enemiesStopped.text = ("Enemies Stopped: " + killCount);
-#if UNITY_ANDROID
-        joystick.SetActive(true);
-#endif
+        if (mobileBuild)
+        {
+            joystick.SetActive(true);
+        }       
     }
 
     // Update is called once per frame

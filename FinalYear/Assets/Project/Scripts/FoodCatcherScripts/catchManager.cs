@@ -23,6 +23,7 @@ public class catchManager : MonoBehaviour
     public AudioSource backingTrack;
     public AudioSource celebration;
     public GameObject basket;
+    public GameObject joystick;
 
     [Header("Characters")]
     public GameObject knight;
@@ -33,6 +34,7 @@ public class catchManager : MonoBehaviour
     public float health;
     public string currentTarget;
     public List<string> foodTypes;
+    public bool mobileBuild;
 
     [Header("Scripts")]
     public playerController playerController;
@@ -83,6 +85,11 @@ public class catchManager : MonoBehaviour
         playerController.setMovementVariables(playerSpeed);
         health = playerHealth;
         healthT.text = "Health: " + health;
+
+        if (mobileBuild)
+        {
+            joystick.SetActive(true);
+        }
     }
 
     void Awake()

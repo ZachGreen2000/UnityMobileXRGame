@@ -348,8 +348,8 @@ MonoBehaviour:
   firstNThirdPerspective: 1
   topDownPerspective: 0
   sideScrollPerspective: 0
-  pcInputSystem: 1
-  mobileInputSystem: 0
+  pcInputSystem: 0
+  mobileInputSystem: 1
   player: {fileID: 146575125}
   playerRigidbody: {fileID: 146575131}
   playerCapsuleCollider: {fileID: 146575126}

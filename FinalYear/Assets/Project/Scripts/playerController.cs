@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -213,6 +214,10 @@ public class playerController : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) // detects if even is on ui element or not
+            {
+                return;
+            }
             if (touch.position.x > Screen.width / 2) // only gets input on right side of screen
             {
                 if (touch.phase == TouchPhase.Began) // detects if touch is happening
