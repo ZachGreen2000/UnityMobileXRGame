@@ -133,6 +133,7 @@ public class catchManager : MonoBehaviour
             isRound = false;
             endScreenDisplay();
             celebration.Play();
+            health = 1;
         }
     }
 
