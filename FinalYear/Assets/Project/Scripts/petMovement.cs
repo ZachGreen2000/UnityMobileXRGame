@@ -7,6 +7,7 @@ public class petMovement : MonoBehaviour
     public GameObject[] wayPoints;
     public float speed;
     private GameObject target;
+    private Vector3 offset = new Vector3(1f, 1f, 1f);
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +16,16 @@ public class petMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+        if (this.transform.position != target.transform.position + offset)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
+            this.transform.LookAt(target.transform);
+        } else
+        {
+            changeDestination();
+        }
     }
 
     public void changeDestination()

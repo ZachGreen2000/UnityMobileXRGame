@@ -22,7 +22,7 @@ public class waypointTrigger : MonoBehaviour
     {
         if (obj.gameObject.CompareTag("Pet"))
         {
-            petMovement.changeDestination();           
+            //petMovement.changeDestination();           
         }else
         {
             homePlayer.stopWalking();

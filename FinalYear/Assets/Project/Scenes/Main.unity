@@ -24024,6 +24024,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: miniWater
       objectReference: {fileID: 0}
+    - target: {fileID: 6392343882927361884, guid: 495bff6be4136974fbdef6afb3dfa305,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24211,6 +24216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: miniGirly
       objectReference: {fileID: 0}
+    - target: {fileID: 7497643651781563430, guid: 6866ce0df82216146bb324bfb566e647,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24395,6 +24405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: miniKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065549743317853578, guid: 316a1db282fd7f04e9d0668f37cb6df4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pet
       objectReference: {fileID: 0}
     - target: {fileID: 6874456717315047216, guid: 316a1db282fd7f04e9d0668f37cb6df4,
         type: 3}
