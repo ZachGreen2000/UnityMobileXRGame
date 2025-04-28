@@ -36,6 +36,7 @@ public class playerController : MonoBehaviour
     private float currentPitchY;
     private float currentPitchX;
     private Vector2 mobileCamRotation = Vector2.zero;
+    private bool topDownCamInitialised = false; 
 
     [Header("Movement Variables")] // variables to control movement of player
     public float playerCurrentSpeed;
@@ -213,29 +214,35 @@ public class playerController : MonoBehaviour
         // camera input check
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) // detects if even is on ui element or not
+            for (int i = 0; i < Input.touchCount; i++) // loops through for multiple touches
             {
-                return;
-            }
-            if (touch.position.x > Screen.width / 2) // only gets input on right side of screen
-            {
-                if (touch.phase == TouchPhase.Began) // detects if touch is happening
+                Touch touch = Input.GetTouch(i);
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) // detects if even is on ui element or not
                 {
-                    lastTouchPos = touch.position;
-                    isDragging = true;
-                } else if (touch.phase == TouchPhase.Moved && isDragging)
-                {
-                    Vector2 camRot = touch.position - lastTouchPos;
-                    lastTouchPos = touch.position;
-
-                    mobileCamRotation = camRot;
-                } else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) // detects if touch has ended
-                {
-                    isDragging = false;
-                    mobileCamRotation = Vector2.zero;
+                    continue;
                 }
-            }
+                if (touch.position.x > Screen.width / 2) // only gets input on right side of screen
+                {
+                    if (touch.phase == TouchPhase.Began) // detects if touch is happening
+                    {
+                        lastTouchPos = touch.position;
+                        isDragging = true;
+                    }
+                    else if (touch.phase == TouchPhase.Moved && isDragging)
+                    {
+                        Vector2 camRot = touch.position - lastTouchPos;
+                        lastTouchPos = touch.position;
+
+                        mobileCamRotation = camRot;
+                    }
+                    else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) // detects if touch has ended
+                    {
+                        isDragging = false;
+                        mobileCamRotation = Vector2.zero;
+                    }
+                    break;
+                }
+            } 
         } else
         {
             mobileCamRotation = Vector2.zero;
@@ -470,9 +477,10 @@ public class playerController : MonoBehaviour
     {
         Vector3 playerPosition = player.transform.position; // takes the players position and stores it in a vector
         Vector3 currentCamPos = topDownCamera.transform.position; // gets current camera position
-        if (!isMoving)
+        if (!topDownCamInitialised)
         {
             cameraOffset = playerPosition - currentCamPos; // calculates the offset for when moving
+            topDownCamInitialised = true;
         } else
         {
             Vector3 desiredCamPos = playerPosition - cameraOffset; // calculates camera position for when following

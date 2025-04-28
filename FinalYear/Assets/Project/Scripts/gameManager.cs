@@ -330,6 +330,7 @@ public class gameManager : MonoBehaviour
         charData = characterData.LoadFromFile();
         currentCharacterID = charData.currentCharacterID;
         detectCurrentChatacter();
+        miniPets();
     }
     // this button call will enable the nfc screen and also start the nfc reader session
     public void unlockCharacterBtn()
@@ -480,6 +481,12 @@ public class gameManager : MonoBehaviour
             miniGirly.GetComponent<Animator>().SetBool("walking", true);
         } else
         {
+            miniGirly.SetActive(false);
+        }
+        if (currentCharacterID != "1" && currentCharacterID != "2" && currentCharacterID != "3")
+        {
+            miniKnight.SetActive(false);
+            miniWater.SetActive(false);
             miniGirly.SetActive(false);
         }
     }
